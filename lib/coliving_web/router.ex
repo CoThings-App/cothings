@@ -17,6 +17,7 @@ defmodule ColivingWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    resources "/rooms", RoomController
   end
 
   # Other scopes may use custom stacks.
