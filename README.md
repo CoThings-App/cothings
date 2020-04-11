@@ -6,7 +6,7 @@ For now, it's only a web application and it needs to update the status of the cu
 
 Here's a screenshot that we use for our share-house's kitchen:
 
-![Kitchen's Counter](https://github.com/rainlab-inc/coliving "Kitchen's Counter")
+![Kitchen's Counter](https://github.com/rainlab-inc/coliving/blob/master/assets/static/images/app_screenshot.png "Kitchen's Counter")
 
 Soon, there will be mobile clients to update the counters automatically using beacons.
 
