@@ -65,4 +65,65 @@ defmodule Coliving.RoomsTest do
       assert %Ecto.Changeset{} = Rooms.change_room(room)
     end
   end
+
+  describe "usages" do
+    alias Coliving.Rooms.Usage
+
+    @valid_attrs %{action: "some action", hit: 42}
+    @update_attrs %{action: "some updated action", hit: 43}
+    @invalid_attrs %{action: nil, hit: nil}
+
+    def usage_fixture(attrs \\ %{}) do
+      {:ok, usage} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Rooms.create_usage()
+
+      usage
+    end
+
+    test "list_usages/0 returns all usages" do
+      usage = usage_fixture()
+      assert Rooms.list_usages() == [usage]
+    end
+
+    test "get_usage!/1 returns the usage with given id" do
+      usage = usage_fixture()
+      assert Rooms.get_usage!(usage.id) == usage
+    end
+
+    test "create_usage/1 with valid data creates a usage" do
+      assert {:ok, %Usage{} = usage} = Rooms.create_usage(@valid_attrs)
+      assert usage.action == "some action"
+      assert usage.hit == 42
+    end
+
+    test "create_usage/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Rooms.create_usage(@invalid_attrs)
+    end
+
+    test "update_usage/2 with valid data updates the usage" do
+      usage = usage_fixture()
+      assert {:ok, %Usage{} = usage} = Rooms.update_usage(usage, @update_attrs)
+      assert usage.action == "some updated action"
+      assert usage.hit == 43
+    end
+
+    test "update_usage/2 with invalid data returns error changeset" do
+      usage = usage_fixture()
+      assert {:error, %Ecto.Changeset{}} = Rooms.update_usage(usage, @invalid_attrs)
+      assert usage == Rooms.get_usage!(usage.id)
+    end
+
+    test "delete_usage/1 deletes the usage" do
+      usage = usage_fixture()
+      assert {:ok, %Usage{}} = Rooms.delete_usage(usage)
+      assert_raise Ecto.NoResultsError, fn -> Rooms.get_usage!(usage.id) end
+    end
+
+    test "change_usage/1 returns a usage changeset" do
+      usage = usage_fixture()
+      assert %Ecto.Changeset{} = Rooms.change_usage(usage)
+    end
+  end
 end
