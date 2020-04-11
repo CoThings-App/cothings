@@ -1,0 +1,10 @@
+<section class="phx-hero">
+  <h1><%= gettext "Welcome to %{name}!", name: "Co-Living Lobby" %></h1>
+  <p>Here's a list of rooms<br/>that you can monitoring in realtime.</p>
+</section>
+
+<section class="row">
+  <article class="column">
+    
+  </article>
+</section>
