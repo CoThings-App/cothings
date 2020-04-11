@@ -29,7 +29,6 @@ Soon, there will be mobile clients to update the counters automatically using be
 - [ ] Create a lobby for all rooms
     - [ ] Track based on a single room
 - [ ] Authorization plug for managing rooms
-    - [ ] Adding a picture to room
     - [ ] Set maximum limit of the usage (for washing machines, dryers etc.)
 
 ## Contributions
