@@ -11,6 +11,20 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    services:
+      db:
+        image: postgres:12.1-alpine
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        env:
+          POSTGRES_DATABASE: coliving_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+
     steps:
     - uses: actions/checkout@v2
     - name: Setup elixir
@@ -26,12 +40,3 @@ jobs:
         DATABASE_HOSTNAME: postgres
 
 
-services:
-  images: postgres
-  ports:
-      - 5432:5432
-  env:
-    POSTGRES_DATABASE: coliving_test
-    POSTGRES_USER: postgres
-    POSTGRES_PASSWORD: postgres
-  options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 3
