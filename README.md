@@ -1,5 +1,7 @@
 # Co-living
 
+![Elixir CI](https://github.com/rainlab-inc/coliving/workflows/Elixir%20CI/badge.svg)
+
 Co-Living service aims to help avoiding crowded areas for co-living spaces, like a share-house or a guest house's kitchens due to COVID-19 pandemic. 
 
 For now, it's only a web application and it needs to update the status of the current room manually. Without any restriction anyone can update the counter in case of people forget to update their status. It uses socket for realtime communication.
