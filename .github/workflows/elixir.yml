@@ -37,6 +37,6 @@ jobs:
     - name: Run Tests
       run: mix test
       env:
-        DATABASE_HOSTNAME: postgres
+        DATABASE_HOSTNAME: db
 
 
