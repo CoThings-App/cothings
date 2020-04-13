@@ -125,14 +125,5 @@ defmodule Coliving.RoomsTest do
       usage = usage_fixture()
       assert %Ecto.Changeset{} = Rooms.change_usage(usage)
     end
-
-    test "create usage with room name and action should creates the room if it does not exist" do
-      hit = Rooms.enter_or_leave_the_room("Kitchen", "enter")
-      assert hit == 1
-      room = Rooms.get_room_by_name!("Kitchen")
-      assert room.id != nil
-      assert room.count == 1
-      assert room.limit == 15
-    end
   end
 end
