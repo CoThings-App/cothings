@@ -2,7 +2,8 @@ defmodule ColivingWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", ColivingWeb.RoomChannel
+  channel "lobby:*", ColivingWeb.LobbyChannel
+  transport(:websocket, Phoenix.Transports.WebSocket)
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After

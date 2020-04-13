@@ -47,7 +47,7 @@ defmodule Coliving.Rooms do
     iex> get_room_by_name!("Living room")
     ** (Ecto.NoResultsError)
   """
-  def get_room_by_name!(name), do: Repo.get_by!(Room, [name: name])
+  def get_room_by_name!(name), do: Repo.get_by!(Room, name: name)
 
   @doc """
   Creates a room.
@@ -140,7 +140,7 @@ defmodule Coliving.Rooms do
       %Usage{}
 
       iex> get_usage!(456)
-      ** (Ecto.NoResultsError)
+      {:error, %Ecto.Changeset{}}
 
   """
   def get_usage!(id), do: Repo.get!(Usage, id)
@@ -243,7 +243,8 @@ defmodule Coliving.Rooms do
     end
   end
 
-  defp maybe_create_room(name) do
+  # Temporarily changed the visibility
+  def maybe_create_room(name) do
     case Repo.one(
            from r in Room,
              where: r.name == ^name,
