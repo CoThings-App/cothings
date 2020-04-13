@@ -210,17 +210,32 @@ defmodule Coliving.Rooms do
     Usage.changeset(usage, %{})
   end
 
-  def enter_or_leave_the_room(name, action) when is_bitstring(name) do
-    {:ok, room} = maybe_create_room(name)
-    enter_or_leave_the_room(room, action)
+  alias Coliving.Models
+
+  def get_latest_room_stats(id) do
+    room = get_room!(id)
+    percentage = round(room.count / room.limit * 100)
+
+    css_class =
+      cond do
+        percentage <= 25 -> "green"
+        percentage > 25 and percentage <= 75 -> "orange"
+        percentage > 75 -> "red"
+      end
+
+    %Models.Room{
+      id: room.id,
+      name: room.name,
+      count: room.count,
+      limit: room.limit,
+      last_updated: room.updated_at,
+      percentage: percentage,
+      css_class: css_class
+    }
   end
 
-  def enter_or_leave_the_room(room_id, action) when is_integer(room_id) do
+  def enter_or_leave_the_room(room_id, action) do
     room = get_room!(room_id)
-    enter_or_leave_the_room(room, action)
-  end
-
-  def enter_or_leave_the_room(room, action) when is_map(room) do
     current_hit = room.count
 
     if action == "left" && current_hit == 0 do
