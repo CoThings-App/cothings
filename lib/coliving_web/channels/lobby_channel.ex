@@ -3,29 +3,23 @@ defmodule ColivingWeb.LobbyChannel do
 
   alias Coliving.Rooms
 
-  @default_room "Kitchen"
-  @action_enter "enter"
-  @action_left "left"
-
-  def join("lobby:" <> @default_room, _payload, socket) do
-    # creating a non-exist room on join is temporary
-    # TODO: remove this when multiple room support comes
-    {:ok, room } = Rooms.maybe_create_room(@default_room)
-    {:ok, %{count: room.count, last_updated: room.updated_at }, socket}
+  def join("lobby:" <> room_id, _payload, socket) do
+    room_id = String.to_integer(room_id)
+    room = Rooms.get_latest_room_stats(room_id)
+    {:ok, %{room: room}, assign(socket, :room_id, room_id)}
   end
 
   def handle_in("ping", payload, socket) do
     {:reply, {:ok, payload}, socket}
   end
 
-  def handle_in(@action_enter, _params, socket),
-    do: log_the_action_broadcast(@action_enter, socket)
-
-  def handle_in(@action_left, _params, socket), do: log_the_action_broadcast(@action_left, socket)
+  def handle_in(action, _params, socket), do: log_the_action_broadcast(action, socket)
 
   defp log_the_action_broadcast(action, socket) do
-    hit = Rooms.enter_or_leave_the_room(@default_room, action)
-    broadcast!(socket, action, %{count: hit, last_updated: DateTime.utc_now()})
+    room_id = socket.assigns.room_id
+    Rooms.enter_or_leave_the_room(room_id, action)
+    room = Rooms.get_latest_room_stats(room_id)
+    broadcast!(socket, action, %{room: room})
     {:reply, :ok, socket}
   end
 end

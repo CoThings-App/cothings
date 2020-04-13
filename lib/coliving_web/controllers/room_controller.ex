@@ -31,6 +31,11 @@ defmodule ColivingWeb.RoomController do
     render(conn, "show.html", room: room)
   end
 
+  def live(conn, %{"id" => id}) do
+    room = Rooms.get_latest_room_stats(id)
+    render(conn, "live.html", room: room)
+  end
+
   def edit(conn, %{"id" => id}) do
     room = Rooms.get_room!(id)
     changeset = Rooms.change_room(room)
