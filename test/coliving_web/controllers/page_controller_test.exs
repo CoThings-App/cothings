@@ -3,6 +3,6 @@ defmodule ColivingWeb.PageControllerTest do
 
   test "GET /", %{conn: conn} do
     conn = get(conn, "/")
-    assert html_response(conn, 200) =~ "Welcome to Co-Living Lobby!"
+    assert html_response(conn, 200) =~ "Co-Living Portal"
   end
 end

@@ -1,10 +1,26 @@
 <section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Co-Living Lobby" %></h1>
-  <p>Here's a list of rooms<br/>that you can monitoring in realtime.</p>
+  <p class="welcome-info">Are you in the kitchen?</p>
+  <p class="welcome-info">キッチンにいますか。</p>
 </section>
 
 <section class="row">
   <article class="column">
-    
+    <div class="people">
+      <h4>People in the Kitchen</h4>
+      <h4>キッチンにいる人</h4>
+      <span id="last-updated">-</span>
+      <span id="counter" class="green">0<span>
+    </div>
   </article>
 </section>
+<section class="row">
+  <article class="column">
+    <div class="float-left"><button id="btn-enter" class="button button-outline">YES! / はい</button></div>
+    <div class="float-right"><button id="btn-left" class="button button-outline">JUST LEFT! / 出口</button></div>
+  </article>
+</section>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    window.createSocket();
+  });
+</script>

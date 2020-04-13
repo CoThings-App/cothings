@@ -1,3 +1,32 @@
 /* This file is for your main application css. */
 
 @import "./phoenix.css";
+
+div.people {
+    text-align: center;
+}
+
+#counter {
+    font-size: 5em;
+}
+
+#last-updated {
+    display: block;
+    font-size: 1em;
+}
+
+span.green {
+    color: #89C73A;
+}
+
+.yellow {
+    color: #FFC300;
+}
+
+.red {
+    color: red;
+}
+
+p.welcome-info {
+    font-size: 1em !important;
+}
