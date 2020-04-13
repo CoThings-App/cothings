@@ -2,7 +2,7 @@
 
 ![Elixir CI](https://github.com/rainlab-inc/coliving/workflows/Elixir%20CI/badge.svg)
 
-Co-Living service aims to help avoiding crowded areas for co-living spaces, like a share-house or a guest house's kitchens due to COVID-19 pandemic. 
+Co-living service aims to help avoiding crowded areas for co-living spaces, like a share-house or a guest house's kitchens to prevent COVID-19 pandemic.
 
 For now, it's only a web application and it needs to update the status of the current room manually. Without any restriction anyone can update the counter in case of people forget to update their status. It uses socket for realtime communication.
 
@@ -29,9 +29,9 @@ Soon, there will be mobile clients to update the counters automatically using be
 
 ## Todos
 - [ ] Create a lobby for all rooms
-    - [ ] Track based on a single room
+    - [x] Track based on a single room
 - [ ] Authorization plug for managing rooms
-    - [ ] Set maximum limit of the usage (for washing machines, dryers etc.)
+    - [x] Set maximum limit of the usage (for washing machines, dryers etc.)
 
 ## Contributions
 Any contributions are welcome. Here is some categories that you might help with:
@@ -48,6 +48,7 @@ You can run the web application on your server with Docker using docker-compose.
 
 To run the project in your local:
 
+  * You'll need a PostreSQL instance in your local
   * Install dependencies with `mix deps.get`
   * Create and migrate your database with `mix ecto.setup`
   * Install Node.js dependencies with `cd assets && npm install`
