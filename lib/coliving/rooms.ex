@@ -38,6 +38,18 @@ defmodule Coliving.Rooms do
   def get_room!(id), do: Repo.get!(Room, id)
 
   @doc """
+  Returns a room by name
+
+  ## Examples:
+    iex> get_room_by_name!("Living room")
+    {:ok, %Room{}}
+
+    iex> get_room_by_name!("Living room")
+    ** (Ecto.NoResultsError)
+  """
+  def get_room_by_name!(name), do: Repo.get_by!(Room, [name: name])
+
+  @doc """
   Creates a room.
 
   ## Examples
@@ -196,5 +208,52 @@ defmodule Coliving.Rooms do
   """
   def change_usage(%Usage{} = usage) do
     Usage.changeset(usage, %{})
+  end
+
+  def enter_or_leave_the_room(name, action) when is_bitstring(name) do
+    {:ok, room} = maybe_create_room(name)
+    enter_or_leave_the_room(room, action)
+  end
+
+  def enter_or_leave_the_room(room_id, action) when is_integer(room_id) do
+    room = get_room!(room_id)
+    enter_or_leave_the_room(room, action)
+  end
+
+  def enter_or_leave_the_room(room, action) when is_map(room) do
+    current_hit = room.count
+
+    if action == "left" && current_hit == 0 do
+      current_hit
+    else
+      create_usage(%{
+        "action" => action,
+        "room_id" => room.id,
+        "hit" => current_hit
+      })
+
+      count = if action == "left", do: -1, else: +1
+      hit = current_hit + count
+
+      update_room(room, %{
+        "count" => hit
+      })
+
+      hit
+    end
+  end
+
+  defp maybe_create_room(name) do
+    case Repo.one(
+           from r in Room,
+             where: r.name == ^name,
+             select: r
+         ) do
+      nil ->
+        create_room(%{"name" => name, "count" => 0, "limit" => 15})
+
+      room ->
+        {:ok, room}
+    end
   end
 end
