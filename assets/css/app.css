@@ -1,13 +1,21 @@
 /* This file is for your main application css. */
 
 @import "./phoenix.css";
+@import "./circle.css";
 
-div.people {
+div.room-status {
+    text-align: center;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+#room-counter {
     text-align: center;
 }
 
 #counter {
-    font-size: 5em;
+    font-size: 3em;
 }
 
 #last-updated {
@@ -19,7 +27,7 @@ span.green {
     color: #89C73A;
 }
 
-.yellow {
+.orange {
     color: #FFC300;
 }
 
