@@ -20,9 +20,9 @@
     <%= for room <- @rooms do %>
     <tr>
       <td><%= link room.name, to: Routes.room_path(@conn, :live, room) %></td>
-      <td><%= room.count %></td>
-      <td><%= room.limit %></td>
-      <td><%= room.percentage %></td>
+      <td><span id="room_<%= room.id %>_count"><%= room.count %><span></td>
+      <td><span id="room_<%= room.id %>_limit"><%= room.limit %><span></td>
+      <td><span id="room_<%= room.id %>_percentage"><%= room.percentage %>%<span></td>
     </tr>
 <% end %>
 </table>
@@ -35,6 +35,6 @@
 </section>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    window.connectToTheRoom(0);
+    window.connectToTheLobby();
   });
 </script>

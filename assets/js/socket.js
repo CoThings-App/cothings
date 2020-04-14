@@ -10,7 +10,6 @@ const connectToTheRoom = (room_id) => {
   let channel = socket.channel("lobby:" + room_id, {})
   channel.join()
     .receive("ok", resp => {
-        if (!resp.room) return;
         updateCounters(resp.room);
     })
     .receive("error", resp => { 
@@ -19,23 +18,19 @@ const connectToTheRoom = (room_id) => {
     })
 
   channel.on("enter", function(data) {
-    if (!data.room) return;
     updateCounters(data.room);
   });
   channel.on("left", function(data) {
-    if (!data.room) return;
     updateCounters(data.room);
   });
   
-  if (room_id > 0) {
-    document.getElementById("btn-inc").addEventListener('click', () => {
-      channel.push("enter");
-    });
+  document.getElementById("btn-inc").addEventListener('click', () => {
+    channel.push("enter");
+  });
 
-    document.getElementById("btn-dec").addEventListener('click', () => {
-      channel.push("left");
-    });
-  }
+  document.getElementById("btn-dec").addEventListener('click', () => {
+    channel.push("left");
+  });
 
   function updateCounters(room) {
     const counter = document.getElementById("counter");
@@ -47,8 +42,34 @@ const connectToTheRoom = (room_id) => {
   }
 }
 
+const connectToTheLobby = () => {
+
+  let channel = socket.channel("lobby:*", {})
+  channel.join()
+    .receive("ok", resp => {
+        console.log(resp);
+        // if (!resp.room) return;
+    })
+    .receive("error", resp => {
+      //TODO: put an alert on UI
+      console.error("Unable to join", resp)
+    })
+
+  channel.on("update", function(data) {
+    console.log("update", data);
+    updateTheRoomStats(data.room)
+  });
+
+  function updateTheRoomStats(room) {
+    document.getElementById(`room_${room.id}_count`).innerText = room.count;
+    document.getElementById(`room_${room.id}_percentage`).innerText = `${room.percentage}%`;
+  }
+
+}
+
 document.addEventListener("DOMContentLoaded", function() {
   moment.locale(window.navigator.userLanguage || window.navigator.language);
 });
 
 window.connectToTheRoom = connectToTheRoom;
+window.connectToTheLobby = connectToTheLobby;
