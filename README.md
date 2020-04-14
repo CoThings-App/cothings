@@ -24,8 +24,10 @@ Soon, there will be mobile clients to update the counters automatically using be
     - Busiest day of the week
     - etc.
 
-## Current working on
+## Currently working on
 - Grouping the rooms
+    - Backend
+    - UI
 
 ## Done
 - [x] Extend the idea for multiple rooms
