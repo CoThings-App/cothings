@@ -12,12 +12,9 @@ Here's a screenshot that we use for our share-house's kitchen:
 
 Soon, there will be mobile clients to update the counters automatically using beacons.
 
-## Roadmap
-- Extend the idea for multiple rooms
-    - Washing machines
-    - Dryers
-    - Bathrooms
-    - Other
+## Roadmap as Todos
+- Graphs for lobby
+- Authorization plug for managing rooms
 - Create mobile clients with beacon support
     - Android
     - iOS
@@ -27,11 +24,19 @@ Soon, there will be mobile clients to update the counters automatically using be
     - Busiest day of the week
     - etc.
 
-## Todos
-- [ ] Create a lobby for all rooms
-    - [x] Track based on a single room
-- [ ] Authorization plug for managing rooms
-    - [x] Set maximum limit of the usage (for washing machines, dryers etc.)
+## Current working on
+- Grouping the rooms
+
+## Done
+- [x] Extend the idea for multiple rooms
+    ✓ Washing machines
+    ✓ Dryers
+    ✓ Bathrooms
+    ✓ For anything
+- [x] Create a lobby for all rooms
+    - [x] Update the lobby on single room update
+    - [x] Track single room
+- [x] Set maximum limit of the usage (for washing machines, dryers etc.)
 
 ## Contributions
 Any contributions are welcome. Here is some categories that you might help with:
