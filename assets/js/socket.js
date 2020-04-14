@@ -9,7 +9,8 @@ const connectToTheRoom = (room_id) => {
 
   let channel = socket.channel("lobby:" + room_id, {})
   channel.join()
-    .receive("ok", resp => { 
+    .receive("ok", resp => {
+        if (!resp.room) return;
         updateCounters(resp.room);
     })
     .receive("error", resp => { 
@@ -18,19 +19,23 @@ const connectToTheRoom = (room_id) => {
     })
 
   channel.on("enter", function(data) {
+    if (!data.room) return;
     updateCounters(data.room);
   });
   channel.on("left", function(data) {
+    if (!data.room) return;
     updateCounters(data.room);
   });
   
-  document.getElementById("btn-inc").addEventListener('click', () => {
-    channel.push("enter");
-  });
+  if (room_id > 0) {
+    document.getElementById("btn-inc").addEventListener('click', () => {
+      channel.push("enter");
+    });
 
-  document.getElementById("btn-dec").addEventListener('click', () => {
-    channel.push("left");
-  });
+    document.getElementById("btn-dec").addEventListener('click', () => {
+      channel.push("left");
+    });
+  }
 
   function updateCounters(room) {
     const counter = document.getElementById("counter");

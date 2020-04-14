@@ -5,8 +5,13 @@ defmodule ColivingWeb.LobbyChannel do
 
   def join("lobby:" <> room_id, _payload, socket) do
     room_id = String.to_integer(room_id)
-    room = Rooms.get_latest_room_stats(room_id)
-    {:ok, %{room: room}, assign(socket, :room_id, room_id)}
+    if room_id == 0 do
+      rooms = Rooms.get_lobby_stats()
+      {:ok, %{rooms: rooms}, assign(socket, :room_id, room_id)}
+    else
+      room = Rooms.get_latest_room_stats(room_id)
+      {:ok, %{room: room}, assign(socket, :room_id, room_id)}
+    end
   end
 
   def handle_in("ping", payload, socket) do

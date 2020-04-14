@@ -214,6 +214,14 @@ defmodule Coliving.Rooms do
 
   def get_latest_room_stats(id) do
     room = get_room!(id)
+    create_room_model_from_stats(room)
+  end
+
+  def get_lobby_stats() do
+    list_rooms() |> Enum.map(&create_room_model_from_stats(&1))
+  end
+
+  def create_room_model_from_stats(room) do
     percentage = round(room.count / room.limit * 100)
 
     css_class =
