@@ -17,19 +17,19 @@ const connectToTheRoom = (room_id) => {
             console.error("Unable to join", resp)
         })
 
-    channel.on("enter", function(data) {
+    channel.on("inc", function(data) {
         updateCounters(data.room);
     });
-    channel.on("left", function(data) {
+    channel.on("dec", function(data) {
         updateCounters(data.room);
     });
 
     document.getElementById("btn-inc").addEventListener('click', () => {
-        channel.push("enter");
+        channel.push("inc");
     });
 
     document.getElementById("btn-dec").addEventListener('click', () => {
-        channel.push("left");
+        channel.push("dec");
     });
 
     function updateCounters(room) {

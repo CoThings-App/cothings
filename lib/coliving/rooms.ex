@@ -251,7 +251,7 @@ defmodule Coliving.Rooms do
     room = get_room!(room_id)
     current_hit = room.count
 
-    if action == "left" && current_hit == 0 do
+    if action == "dec" && current_hit == 0 do
       current_hit
     else
       create_usage(%{
@@ -260,7 +260,7 @@ defmodule Coliving.Rooms do
         "hit" => current_hit
       })
 
-      count = if action == "left", do: -1, else: +1
+      count = if action == "dec", do: -1, else: +1
       hit = current_hit + count
 
       update_room(room, %{
@@ -268,21 +268,6 @@ defmodule Coliving.Rooms do
       })
 
       hit
-    end
-  end
-
-  # Temporarily changed the visibility
-  def maybe_create_room(name) do
-    case Repo.one(
-           from r in Room,
-             where: r.name == ^name,
-             select: r
-         ) do
-      nil ->
-        create_room(%{"name" => name, "count" => 0, "limit" => 15})
-
-      room ->
-        {:ok, room}
     end
   end
 end
