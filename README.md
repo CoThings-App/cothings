@@ -6,7 +6,7 @@ Co-living service aims to help avoiding crowded areas for co-living spaces, like
 
 For now, it's only a web application and it needs to update the status of the current room manually. Without any restriction anyone can update the counter in case of people forget to update their status. It uses socket for realtime communication.
 
-Here's a screenshot that we use for our share-house's kitchen:
+Here's some screenshots that we use for our share-house's facility:
 
 ![Lobby](https://github.com/rainlab-inc/coliving/blob/master/assets/static/images/app_screenshot_lobby.png "Lobby Overall")
 ![Room](https://github.com/rainlab-inc/coliving/blob/master/assets/static/images/app_screenshot_room.png "Room Stats")
@@ -58,7 +58,7 @@ You can run the web application on your server with Docker using docker-compose.
 
 To run the project in your local:
 
-  * You'll need a PostreSQL instance in your local
+  * You'll need a PostgreSQL instance in your local
   * Install dependencies with `mix deps.get`
   * Create and migrate your database with `mix ecto.setup`
   * Install Node.js dependencies with `cd assets && npm install`
