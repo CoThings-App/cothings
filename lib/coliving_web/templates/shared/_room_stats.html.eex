@@ -7,5 +7,5 @@
 </div>
 
 <div id="room-counter">
-    <span id="counter" class="center"><%= "#{@room.count}/#{@room.limit}" %>  <span>
+    <span id="counter" class="center <%= @room.css_class %>"><%= "#{@room.count}/#{@room.limit}" %>  <span>
 </div>

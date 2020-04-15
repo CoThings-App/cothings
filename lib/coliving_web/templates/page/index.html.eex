@@ -1,5 +1,5 @@
 <section class="phx-hero">
-  <p class="welcome-info">Welcome to Lobby!</p>
+  <p class="welcome-info">Welcome to Lobby!<br/>Here's list of rooms that you can monitor in realtime.</p>
 </section>
 <section class="row">
   <article class="column">
@@ -7,8 +7,8 @@
       <thead>
         <tr>
           <th>Room</th>
-          <th>Occupied</th>
-          <th>Capacity</th>
+          <th class="center">Occupied</th>
+          <th class="center">Capacity</th>
           <th>Occupied (%)</th>
         </tr>
       </thead>
@@ -24,9 +24,10 @@
           <td>
             <%= link room.name, to: Routes.room_path(@conn, :live, room) %>
           </td>
-          <td><span id="room_<%= room.id %>_count"><%= room.count %><span></td>
-          <td><span id="room_<%= room.id %>_limit"><%= room.limit %><span></td>
-          <td><span id="room_<%= room.id %>_percentage"><%= room.percentage %>%<span></td>
+          <td class="center"><span id="room_<%= room.id %>_count"><%= room.count %><span></td>
+          <td class="center"><span id="room_<%= room.id %>_limit"><%= room.limit %><span></td>
+          <td>
+           <%= render ColivingWeb.SharedView, "_lobby_item.html", room: room %>
         </tr>
         <% end %>
       </tbody>

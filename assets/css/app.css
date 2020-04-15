@@ -2,7 +2,6 @@
 
 @import "./phoenix.css";
 @import "./circle.css";
-
 div.room-status {
     width: 100%;
 }
@@ -25,18 +24,65 @@ div.room-status {
     font-size: 1em;
 }
 
-span.green {
-    color: #89C73A;
+div.green2 {
+    background-color: rgb(129, 160, 90);
 }
 
-.orange {
+div.orange2 {
+    background-color: #FFC300;
+}
+
+div.red2 {
+    background-color: red;
+}
+
+
+/* span.green {
+    color: rgb(129, 160, 90);
+} */
+
+
+/* span.orange {
     color: #FFC300;
 }
 
-.red {
+span.red {
     color: red;
-}
+} */
 
 p.welcome-info {
     font-size: 1em !important;
+}
+
+td.center {
+    text-align: center;
+}
+
+th.center {
+    text-align: center;
+}
+
+
+/* Progress Bar */
+
+.light-grey {
+    width: 100%;
+    height: 26px;
+    display: block;
+    background-color: #f1f1f1;
+}
+
+.progress-bar {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    width: inherit;
+    max-width: 100%;
+    text-align: center;
+    height: 26px;
+    display: block;
+    z-index: 1000;
+}
+
+span.percentage {
+    color: #000000;
 }
