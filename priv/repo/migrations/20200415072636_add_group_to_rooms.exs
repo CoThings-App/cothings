@@ -5,6 +5,7 @@ defmodule Coliving.Repo.Migrations.AddGroupToRooms do
     alter table(:rooms) do
       add :group, :string
     end
+
     create index(:rooms, [:group])
   end
 end
