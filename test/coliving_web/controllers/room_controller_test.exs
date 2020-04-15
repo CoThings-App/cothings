@@ -3,9 +3,9 @@ defmodule ColivingWeb.RoomControllerTest do
 
   alias Coliving.Rooms
 
-  @create_attrs %{count: 42, limit: 42, name: "some name"}
-  @update_attrs %{count: 43, limit: 43, name: "some updated name"}
-  @invalid_attrs %{count: nil, limit: nil, name: nil}
+  @create_attrs %{count: 42, limit: 42, name: "some name", group: "some group"}
+  @update_attrs %{count: 43, limit: 43, name: "some updated name", group: "some updated group"}
+  @invalid_attrs %{count: nil, limit: nil, name: nil, group: nil}
 
   def fixture(:room) do
     {:ok, room} = Rooms.create_room(@create_attrs)
