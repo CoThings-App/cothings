@@ -7,6 +7,7 @@ defmodule Coliving.Rooms.Room do
     # count of people / running machines etc.
     field :count, :integer
     field :limit, :integer
+    field :group, :string
 
     timestamps()
   end
@@ -14,7 +15,7 @@ defmodule Coliving.Rooms.Room do
   @doc false
   def changeset(room, attrs) do
     room
-    |> cast(attrs, [:name, :count, :limit])
-    |> validate_required([:name, :count, :limit])
+    |> cast(attrs, [:name, :count, :limit, :group])
+    |> validate_required([:name, :count, :limit, :group])
   end
 end

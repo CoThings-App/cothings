@@ -6,7 +6,7 @@
       <th>Name</th>
       <th>Count</th>
       <th>Limit</th>
-
+      <th>Group</th>
       <th></th>
     </tr>
   </thead>
@@ -16,6 +16,7 @@
       <td><%= room.name %></td>
       <td><%= room.count %></td>
       <td><%= room.limit %></td>
+      <td><%= room.group %></td>
 
       <td>
         <span><%= link "Show", to: Routes.room_path(@conn, :show, room) %></span>

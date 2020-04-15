@@ -18,7 +18,11 @@ defmodule Coliving.Rooms do
 
   """
   def list_rooms do
-    Repo.all(Room)
+    Repo.all(
+      from r in Room,
+        order_by: r.group,
+        select: r
+    )
   end
 
   @doc """

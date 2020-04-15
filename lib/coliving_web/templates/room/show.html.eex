@@ -17,6 +17,11 @@
     <%= @room.limit %>
   </li>
 
+  <li>
+    <strong>Group:</strong>
+    <%= @room.group %>
+  </li>
+
 </ul>
 
 <span><%= link "Edit", to: Routes.room_path(@conn, :edit, @room) %></span>

@@ -17,6 +17,10 @@
   <%= number_input f, :limit %>
   <%= error_tag f, :limit %>
 
+  <%= label f, :group %>
+  <%= text_input f, :group %>
+  <%= error_tag f, :group %>
+
   <div>
     <%= submit "Save" %>
   </div>
