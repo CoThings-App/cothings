@@ -8,16 +8,14 @@ For now, it's only a web application and it needs to update the status of the cu
 
 Here's a screenshot that we use for our share-house's kitchen:
 
-![Kitchen's Counter](https://github.com/rainlab-inc/coliving/blob/master/assets/static/images/app_screenshot.png "Kitchen's Counter")
+![Lobby](https://github.com/rainlab-inc/coliving/blob/master/assets/static/images/app_screenshot_lobby.png "Lobby Overall")
+![Room](https://github.com/rainlab-inc/coliving/blob/master/assets/static/images/app_screenshot_room.png "Room Stats")
 
 Soon, there will be mobile clients to update the counters automatically using beacons.
 
 ## Roadmap as Todos
 - Graphs for lobby
 - Authorization plug for managing rooms
-- Create mobile clients with beacon support
-    - Android
-    - iOS
 - Separate Backend and Frontend
 - Statistics
     - Busiest time of the day
@@ -25,10 +23,9 @@ Soon, there will be mobile clients to update the counters automatically using be
     - etc.
 
 ## Currently working on
-- [ ] Grouping the rooms
-    - [x] Backend
-    - [x] Frontend
-    - [ ] UI improvements
+- [ ] Create mobile clients with beacon support
+    - [ ] Android
+    - [ ] iOS
 
 ## Done
 - [x] Extend the idea for multiple rooms
@@ -40,6 +37,11 @@ Soon, there will be mobile clients to update the counters automatically using be
     - [x] Update the lobby on single room update
     - [x] Track single room
 - [x] Set maximum limit of the usage (for washing machines, dryers etc.)
+- [x] Grouping the rooms
+    - [x] Backend
+    - [x] Frontend
+    - [x] UI improvements
+
 
 ## Contributions
 Any contributions are welcome. Here is some categories that you might help with:
