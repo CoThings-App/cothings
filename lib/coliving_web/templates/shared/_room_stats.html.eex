@@ -1,0 +1,11 @@
+<div id="percentage-circle" class="c100 p<%= @room.percentage %> <%= @room.css_class %>">
+    <span id="percentage"><%= @room.percentage %> %</span>
+    <div class="slice">
+        <div class="bar"></div>
+        <div class="fill"></div>
+    </div>
+</div>
+
+<div id="room-counter">
+    <span id="counter" class="center"><%= "#{@room.count}/#{@room.limit}" %>  <span>
+</div>

@@ -11,25 +11,12 @@
 <section class="row">
     <article class="column">
         <div class="room-status">
-            <div id="percentage-circle" class="c100 p<%= @room.percentage %> <%= @room.css_class %>">
-                <span id="percentage"><%= @room.percentage %> %</span>
-                <div class="slice">
-                    <div class="bar"></div>
-                    <div class="fill"></div>
-                </div>
+            <div id="inner">
+                <%= render ColivingWeb.SharedView, "_room_stats.html", assigns %>
             </div>
         </div>
     </article>
 </section>
-<section class="row">
-    <article class="column">
-        <div id="room-counter">
-            <span id="counter" class="center"><%= "#{@room.count}/#{@room.limit}" %>  <span>
-        </div>
-    </article>
-<section>
-
-
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     window.connectToTheRoom(<%= @room.id %>);
