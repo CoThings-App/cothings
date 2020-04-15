@@ -230,9 +230,9 @@ defmodule Coliving.Rooms do
 
     css_class =
       cond do
-        percentage <= 25 -> "green"
-        percentage > 25 and percentage <= 75 -> "orange"
-        percentage > 75 -> "red"
+        percentage <= 60 -> "green"
+        percentage > 60 and percentage <= 80 -> "orange"
+        percentage > 80 -> "red"
       end
 
     %Models.Room{
