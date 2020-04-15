@@ -25,9 +25,10 @@ Soon, there will be mobile clients to update the counters automatically using be
     - etc.
 
 ## Currently working on
-- Grouping the rooms
-    - Backend
-    - UI
+- [ ] Grouping the rooms
+    - [x] Backend
+    - [x] Frontend
+    - [ ] UI improvements
 
 ## Done
 - [x] Extend the idea for multiple rooms
