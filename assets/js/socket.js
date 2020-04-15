@@ -63,7 +63,7 @@ const connectToTheLobby = () => {
     function updateTheRoomStats(room) {
         document.getElementById(`room_${room.id}_count`).innerText = room.count;
         document.getElementById(`room_${room.id}_percentage`).innerText = `${room.percentage}%`;
-        document.getElementById(`bar_${room.id}`).classList.add(`${room.css_class}`);
+        document.getElementById(`bar_${room.id}`).className = `progress-bar ${room.css_class}`;
         document.getElementById(`bar_${room.id}`).style.width = `${room.percentage}%`;
     }
 

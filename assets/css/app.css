@@ -24,18 +24,6 @@ div.room-status {
     font-size: 1em;
 }
 
-div.green2 {
-    background-color: rgb(129, 160, 90);
-}
-
-div.orange2 {
-    background-color: #FFC300;
-}
-
-div.red2 {
-    background-color: red;
-}
-
 
 /* span.green {
     color: rgb(129, 160, 90);
@@ -81,6 +69,18 @@ th.center {
     height: 26px;
     display: block;
     z-index: 1000;
+}
+
+.progress-bar.green {
+    background-color: rgb(129, 160, 90);
+}
+
+.progress-bar.orange {
+    background-color: #FFC300;
+}
+
+.progress-bar.red {
+    background-color: red;
 }
 
 span.percentage {
