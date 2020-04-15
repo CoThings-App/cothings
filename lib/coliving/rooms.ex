@@ -251,7 +251,7 @@ defmodule Coliving.Rooms do
     room = get_room!(room_id)
     current_hit = room.count
 
-    if (action == "enter" && room.limit == current_hit) || (action == "left" && current_hit == 0) do
+    if action == "left" && current_hit == 0 do
       current_hit
     else
       create_usage(%{
