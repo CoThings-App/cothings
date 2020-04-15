@@ -240,6 +240,7 @@ defmodule Coliving.Rooms do
       name: room.name,
       count: room.count,
       limit: room.limit,
+      group: room.group,
       last_updated: room.updated_at,
       percentage: percentage,
       css_class: css_class

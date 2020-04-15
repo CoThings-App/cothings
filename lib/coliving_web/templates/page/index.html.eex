@@ -4,37 +4,38 @@
 <section class="row">
   <article class="column">
     <table>
-    <th>
-      Name
-    </th>
-    <th>
-      Count
-    </th>
-    <th>
-      Limit
-    </th>
-    <th>
-      Percentage
-    </th>
-
-    <%= for room <- @rooms do %>
-    <tr>
-      <td><%= link room.name, to: Routes.room_path(@conn, :live, room) %></td>
-      <td><span id="room_<%= room.id %>_count"><%= room.count %><span></td>
-      <td><span id="room_<%= room.id %>_limit"><%= room.limit %><span></td>
-      <td><span id="room_<%= room.id %>_percentage"><%= room.percentage %>%<span></td>
-    </tr>
-<% end %>
-</table>
-  </article>
-</section>
-<section class="row">
-  <article class="column">
-    
+      <thead>
+        <tr>
+          <th>Room</th>
+          <th>Occupied</th>
+          <th>Capacity</th>
+          <th>Occupied (%)</th>
+        </tr>
+      </thead>
+      <%= for {group, rooms } <- @rooms do %>
+      <tbody>
+        <tr>
+          <td colspan="4">
+            <h3><%= group %></h3>
+          </td>
+        </tr>
+        <%= for room <- rooms do %>
+        <tr>
+          <td>
+            <%= link room.name, to: Routes.room_path(@conn, :live, room) %>
+          </td>
+          <td><span id="room_<%= room.id %>_count"><%= room.count %><span></td>
+          <td><span id="room_<%= room.id %>_limit"><%= room.limit %><span></td>
+          <td><span id="room_<%= room.id %>_percentage"><%= room.percentage %>%<span></td>
+        </tr>
+        <% end %>
+      </tbody>
+      <% end %>
+    </table>
   </article>
 </section>
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    window.connectToTheLobby();
-  });
+document.addEventListener("DOMContentLoaded", function() {
+  window.connectToTheLobby();
+});
 </script>

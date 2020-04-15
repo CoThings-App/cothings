@@ -4,6 +4,7 @@ defmodule ColivingWeb.PageController do
   alias Coliving.Rooms
 
   def index(conn, _params) do
-    render(conn, "index.html", rooms: Rooms.get_lobby_stats())
+    rooms = Rooms.get_lobby_stats() |> Enum.group_by(&(&1.group))
+    render(conn, "index.html", rooms: rooms)
   end
 end
