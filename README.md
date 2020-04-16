@@ -4,7 +4,6 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/rainlab-inc/coliving)](https://github.com/rainlab-inc/coliving/commits/master)
 [![GitHub issues](https://img.shields.io/github/issues/rainlab-inc/coliving)](https://github.com/rainlab-inc/coliving/issues)
 [![License](https://img.shields.io/github/license/rainlab-inc/coliving)](LICENSE.md)
-[![Tweet](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Frainlab-inc%2Fcoliving)](	https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Frainlab-inc%2Fcoliving)
 
 Co-living service aims to help avoiding crowded areas for co-living spaces, like a share-house or a guest house's kitchens to prevent COVID-19 pandemic.
 
