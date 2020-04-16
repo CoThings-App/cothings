@@ -52,10 +52,17 @@ Any contributions are welcome. Here is some categories that you might help with:
 
 ## Technical Information
 
-Currently the project is been developed in Elixir + Phoenix Framework. In the future we might separate the backend and frontend.
+Currently the project is being developed in Elixir + Phoenix Framework. In the future we might separate the backend and frontend.
 
 You can run the web application on your server with Docker using docker-compose. How to part will be detailed later.
 
+## Release
+
+Once you release and ran the app on production, you may need to run migration like this:
+
+`/bin/coliving eval "Coliving.Release.migrate"`
+
+## Local
 To run the project in your local:
 
   * You'll need a PostgreSQL instance in your local
