@@ -61,6 +61,14 @@ You can run the web application on your server with Docker using docker-compose.
 
 ## Release
 
+- Change the `host` of `url` in `config/prod.exs` in for socket handshaking.
+```elixir
+config :coliving, ColivingWeb.Endpoint,
+  url: [host: "example.com", port: 80],
+  server: true,
+  cache_static_manifest: "priv/static/cache_manifest.json"
+  ```
+
 Once you release and ran the app on production, you may need to run migration like this:
 
 `/bin/coliving eval "Coliving.Release.migrate"`
