@@ -61,7 +61,7 @@ You can run the web application on your server with Docker using docker-compose.
 
 ## Release
 
-- Change the `host` of `url` in `config/prod.exs` in for socket handshaking.
+- Change the `host` of `url` in `config/prod.exs` for socket handshaking.
 ```elixir
 config :coliving, ColivingWeb.Endpoint,
   url: [host: "example.com", port: 80],
