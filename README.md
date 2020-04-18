@@ -27,7 +27,7 @@ Any contributions are welcome. Here is some categories that you might help with:
 
 ## Technical Information
 
-Currently the project is being developed in Elixir + Phoenix Framework. In the future we might separate the backend and frontend.
+Currently the project is being developed in [Elixir](https://elixir-lang.org/) + [Phoenix Framework](https://www.phoenixframework.org/). In the future we might separate the backend and frontend.
 
 You can run the web application on your server with Docker using docker-compose. How to part will be detailed later.
 
