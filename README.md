@@ -9,7 +9,7 @@ Co-living service aims to help avoiding crowded areas for co-living spaces, like
 
 For now, it's only a web application and it needs to update the status of the current room manually. Without any restriction anyone can update the counter in case of people forget to update their status. It uses socket for realtime communication.
 
-You can see the project progress from [here](https://github.com/rainlab-inc/coliving/projects/4)
+You can see the project overall progress from [here](https://github.com/rainlab-inc/coliving/projects/4)
 
 Here's some screenshots that we use for our share-house's facility:
 
@@ -17,6 +17,8 @@ Here's some screenshots that we use for our share-house's facility:
 ![Room](https://github.com/rainlab-inc/coliving/blob/master/assets/static/images/app_screenshot_room.png "Room Stats")
 
 Soon, there will be mobile clients to update the counters automatically using beacons.
+
+Here's our [iOS Application](https://github.com/rainlab-inc/coliving-ios)
 
 ## Contributions
 Any contributions are welcome. Here is some categories that you might help with:
@@ -33,6 +35,10 @@ You can run the web application on your server with Docker using docker-compose.
 
 ## Release
 
+Please always chekcout the latest release documentation for Phoenix from [here](https://hexdocs.pm/phoenix/deployment.html)
+
+Here's some quick info for releasing the app by yourself until [this task](https://github.com/rainlab-inc/coliving/projects/4#card-36534840) being done
+
 - Change the `host` of `url` in `config/prod.exs` for socket handshaking.
 ```elixir
 config :coliving, ColivingWeb.Endpoint,
@@ -45,7 +51,7 @@ Once you release and ran the app on production, you may need to run migration li
 
 `/bin/coliving eval "Coliving.Release.migrate"`
 
-## Local
+## Local Development
 To run the project in your local:
 
   * You'll need a PostgreSQL instance in your local
