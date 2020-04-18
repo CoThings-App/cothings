@@ -9,14 +9,14 @@ Co-living service aims to help avoiding crowded areas for co-living spaces, like
 
 For now, it's only a web application and it needs to update the status of the current room manually. Without any restriction anyone can update the counter in case of people forget to update their status. It uses socket for realtime communication.
 
+You can see the project progress from [here](https://github.com/rainlab-inc/coliving/projects/4)
+
 Here's some screenshots that we use for our share-house's facility:
 
 ![Lobby](https://github.com/rainlab-inc/coliving/blob/master/assets/static/images/app_screenshot_lobby.png "Lobby Overall")
 ![Room](https://github.com/rainlab-inc/coliving/blob/master/assets/static/images/app_screenshot_room.png "Room Stats")
 
 Soon, there will be mobile clients to update the counters automatically using beacons.
-
-You can see the project progress from [here](https://github.com/rainlab-inc/coliving/projects/4)
 
 ## Contributions
 Any contributions are welcome. Here is some categories that you might help with:
