@@ -11,7 +11,18 @@
   <body>
     <header>
       <section class="container">
-       <h3>Co-Living Portal</h3>
+        <nav role="navigation">
+            <ul>
+              <%= if @conn.assigns[:logged_in] do %>
+                <li><a href="/session/logout">Logout</a></li>
+                <% else %>
+                <li><a href="/session">Manage</a></li>
+              <% end %>
+            </ul>
+        </nav>
+        <a href="/" class="phx-logo">
+        <h3>Co-Living Portal</h3>
+        </a>
       </section>
     </header>
     <main role="main" class="container">
