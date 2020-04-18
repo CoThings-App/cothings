@@ -7,6 +7,7 @@ defmodule ColivingWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug ColivingWeb.Plugs.SessionPlug
   end
 
   pipeline :api do
@@ -19,6 +20,13 @@ defmodule ColivingWeb.Router do
     get "/", PageController, :index
     resources "/rooms", RoomController
     get "/live/:id", RoomController, :live
+  end
+
+  scope "/session", ColivingWeb do
+    pipe_through :browser
+    get "/", SessionController, :index
+    post "/login", SessionController, :login
+    get "/logout", SessionController, :logout
   end
 
   # Other scopes may use custom stacks.
