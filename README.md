@@ -16,35 +16,7 @@ Here's some screenshots that we use for our share-house's facility:
 
 Soon, there will be mobile clients to update the counters automatically using beacons.
 
-## Roadmap as Todos
-- Graphs for lobby
-- Authorization plug for managing rooms
-- Separate Backend and Frontend
-- Statistics
-    - Busiest time of the day
-    - Busiest day of the week
-    - etc.
-
-## Currently working on
-- [ ] Create mobile clients with beacon support
-    - [ ] Android
-    - [ ] iOS
-
-## Done
-- [x] Extend the idea for multiple rooms
-    ✓ Washing machines
-    ✓ Dryers
-    ✓ Bathrooms
-    ✓ For anything
-- [x] Create a lobby for all rooms
-    - [x] Update the lobby on single room update
-    - [x] Track single room
-- [x] Set maximum limit of the usage (for washing machines, dryers etc.)
-- [x] Grouping the rooms
-    - [x] Backend
-    - [x] Frontend
-    - [x] UI improvements
-
+You can see the project progress from [here](https://github.com/rainlab-inc/coliving/projects/4)
 
 ## Contributions
 Any contributions are welcome. Here is some categories that you might help with:
