@@ -4,6 +4,8 @@ defmodule ColivingWeb.RoomController do
   alias Coliving.Rooms
   alias Coliving.Rooms.Room
 
+  plug ColivingWeb.Plugs.AuthPlug when action not in [:live]
+
   def index(conn, _params) do
     rooms = Rooms.list_rooms()
     render(conn, "index.html", rooms: rooms)
