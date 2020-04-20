@@ -241,6 +241,10 @@ defmodule Coliving.Rooms do
       count: room.count,
       limit: room.limit,
       group: room.group,
+      ibeacon_uuid: room.ibeacon_uuid,
+      altbeacon_uuid: room.altbeacon_uuid,
+      major: room.major,
+      minor: room.minor,
       last_updated: room.updated_at,
       percentage: percentage,
       css_class: css_class
