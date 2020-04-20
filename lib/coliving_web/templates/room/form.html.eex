@@ -5,7 +5,7 @@
     </div>
   <% end %>
 
-  <%= label f, :name %>
+  <label>Name (will be also beacon's name)</label>
   <%= text_input f, :name %>
   <%= error_tag f, :name %>
 
@@ -20,6 +20,23 @@
   <%= label f, :group %>
   <%= text_input f, :group %>
   <%= error_tag f, :group %>
+
+  <label>iBeacon UUID (For Apple Devices)</label>
+  <%= text_input f, :ibeacon_uuid %>
+  <%= error_tag f, :ibeacon_uuid %>
+
+  <label>AltBeacon UUID (For Android Devices)</label>
+  <%= text_input f, :altbeacon_uuid %>
+  <%= error_tag f, :altbeacon_uuid %>
+
+
+  <label>Major (Kind of branch no)</label>
+  <%= number_input f, :major %>
+  <%= error_tag f, :major %>
+
+  <label>Minor (Kind of subbranch no)</label>
+  <%= number_input f, :minor %>
+  <%= error_tag f, :minor %>
 
   <div>
     <%= submit "Save" %>
