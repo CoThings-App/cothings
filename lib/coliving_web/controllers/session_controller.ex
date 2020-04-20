@@ -3,14 +3,16 @@ defmodule ColivingWeb.SessionController do
 
   alias ColivingWeb.Router.Helpers
 
+  @env_admin_username "ADMIN_USERNAME"
   @env_admin_password "ADMIN_PASSWORD"
 
   def index(conn, _params) do
     render(conn, "index.html")
   end
 
-  def login(conn, %{"password" => password}) do
-    if System.get_env(@env_admin_password) == password do
+  def login(conn, %{"username" => username, "password" => password}) do
+    if System.get_env(@env_admin_username) == username and
+         System.get_env(@env_admin_password) == password do
       conn
       |> put_flash(:info, "Welcome back!")
       |> put_session(:logged_in, true)
