@@ -24,6 +24,7 @@ defmodule ColivingWeb.Router do
 
   scope "/session", ColivingWeb do
     pipe_through :browser
+
     get "/", SessionController, :index
     post "/login", SessionController, :login
     get "/logout", SessionController, :logout

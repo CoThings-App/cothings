@@ -2,10 +2,28 @@ defmodule ColivingWeb.RoomControllerTest do
   use ColivingWeb.ConnCase
 
   alias Coliving.Rooms
+  alias Plug.Conn
 
   @create_attrs %{count: 42, limit: 42, name: "some name", group: "some group"}
   @update_attrs %{count: 43, limit: 43, name: "some updated name", group: "some updated group"}
   @invalid_attrs %{count: nil, limit: nil, name: nil, group: nil}
+
+  @session Plug.Session.init(
+             store: :cookie,
+             key: "_app",
+             encryption_salt: "test_salt",
+             signing_salt: "signing_salt"
+           )
+
+  setup %{conn: conn} do
+    conn =
+      conn
+      |> Plug.Session.call(@session)
+      |> Conn.fetch_session()
+      |> Conn.put_session(:logged_in, true)
+
+    {:ok, conn: conn}
+  end
 
   def fixture(:room) do
     {:ok, room} = Rooms.create_room(@create_attrs)
