@@ -15,8 +15,6 @@
             <ul>
               <%= if @conn.assigns[:logged_in] do %>
                 <li><a href="/session/logout">Logout</a></li>
-                <% else %>
-                <li><a href="/session">Manage</a></li>
               <% end %>
             </ul>
         </nav>
