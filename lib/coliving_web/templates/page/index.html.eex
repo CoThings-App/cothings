@@ -1,5 +1,5 @@
 <section class="phx-hero">
-  <p class="welcome-info">Welcome to Lobby!<br/>Here's list of rooms that you can monitor in realtime.</p>
+  <p class="welcome-info">Welcome to Lobby!<br/>Here's list of rooms that you can monitor in realtime.<br/><span id="last-updated"></span></p>
 </section>
 <section class="row">
   <article class="column">
@@ -36,7 +36,7 @@
   </article>
 </section>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  window.connectToTheLobby();
-});
+  function connectToSocket() {
+    window.connectToTheLobby()
+  }
 </script>

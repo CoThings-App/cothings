@@ -1,5 +1,5 @@
 <section class="phx-hero">
-  <p class="welcome-info">How much is occupied in <b><%= @room.name %>?</b><br>Last updated: <span id="last-updated"></span></p>
+  <p class="welcome-info">How much is occupied in <b><%= @room.name %>?</b><br/><span id="last-updated"></span></p>
 </section>
 
 <section class="row">
@@ -18,8 +18,7 @@
     </article>
 </section>
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
+  function connectToSocket() {
     window.connectToTheRoom(<%= @room.id %>);
-  });
-
+  }
 </script>
