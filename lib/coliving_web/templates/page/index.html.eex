@@ -19,7 +19,7 @@
             <h3><%= group %></h3>
           </td>
         </tr>
-        <%= for room <- rooms do %>
+        <%= for room <- Enum.sort_by(rooms, &(&1.name)) do %>
         <tr>
           <td>
             <%= link room.name, to: Routes.room_path(@conn, :live, room) %>
