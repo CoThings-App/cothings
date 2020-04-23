@@ -1,0 +1,39 @@
+version: '2'
+
+services:
+  coliving: coliving
+    env_file:
+      - .env
+    links:
+        - db
+    labels:
+      # Traefik v2
+      - "traefik.enable=true"
+      - "traefik.http.routers.nextcloud-secure.entrypoints=web-secure"
+      - "traefik.http.routers.nextcloud-secure.rule=Host(`${HOST}`)"
+      - "traefik.http.routers.nextcloud-secure.tls.certresolver=default"
+
+      # Traefik v1
+      # - "traefik.enable=true"
+      # - "traefik.backend=co-living"
+      # - "traefik.frontend.rule=Host:${HOST}"
+      # - "traefik.port=$PORT"
+
+    restart: unless-stopped
+    networks:
+      - proxy
+  db:
+    image: postgres:12.1-alpine
+    environment:
+      - POSTGRES_USER=
+      - POSTGRES_PASSWORD=
+      - POSTGRES_DB=
+    volumes:
+        - ~/data/coliving/database:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

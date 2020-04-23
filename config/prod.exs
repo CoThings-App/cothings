@@ -10,7 +10,8 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :coliving, ColivingWeb.Endpoint,
-  url: [host: System.get_env("HOST"), port: 80],
+  load_from_system_env: true,
+  url: [host: Application.get_env(:coliving, "HOST"), port: 80],
   server: true,
   cache_static_manifest: "priv/static/cache_manifest.json"
 
@@ -53,4 +54,4 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs which loads secrets
 # and configuration from environment variables.
-import_config "prod.secret.exs"
+# import_config "prod.secret.exs"
