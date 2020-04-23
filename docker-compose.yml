@@ -1,8 +1,8 @@
 version: '2'
 
 services:
-  image: coliving
-  container_name: coliving
+  coliving:
+    image: coliving
     env_file:
       - .env
     links:
