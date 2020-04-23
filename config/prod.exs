@@ -24,13 +24,14 @@ config :coliving, ColivingWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
-config :coliving, ColivingWeb.Endpoint,
-  http: [:inet6, port: port],
-  secret_key_base: secret_key_base
-
-config :coliving, port: port
-config :coliving, host: host
-
 config :coliving, Coliving.Repo,
+  # ssl: true,
   url: database_url,
   pool_size: pool_size
+
+config :coliving, ColivingWeb.Endpoint,
+  http: [
+    port: port,
+    transport_options: [socket_opts: [:inet6]]
+  ],
+  secret_key_base: secret_key_base
