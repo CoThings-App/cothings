@@ -1,7 +1,8 @@
 version: '2'
 
 services:
-  coliving: coliving
+  image: coliving
+  container_name: coliving
     env_file:
       - .env
     links:
@@ -9,9 +10,9 @@ services:
     labels:
       # Traefik v2
       - "traefik.enable=true"
-      - "traefik.http.routers.nextcloud-secure.entrypoints=web-secure"
-      - "traefik.http.routers.nextcloud-secure.rule=Host(`${HOST}`)"
-      - "traefik.http.routers.nextcloud-secure.tls.certresolver=default"
+      - "traefik.http.routers.coliving-secure.entrypoints=web-secure"
+      - "traefik.http.routers.coliving-secure.rule=Host(`${HOST}`)"
+      - "traefik.http.routers.coliving-secure.tls.certresolver=default"
 
       # Traefik v1
       # - "traefik.enable=true"
