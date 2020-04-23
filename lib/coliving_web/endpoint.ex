@@ -13,7 +13,32 @@ defmodule ColivingWeb.Endpoint do
         Application.get_env(:coliving, :port) ||
           raise "expected the PORT environment variable to be set"
 
-      {:ok, Keyword.put(config, :http, [:inet6, port: port])}
+      secret_key_base =
+        Application.get_env(:coliving, :secret_key_base) ||
+          raise "expected the SECRET_KEY_BASE environment variable to be set"
+
+      host =
+        Application.get_env(:coliving, :host) ||
+          raise "expected the HOST environment variable to be set"
+
+      database_url =
+        Application.get_env(:coliving, :database_url) ||
+          raise """
+          expected the DATABASE_URL environment variable to be set
+          For example: ecto://USER:PASS@HOST/DATABASE
+          """
+
+      pool_size = String.to_integer(Application.get_env(:coliving, :pool_size) || "10")
+
+      config =
+        config
+        |> Keyword.put(:http, [:inet6, port: port])
+        |> Keyword.put(:secret_key_base, secret_key_base)
+        |> Keyword.put(:host, host)
+        |> Keyword.put(:database_url, database_url)
+        |> Keyword.put(:pool_size, pool_size)
+
+      {:ok, config}
     else
       {:ok, config}
     end
