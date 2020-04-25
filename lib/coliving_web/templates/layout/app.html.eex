@@ -27,13 +27,15 @@
   <body onblur="wentAway()" onfocus="cameBack()" onpageshow="navigateBack()" onbeforeunload="wentAway()">
     <header>
       <section class="container">
-        <nav role="navigation">
+        <%= if @conn.assigns[:logged_in] do %>
+          <nav role="navigation">
             <ul>
-              <%= if @conn.assigns[:logged_in] do %>
-                <li><a href="/session/logout">Logout</a></li>
-              <% end %>
+              <li>
+                <a href="/session/logout">Logout</a>
+              </li>
             </ul>
-        </nav>
+          </nav>
+        <% end %>
         <a href="/" class="phx-logo">
           <h3>Co-Living Portal</h3>
         </a>
