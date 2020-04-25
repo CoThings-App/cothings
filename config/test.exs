@@ -16,8 +16,7 @@ if System.get_env("GITHUB_ACTIONS") do
 end
 
 if System.get_env("GITLAB_CI") do
-  config :coliving, Coliving.Repo,
-  hostname: "postgres",
+  config :coliving, Coliving.Repo, hostname: "postgres"
 end
 
 # We don't run a server during test. If one is required,
