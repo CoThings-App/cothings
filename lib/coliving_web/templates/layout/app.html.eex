@@ -14,13 +14,14 @@
         }
 
         function cameBack() {
-          connectToSocket();
-        }
-
-        function navigateBack() {
+            if (typeof connectToSocket !== 'function') return;
             connectToSocket();
         }
 
+        function navigateBack() {
+            if (typeof connectToSocket !== 'function') return;
+            connectToSocket();
+        }
     </script>
 
   </head>
