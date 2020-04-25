@@ -9,6 +9,7 @@ variables:
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: "postgres"
   MIX_ENV: "test"
+  GITLAB_CI: true
 
 before_script:
   - mix local.rebar --force
