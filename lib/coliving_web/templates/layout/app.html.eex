@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title><%= assigns[:page_title] || "Co-Living Portal" %></title>
+    <title><%= assigns[:page_title] || Application.get_env(:coliving, :app_title) %></title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <%= csrf_meta_tag() %>
 
@@ -38,7 +38,7 @@
           </nav>
         <% end %>
         <a href="/" class="phx-logo">
-          <h3>Co-Living Portal</h3>
+          <h3><%= Application.get_env(:coliving, :app_title) %></h3>
         </a>
       </section>
     </header>

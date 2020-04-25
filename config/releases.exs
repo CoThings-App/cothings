@@ -28,3 +28,5 @@ config :coliving, ColivingWeb.Endpoint,
   server: true,
   cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: secret_key_base
+
+config :coliving, app_title: System.get_env("APP_TITLE") || "CoThings"
