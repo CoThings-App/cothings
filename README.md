@@ -48,7 +48,7 @@ Please always chekcout the latest release documentation for Phoenix from [here](
 1. Create `.env` file in the root folder of the project or `mv .env.example .env` and set the environment variables as needed.
 Here's some explanation of some environment values.
 
- ⋅⋅⋅`SECRET_KEY_BASE` is an unique key to sign in your cookie and session, to not save it plain. Keep it secret! Don't commit it. You should generate your own by using mix command `mix phx.gen.secret`
+    ⋅⋅⋅`SECRET_KEY_BASE` is an unique key to sign in your cookie and session, to not save it plain. Keep it secret! Don't commit it. You should generate your own by using mix command `mix phx.gen.secret`
 
 ⋅⋅⋅`DATABASE_URL` is pretty clear. Should be something like this `ecto://db_user:db_password@db_hostname/coliving_prod`
 
