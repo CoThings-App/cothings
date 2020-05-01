@@ -34,7 +34,7 @@ Currently the project is being developed in [Elixir](https://elixir-lang.org/) +
 
 You can run the web application on your server with Docker using docker-compose. How to part will be detailed later.
 
-## Release the app for production
+# Release the app for production
 
 Please always chekcout the latest release documentation for Phoenix from [here](https://hexdocs.pm/phoenix/deployment.html)
 
@@ -43,36 +43,38 @@ Please always chekcout the latest release documentation for Phoenix from [here](
 **Erlang/OTP:** `22`
 **Phoenix:** `1.4.16`
 
-# Release the app with a docker container
-- Create `.env` file in the root folder of the project and set the environment variables as needed.
-Here's an example:
+## Release the app with a docker container
+- Create `.env` file in the root folder of the project or `mv .env.example .env` and set the environment variables as needed.
+Here's some explanation of some environment values.
 
-```bash
-SECRET_KEY_BASE= # use mix phx.gen.secret to create one, without quote
-DATABASE_URL=ecto://db_user:db_password@db_hostname/coliving_prod
-POOL_SIZE=20 #your db's connection pool size
-HOST=cothings.yourdomain.com
-APP_TITLE="CoThings" # feel free to  change the app's title, but you need to keep the 
-PORT=4004
-LANG=en_US.UTF-8
-REPLACE_OS_VARS=true
-MIX_ENV=prod
-ADMIN_USERNAME=#without quote 
-ADMIN_PASSWORD=#without quote
-```
+`SECRET_KEY_BASE` is an unique key to sign in your cookie and session, to not save it plain. Keep it secret! Don't commit it. You should generate your own by using mix command `mix phx.gen.secret`
+
+`DATABASE_URL` is pretty clear. Should be something like this `ecto://db_user:db_password@db_hostname/coliving_prod`
+
+`POOL_SIZE` Your database's connection pool size
+
+`HOST` Your app's domain. You need it in order to confirm the handshaking between clients.
+
+`APP_TITLE` "CoThings" is the default app title however feel free to  change the app's title, but you need to keep the credits at the bottom acccording to the license.
+
+`ADMIN_USERNAME` and `ADMIN_PASSWORD` are the credentials for managing rooms. To access the rooms management the url is `/rooms`
+
 - Update your database settings in `docker-compose.yml` file.
-- Build the image `docker build -t cothings .` Please note that, since out `Dockerfile` use multistage build, you will need Docker version 17.05 or later.
-- Now run the application `docker-compose up -d`
-- To see the logs `docker-compose logs`
 
-Once you've released and ran the app on production, you need to run migration. First connect to the container. 
+- Build the image `docker build -t cothings .` Please note that, since out `Dockerfile` use multistage build, you will need Docker version 17.05 or later.
+
+- Now run the application `docker-compose up -d`
+
+- See the logs `docker-compose logs` to confirm your `hostname` is written in the logs.
+
+⚠️ Once you've released and ran the app on production, you need to run migration. Run the following command.
 
 `docker exec -it {container_name} bash bin/coliving eval Coliving.Release.migrate`
 
-## Local Development
+# Local Development
 To run the project in your local:
 
-  * You'll need a PostgreSQL instance in your local (We recommend use a docker container in your local, however it's totally up to you
+  * You'll need a PostgreSQL (docker) instance in your local
   * Install dependencies with `mix deps.get`
   * Create and migrate your database with `mix ecto.setup`
   * Install Node.js dependencies with `cd assets && npm install`
