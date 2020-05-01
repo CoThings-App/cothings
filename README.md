@@ -1,11 +1,12 @@
-# Co-Living
+# CoThings
+# Codename: Co-Living
 
 ![Elixir CI](https://github.com/rainlab-inc/coliving/workflows/Elixir%20CI/badge.svg)
 [![GitHub last commit](https://img.shields.io/github/last-commit/rainlab-inc/coliving)](https://github.com/rainlab-inc/coliving/commits/master)
 [![GitHub issues](https://img.shields.io/github/issues/rainlab-inc/coliving)](https://github.com/rainlab-inc/coliving/issues)
 [![License](https://img.shields.io/github/license/rainlab-inc/coliving)](LICENSE.md)
 
-Co-living service aims to help avoiding crowded areas for co-living spaces, like a share-house or a guest house's kitchens to prevent COVID-19 pandemic.
+CoThings helps you avoiding crowded areas for co-living spaces, like a share-house or a guest house's kitchens to prevent COVID-19 pandemic.
 
 For now, it's only a web application and it needs to update the status of the current room manually. Without any restriction anyone can update the counter in case of people forget to update their status. It uses socket for realtime communication.
 
@@ -33,28 +34,45 @@ Currently the project is being developed in [Elixir](https://elixir-lang.org/) +
 
 You can run the web application on your server with Docker using docker-compose. How to part will be detailed later.
 
-## Release
+## Release the app for production
 
 Please always chekcout the latest release documentation for Phoenix from [here](https://hexdocs.pm/phoenix/deployment.html)
 
-Here's some quick info for releasing the app by yourself until [this task](https://github.com/rainlab-inc/coliving/projects/4#card-36534840) being done
+#### Stack Versions
+**Elixir:** `1.10.0`
+**Erlang/OTP:** `22`
+**Phoenix:** `1.4.16`
 
-- Change the `host` of `url` in `config/prod.exs` for socket handshaking.
-```elixir
-config :coliving, ColivingWeb.Endpoint,
-  url: [host: "example.com", port: 80],
-  server: true,
-  cache_static_manifest: "priv/static/cache_manifest.json"
-  ```
+# Release the app with a docker container
+- Create `.env` file in the root folder of the project and set the environment variables as needed.
+Here's an example:
 
-Once you release and ran the app on production, you may need to run migration like this:
+```bash
+SECRET_KEY_BASE= # use mix phx.gen.secret to create one, without quote
+DATABASE_URL=ecto://db_user:db_password@db_hostname/coliving_prod
+POOL_SIZE=20 #your db's connection pool size
+HOST=cothings.yourdomain.com
+APP_TITLE="CoThings" # feel free to  change the app's title, but you need to keep the 
+PORT=4004
+LANG=en_US.UTF-8
+REPLACE_OS_VARS=true
+MIX_ENV=prod
+ADMIN_USERNAME=#without quote 
+ADMIN_PASSWORD=#without quote
+```
+- Update your database settings in `docker-compose.yml` file.
+- Build the image `docker build -t cothings .` Please note that, since out `Dockerfile` use multistage build, you will need Docker version 17.05 or later.
+- Now run the application `docker-compose up -d`
+- To see the logs `docker-compose logs`
 
-`/bin/coliving eval "Coliving.Release.migrate"`
+Once you've released and ran the app on production, you need to run migration. First connect to the container. 
+
+`docker exec -it {container_name} bash bin/coliving eval Coliving.Release.migrate`
 
 ## Local Development
 To run the project in your local:
 
-  * You'll need a PostgreSQL instance in your local
+  * You'll need a PostgreSQL instance in your local (We recommend use a docker container in your local, however it's totally up to you
   * Install dependencies with `mix deps.get`
   * Create and migrate your database with `mix ecto.setup`
   * Install Node.js dependencies with `cd assets && npm install`
