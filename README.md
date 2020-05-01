@@ -44,30 +44,31 @@ Please always chekcout the latest release documentation for Phoenix from [here](
 **Phoenix:** `1.4.16`
 
 ## Release the app with a docker container
-- Create `.env` file in the root folder of the project or `mv .env.example .env` and set the environment variables as needed.
+
+1. Create `.env` file in the root folder of the project or `mv .env.example .env` and set the environment variables as needed.
 Here's some explanation of some environment values.
 
-...`SECRET_KEY_BASE` is an unique key to sign in your cookie and session, to not save it plain. Keep it secret! Don't commit it. You should generate your own by using mix command `mix phx.gen.secret`
+ ⋅⋅⋅`SECRET_KEY_BASE` is an unique key to sign in your cookie and session, to not save it plain. Keep it secret! Don't commit it. You should generate your own by using mix command `mix phx.gen.secret`
 
-...`DATABASE_URL` is pretty clear. Should be something like this `ecto://db_user:db_password@db_hostname/coliving_prod`
+⋅⋅⋅`DATABASE_URL` is pretty clear. Should be something like this `ecto://db_user:db_password@db_hostname/coliving_prod`
 
-...`POOL_SIZE` Your database's connection pool size
+⋅⋅⋅`POOL_SIZE` Your database's connection pool size
 
-...`HOST` Your app's domain. You need it in order to confirm the handshaking between clients.
+⋅⋅⋅`HOST` Your app's domain. You need it in order to confirm the handshaking between clients.
 
- ...`APP_TITLE` "CoThings" is the default app title however feel free to  change the app's title, but you need to keep the credits at the bottom acccording to the license.
+⋅⋅⋅`APP_TITLE` "CoThings" is the default app title however feel free to  change the app's title, but you need to keep the credits at the bottom acccording to the license.
 
- ...`ADMIN_USERNAME` and `ADMIN_PASSWORD` are the credentials for managing rooms. To access the rooms management the url is `/rooms`
+ ⋅⋅⋅`ADMIN_USERNAME` and `ADMIN_PASSWORD` are the credentials for managing rooms. To access the rooms management the url is `/rooms`
 
-- Update your database settings in `docker-compose.yml` file.
+2. Update your database settings in `docker-compose.yml` file.
 
-- Build the image `docker build -t cothings .` Please note that, since out `Dockerfile` use multistage build, you will need Docker version 17.05 or later.
+3. Build the image `docker build -t cothings .` Please note that, since out `Dockerfile` use multistage build, you will need Docker version 17.05 or later.
 
-- Now run the application `docker-compose up -d`
+4. Now run the application `docker-compose up -d`
 
-- See the logs `docker-compose logs` to confirm your `hostname` is written in the logs.
+5. See the logs `docker-compose logs` to confirm your `hostname` is written in the logs.
 
-⚠️ Once you've released and ran the app on production, you need to run migration. Run the following command.
+6. ⚠️ Once you've released and ran the app on production, you need to run migration. Run the following command.
 
 `docker exec -it {container_name} bash bin/coliving eval Coliving.Release.migrate`
 
