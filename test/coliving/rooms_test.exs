@@ -69,9 +69,21 @@ defmodule Coliving.RoomsTest do
   describe "usages" do
     alias Coliving.Rooms.Usage
 
+    setup do
+      {:ok, room} =
+        Rooms.create_room(%{
+          count: 42,
+          limit: 42,
+          name: "some name",
+          group: "some group"
+        })
+
+      %{room_id: room.id, user_id: Ecto.UUID.generate()}
+    end
+
     @valid_attrs %{action: "some action", hit: 42}
     @update_attrs %{action: "some updated action", hit: 43}
-    @invalid_attrs %{action: nil, hit: nil}
+    @invalid_attrs %{action: nil, hit: nil, user_id: nil, room_id: nil}
 
     def usage_fixture(attrs \\ %{}) do
       {:ok, usage} =
@@ -82,18 +94,21 @@ defmodule Coliving.RoomsTest do
       usage
     end
 
-    test "list_usages/0 returns all usages" do
-      usage = usage_fixture()
+    test "list_usages/0 returns all usages", room_and_user do
+      usage = usage_fixture(room_and_user)
       assert Rooms.list_usages() == [usage]
     end
 
-    test "get_usage!/1 returns the usage with given id" do
-      usage = usage_fixture()
+    # room_and_user returns from `setup`
+    test "get_usage!/1 returns the usage with given id", room_and_user do
+      usage = usage_fixture(room_and_user)
       assert Rooms.get_usage!(usage.id) == usage
     end
 
-    test "create_usage/1 with valid data creates a usage" do
-      assert {:ok, %Usage{} = usage} = Rooms.create_usage(@valid_attrs)
+    # leaving this one as a sample of pattern matching
+    test "create_usage/1 with valid data creates a usage", %{room_id: room_id, user_id: user_id} do
+      attrs = Enum.into(@valid_attrs, %{user_id: user_id, room_id: room_id})
+      assert {:ok, %Usage{} = usage} = Rooms.create_usage(attrs)
       assert usage.action == "some action"
       assert usage.hit == 42
     end
@@ -102,27 +117,27 @@ defmodule Coliving.RoomsTest do
       assert {:error, %Ecto.Changeset{}} = Rooms.create_usage(@invalid_attrs)
     end
 
-    test "update_usage/2 with valid data updates the usage" do
-      usage = usage_fixture()
+    test "update_usage/2 with valid data updates the usage", room_and_user do
+      usage = usage_fixture(room_and_user)
       assert {:ok, %Usage{} = usage} = Rooms.update_usage(usage, @update_attrs)
       assert usage.action == "some updated action"
       assert usage.hit == 43
     end
 
-    test "update_usage/2 with invalid data returns error changeset" do
-      usage = usage_fixture()
+    test "update_usage/2 with invalid data returns error changeset", room_and_user do
+      usage = usage_fixture(room_and_user)
       assert {:error, %Ecto.Changeset{}} = Rooms.update_usage(usage, @invalid_attrs)
       assert usage == Rooms.get_usage!(usage.id)
     end
 
-    test "delete_usage/1 deletes the usage" do
-      usage = usage_fixture()
+    test "delete_usage/1 deletes the usage", room_and_user do
+      usage = usage_fixture(room_and_user)
       assert {:ok, %Usage{}} = Rooms.delete_usage(usage)
       assert_raise Ecto.NoResultsError, fn -> Rooms.get_usage!(usage.id) end
     end
 
-    test "change_usage/1 returns a usage changeset" do
-      usage = usage_fixture()
+    test "change_usage/1 returns a usage changeset", room_and_user do
+      usage = usage_fixture(room_and_user)
       assert %Ecto.Changeset{} = Rooms.change_usage(usage)
     end
   end
