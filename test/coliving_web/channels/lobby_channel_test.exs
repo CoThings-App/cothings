@@ -33,14 +33,14 @@ defmodule ColivingWeb.LobbyChannelTests do
   end
 
   test "enter a room", %{socket: socket} do
-    push(socket, "enter", %{})
-    assert_push "enter", %{}
-    assert_broadcast "enter", %{}
+    push(socket, "inc", %{})
+    assert_push "inc", %{}
+    assert_broadcast "inc", %{}
   end
 
   test "leave a room", %{socket: socket} do
-    push(socket, "left", %{})
-    assert_push "left", %{}
-    assert_broadcast "left", %{}
+    push(socket, "dec", %{})
+    assert_push "dec", %{}
+    assert_broadcast "dec", %{}
   end
 end
