@@ -60,7 +60,7 @@ Here's some explanation of some environment values.
 
     `ADMIN_USERNAME` and `ADMIN_PASSWORD` are the credentials for managing rooms. To access the rooms management the url is `/rooms`
 
-2. Update your database settings in `docker-compose.yml` file.
+2. Update your database settings and persistent volume paths in `docker-compose.yml` file.
 
 3. Build the image `docker build -t cothings .` Please note that, since out `Dockerfile` use multistage build, you will need Docker version 17.05 or later.
 
