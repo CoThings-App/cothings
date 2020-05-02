@@ -9,7 +9,7 @@ defmodule ColivingWeb.LobbyChannelTests do
     room = create_test_room()
 
     {:ok, _, socket} =
-      socket(UserSocket, %{})
+      socket(UserSocket, "device_uuid", %{some: :assign})
       |> subscribe_and_join(LobbyChannel, "lobby:#{room.id}")
 
     {:ok, socket: socket}
