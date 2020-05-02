@@ -2,15 +2,16 @@ defmodule Coliving.Rooms.Usage do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @all_fields ~w(room_id action hit user_id)a
-  @required_fields ~w(room_id action hit user_id)a
+  @all_fields ~w(room_id action hit device_uuid)a
+  @required_fields ~w(room_id action hit device_uuid)a
 
   schema "usages" do
     field :room_id, :id
     field :action, :string
     # count of the room at the time
     field :hit, :integer
-    field :user_id, :binary_id
+    # did for the sake of performance
+    field :device_uuid, :binary_id
 
     timestamps()
   end
