@@ -78,12 +78,12 @@ defmodule Coliving.RoomsTest do
           group: "some group"
         })
 
-      %{room_id: room.id, user_id: Ecto.UUID.generate()}
+      %{room_id: room.id, device_uuid: Ecto.UUID.generate()}
     end
 
     @valid_attrs %{action: "some action", hit: 42}
     @update_attrs %{action: "some updated action", hit: 43}
-    @invalid_attrs %{action: nil, hit: nil, user_id: nil, room_id: nil}
+    @invalid_attrs %{action: nil, hit: nil, device_uuid: nil, room_id: nil}
 
     def usage_fixture(attrs \\ %{}) do
       {:ok, usage} =
@@ -106,8 +106,11 @@ defmodule Coliving.RoomsTest do
     end
 
     # leaving this one as a sample of pattern matching
-    test "create_usage/1 with valid data creates a usage", %{room_id: room_id, user_id: user_id} do
-      attrs = Enum.into(@valid_attrs, %{user_id: user_id, room_id: room_id})
+    test "create_usage/1 with valid data creates a usage", %{
+      room_id: room_id,
+      device_uuid: device_uuid
+    } do
+      attrs = Enum.into(@valid_attrs, %{device_uuid: device_uuid, room_id: room_id})
       assert {:ok, %Usage{} = usage} = Rooms.create_usage(attrs)
       assert usage.action == "some action"
       assert usage.hit == 42

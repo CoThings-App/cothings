@@ -6,9 +6,27 @@ defmodule Coliving.DevicesTest do
   describe "devices" do
     alias Coliving.Devices.Device
 
-    @valid_attrs %{client_version: "some client_version", device_uuid: "7488a646-e31f-11e4-aace-600308960662", hit: 42, platform: "some platform", push_token: "some push_token"}
-    @update_attrs %{client_version: "some updated client_version", device_uuid: "7488a646-e31f-11e4-aace-600308960668", hit: 43, platform: "some updated platform", push_token: "some updated push_token"}
-    @invalid_attrs %{client_version: nil, device_uuid: nil, hit: nil, platform: nil, push_token: nil}
+    @valid_attrs %{
+      client_version: "some client_version",
+      device_uuid: "7488a646-e31f-11e4-aace-600308960662",
+      hit: 42,
+      platform: "some platform",
+      push_token: "some push_token"
+    }
+    @update_attrs %{
+      client_version: "some updated client_version",
+      device_uuid: "7488a646-e31f-11e4-aace-600308960668",
+      hit: 43,
+      platform: "some updated platform",
+      push_token: "some updated push_token"
+    }
+    @invalid_attrs %{
+      client_version: nil,
+      device_uuid: nil,
+      hit: nil,
+      platform: nil,
+      push_token: nil
+    }
 
     def device_fixture(attrs \\ %{}) do
       {:ok, device} =
