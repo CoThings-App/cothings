@@ -1,23 +1,25 @@
-image: elixir:latest
+stages:
+  - test
+  - build
+  - release
 
-services:
-  - postgres:latest
-  
-variables:
-  POSTGRES_DB: coliving_test
-  POSTGRES_HOST: postgres
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: "postgres"
-  MIX_ENV: "test"
-  GITLAB_CI: "true"
-
-before_script:
-  - mix local.rebar --force
-  - mix local.hex --force
-  - mix deps.get
-  - mix ecto.create
-  - mix ecto.migrate
-
-mix:
+test:
+  stage: test
+  image: elixir:latest
+  variables:
+    POSTGRES_DB: coliving_test
+    POSTGRES_HOST: postgres
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: "postgres"
+    MIX_ENV: "test"
+    GITLAB_CI: "true"
+  services:
+    - postgres:latest
+  before_script:
+    - mix local.rebar --force
+    - mix local.hex --force
+    - mix deps.get
+    - mix ecto.create
+    - mix ecto.migrate
   script:
     - mix test
