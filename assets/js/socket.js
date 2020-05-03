@@ -1,18 +1,17 @@
 import { Socket } from "phoenix"
 import moment from './moment';
 
-
-
+let socket = new Socket("/socket");
 
 const connectToTheRoom = (room_id) => {
 
-    socket.connect();
+    socket.connect({
+        token: window.userToken,
+    });
 
     console.log('connecting to the socket ....');
 
-    let channel = socket.channel("lobby:" + room_id, {
-        // token: window.userToken added token here also didn't work according to the doc 
-    })
+    let channel = socket.channel("lobby:" + room_id, {})
     channel.join()
         .receive("ok", resp => {
             console.log('connected to the socket!');
@@ -54,12 +53,13 @@ function updateTime(time) {
 
 const connectToTheLobby = () => {
 
-    socket.connect();
+    socket.connect({
+        token: window.userToken
+    });
+
     console.log('connecting to the socket ....');
 
-    let channel = socket.channel("lobby:*", {
-        // params: { token: window.userToken } // tried this way too
-    })
+    let channel = socket.channel("lobby:*", {})
     channel.join()
         .receive("ok", resp => {
             console.log('connected to the socket!');
