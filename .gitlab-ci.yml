@@ -30,7 +30,7 @@ build:dev:
     - docker
   script:
     - docker build --pull -t ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}-dev .
-    - docker push ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}-dev"
+    - docker push ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}-dev
   except:
     - master
 
