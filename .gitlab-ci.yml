@@ -23,3 +23,27 @@ test:
     - mix ecto.migrate
   script:
     - mix test
+
+build:dev:
+  stage: build
+  tags:
+    - docker
+  script:
+    - docker build --pull -t ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}-dev .
+    - docker push ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}-dev"
+  except:
+    - master
+
+release:latest:
+  stage: release
+  tags:
+    - docker
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - RELEASE_TAG=${CI_COMMIT_TAG:-latest}
+    - docker build --pull -t ${CI_REGISTRY_IMAGE}:${RELEASE_TAG} .
+    - docker push ${CI_REGISTRY_IMAGE}:${RELEASE_TAG}
+  only:
+    - master
+    - tags
