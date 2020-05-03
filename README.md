@@ -43,7 +43,7 @@ Please always chekcout the latest release documentation for Phoenix from [here](
 
 **Erlang/OTP:** `22`
 
-**Phoenix:** `1.4.16`
+**Phoenix:** `1.5.1`
 
 ## Run as a Docker Container
 
