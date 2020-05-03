@@ -1,17 +1,8 @@
 import { Socket } from "phoenix"
-import moment from './moment.min';
+import moment from './moment';
 
-// previous way
-let socket = new Socket("/socket", {
-    params: {
-        token: window.userToken
-            //Q: can add more params? only allow to pass token?
-    }
-});
 
-// socket.connect(); doesn't matter connect here or below
 
-// following latest doc for Phoenix 1.5.1 https://hexdocs.pm/phoenix/js/
 
 const connectToTheRoom = (room_id) => {
 
