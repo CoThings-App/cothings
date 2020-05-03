@@ -1,23 +1,51 @@
-image: elixir:latest
+stages:
+  - test
+  - build
+  - release
 
-services:
-  - postgres:latest
-  
-variables:
-  POSTGRES_DB: coliving_test
-  POSTGRES_HOST: postgres
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: "postgres"
-  MIX_ENV: "test"
-  GITLAB_CI: "true"
-
-before_script:
-  - mix local.rebar --force
-  - mix local.hex --force
-  - mix deps.get
-  - mix ecto.create
-  - mix ecto.migrate
-
-mix:
+test:
+  stage: test
+  image: elixir:latest
+  variables:
+    POSTGRES_DB: coliving_test
+    POSTGRES_HOST: postgres
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: "postgres"
+    MIX_ENV: "test"
+    GITLAB_CI: "true"
+  services:
+    - postgres:latest
+  before_script:
+    - mix local.rebar --force
+    - mix local.hex --force
+    - mix deps.get
+    - mix ecto.create
+    - mix ecto.migrate
   script:
     - mix test
+
+build:dev:
+  stage: build
+  tags:
+    - docker
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - docker build --pull -t ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}-dev .
+    - docker push ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}-dev
+  except:
+    - master
+
+release:latest:
+  stage: release
+  tags:
+    - docker
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - RELEASE_TAG=${CI_COMMIT_TAG:-latest}
+    - docker build --pull -t ${CI_REGISTRY_IMAGE}:${RELEASE_TAG} .
+    - docker push ${CI_REGISTRY_IMAGE}:${RELEASE_TAG}
+  only:
+    - master
+    - tags
