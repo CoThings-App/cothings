@@ -34,16 +34,18 @@ Currently the project is being developed in [Elixir](https://elixir-lang.org/) +
 
 You can run the web application on your server with Docker using docker-compose. How to part will be detailed later.
 
-# Release the app for production
+# How to run the app for Production
 
 Please always chekcout the latest release documentation for Phoenix from [here](https://hexdocs.pm/phoenix/deployment.html)
 
 #### Stack Versions
 **Elixir:** `1.10.0`
+
 **Erlang/OTP:** `22`
+
 **Phoenix:** `1.4.16`
 
-## Release the app with a docker container
+## Run as a Docker Container
 
 1. Create `.env` file in the root folder of the project or `mv .env.example .env` and set the environment variables as needed.
 Here's some explanation of some environment values.
@@ -60,19 +62,23 @@ Here's some explanation of some environment values.
 
     `ADMIN_USERNAME` and `ADMIN_PASSWORD` are the credentials for managing rooms. To access the rooms management the url is `/rooms`
 
-2. Update your database settings and persistent volume paths in `docker-compose.yml` file.
+1. Update your database settings and persistent volume paths in `docker-compose.yml` file.
 
-3. Build the image `docker build -t cothings .` Please note that, since out `Dockerfile` use multistage build, you will need Docker version 17.05 or later.
+1. There are two ways to have the docker image:
 
-4. Now run the application `docker-compose up -d`
+   1. Build the image by yourself `docker build -t coliving .` Please note that, since out `Dockerfile` use multistage build, you will need Docker version 17.05 or later.
 
-5. See the logs `docker-compose logs` to confirm your `hostname` is written in the logs.
+   1. Or you can use our [initial release](https://github.com/rainlab-inc/cothings/releases/tag/v0.1.0) _docker image_ by pull it like this: `docker pull dkr.rlab.io/cothings/web-app:v0.1.0` or specify in the _image_ and the _tag_ in `docker-compose.yml` file.
 
-6. ⚠️ Once you've released and ran the app on production, you need to run migration. Run the following command.
+1. Now run the application `docker-compose up -d`
+
+1. See the logs `docker-compose logs` to confirm your `hostname` is written in the logs.
+
+1. ⚠️ Once you've released and ran the app on production, you need to run migration. Run the following command.
 
 `docker exec -it {container_name} bash bin/coliving eval Coliving.Release.migrate`
 
-# Local Development
+# Run in Local Environment (or for Development purpose)
 To run the project in your local:
 
   * You'll need a PostgreSQL (docker) instance in your local
