@@ -1,15 +1,27 @@
 import { Socket } from "phoenix"
 import moment from './moment.min';
 
-let socket = new Socket("/socket", { params: {} });
+// previous way
+let socket = new Socket("/socket", {
+    params: {
+        token: window.userToken
+            //Q: can add more params? only allow to pass token?
+    }
+});
 
+// socket.connect(); doesn't matter connect here or below
+
+// following latest doc for Phoenix 1.5.1 https://hexdocs.pm/phoenix/js/
 
 const connectToTheRoom = (room_id) => {
 
     socket.connect();
+
     console.log('connecting to the socket ....');
 
-    let channel = socket.channel("lobby:" + room_id, {})
+    let channel = socket.channel("lobby:" + room_id, {
+        // token: window.userToken added token here also didn't work according to the doc 
+    })
     channel.join()
         .receive("ok", resp => {
             console.log('connected to the socket!');
@@ -54,7 +66,9 @@ const connectToTheLobby = () => {
     socket.connect();
     console.log('connecting to the socket ....');
 
-    let channel = socket.channel("lobby:*", {})
+    let channel = socket.channel("lobby:*", {
+        // params: { token: window.userToken } // tried this way too
+    })
     channel.join()
         .receive("ok", resp => {
             console.log('connected to the socket!');
