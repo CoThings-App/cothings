@@ -12,7 +12,7 @@ For now, it's only a web application and it needs to update the status of the cu
 
 You can see the project overall progress from [here](https://github.com/rainlab-inc/coliving/projects/4)
 
-You can check out the [designs](https://github.com/rainlab-inc/cothings-design)
+You can checkout applications' designs from [here](https://github.com/rainlab-inc/cothings-design)
 
 Here's some screenshots that we use for our share-house's facility:
 
