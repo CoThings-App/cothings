@@ -12,6 +12,8 @@ For now, it's only a web application and it needs to update the status of the cu
 
 You can see the project overall progress from [here](https://github.com/rainlab-inc/coliving/projects/4)
 
+[Designs](https://github.com/rainlab-inc/cothings-design)
+
 Here's some screenshots that we use for our share-house's facility:
 
 ![Lobby](https://github.com/rainlab-inc/coliving/blob/master/assets/static/images/app_screenshot_lobby.png "Lobby Overall")
