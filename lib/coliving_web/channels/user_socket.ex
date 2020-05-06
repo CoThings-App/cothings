@@ -4,11 +4,13 @@ defmodule ColivingWeb.UserSocket do
   channel "lobby:*", ColivingWeb.LobbyChannel
 
   def connect(params, socket, _connect_info) do
-    token = params["token"]
-    if token == nil do
-     :error
+    device_token = params["device_token"]
+
+    if device_token == nil do
+      :error
     else
-      case Phoenix.Token.verify(socket, "user socket", token, max_age: 1_209_600) do
+      # after decode device_token maybe we should verify the device_uuid in db as well
+      case Phoenix.Token.verify(socket, "device token", device_token, max_age: 1_209_600) do
         {:ok, device_uuid} ->
           {:ok, assign(socket, :device_uuid, device_uuid)}
 
