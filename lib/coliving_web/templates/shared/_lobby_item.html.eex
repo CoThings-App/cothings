@@ -1,5 +1,5 @@
 <div class="light-grey">
-    <div id="bar_<%= @room.id %>" style="width: <%= @room.percentage %>%;" class="progress-bar <%= @room.css_class %>">
-        <span class="percentage" id="room_<%= @room.id %>_percentage"><%= @room.percentage %>%<span>
+    <div id="bar_<%= @room.id %>" style="width: <%= get_room_percentage(@room) %>%;" class="progress-bar <%= get_room_css_class(@room) %>">
+        <span class="percentage" id="room_<%= @room.id %>_percentage"><%= get_room_percentage(@room) %>%<span>
     </div>
 </div>
