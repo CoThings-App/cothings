@@ -101,4 +101,21 @@ defmodule Coliving.Devices do
   def change_device(%Device{} = device) do
     Device.changeset(device, %{})
   end
+
+  @doc """
+  Gets device by uuid
+
+  Return nil if the Device does not exist.
+
+  ## Examples
+
+      iex> get_device_by_uuid("bca51b59-02bf-4902-a9f4-b51cef6498fe")
+      %Device{}
+
+      iex> get_device_by_uuid("bca51b59-02bf-4902-a9f4-b51cef6498fe")
+      ** nil
+  """
+  def get_device_by_uuid(uuid) do
+    Repo.get_by(Device, device_uuid: uuid)
+  end
 end
