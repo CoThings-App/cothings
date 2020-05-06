@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <%= csrf_meta_tag() %>
     <script>
-    //window.userToken = "<%= assigns[:user_token] %>"
-      window.userToken = '<%= Phoenix.Token.sign(ColivingWeb.Endpoint, "user socket", "47375ea2-26d4-4377-8715-8263b61e5b23") %>'
+      window.deviceToken = '<%= assigns[:device_token] %>'
     </script>
     <script>
         function wentAway() {

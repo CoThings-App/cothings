@@ -3,11 +3,15 @@ import moment from './moment';
 
 let socket = new Socket("/socket");
 
+const socketParams = () => {
+    return {
+        device_token: window.deviceToken
+    }
+}
+
 const connectToTheRoom = (room_id) => {
 
-    socket.connect({
-        token: window.userToken,
-    });
+    socket.connect(socketParams);
 
     console.log('connecting to the socket ....');
 
@@ -53,9 +57,7 @@ function updateTime(time) {
 
 const connectToTheLobby = () => {
 
-    socket.connect({
-        token: window.userToken
-    });
+    socket.connect(socketParams);
 
     console.log('connecting to the socket ....');
 
@@ -100,6 +102,7 @@ const disconnect = () => {
     console.log('disconnecting from the socket!');
     socket.disconnect();
 }
+
 
 window.connectToTheRoom = connectToTheRoom;
 window.connectToTheLobby = connectToTheLobby;
