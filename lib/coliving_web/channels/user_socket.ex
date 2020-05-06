@@ -1,6 +1,8 @@
 defmodule ColivingWeb.UserSocket do
   use Phoenix.Socket
 
+  @cookie_max_age 15_778_476 # 6 months
+
   channel "lobby:*", ColivingWeb.LobbyChannel
 
   def connect(params, socket, _connect_info) do
@@ -10,7 +12,7 @@ defmodule ColivingWeb.UserSocket do
       :error
     else
       # after decode device_token maybe we should verify the device_uuid in db as well
-      case Phoenix.Token.verify(socket, "device token", device_token, max_age: 1_209_600) do
+      case Phoenix.Token.verify(socket, "device token", device_token, max_age: @cookie_max_age) do
         {:ok, device_uuid} ->
           {:ok, assign(socket, :device_uuid, device_uuid)}
 
