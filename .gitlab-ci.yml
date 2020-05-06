@@ -2,6 +2,7 @@ stages:
   - test
   - build
   - release
+  - deploy
 
 test:
   stage: test
@@ -46,6 +47,18 @@ release:latest:
     - RELEASE_TAG=${CI_COMMIT_TAG:-latest}
     - docker build --pull -t ${CI_REGISTRY_IMAGE}:${RELEASE_TAG} .
     - docker push ${CI_REGISTRY_IMAGE}:${RELEASE_TAG}
+    - docker image inspect -f '{{ index .RepoDigests 0 }}' ${CI_REGISTRY_IMAGE}:${RELEASE_TAG} > latest.image.txt
   only:
     - master
     - tags
+  artifacts:
+    paths:
+    - latest.image.txt
+
+deploy:
+  needs:
+  - job: release:latest
+    artifacts: true
+  script:
+  - IMAGE=$(cat latest.image.txt)
+  
