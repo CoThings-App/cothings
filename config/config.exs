@@ -15,7 +15,7 @@ config :coliving, ColivingWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "nx/r/7iQ8AX0/lkGxNbAtgGzJgi91FT79DLp04R3FK9/wT4p5lMZGHslNYUt6iuB",
   render_errors: [view: ColivingWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Coliving.PubSub, adapter: Phoenix.PubSub.PG2],
+  pubsub_server: ColivingWeb.PubSub,
   live_view: [signing_salt: "/kUBZxe/"]
 
 # Configures Elixir's Logger

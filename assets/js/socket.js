@@ -1,12 +1,18 @@
 import { Socket } from "phoenix"
-import moment from './moment.min';
+import moment from './moment';
 
-let socket = new Socket("/socket", { params: {} });
+let socket = new Socket("/socket");
 
+const socketParams = () => {
+    return {
+        device_token: window.deviceToken
+    }
+}
 
 const connectToTheRoom = (room_id) => {
 
-    socket.connect();
+    socket.connect(socketParams);
+
     console.log('connecting to the socket ....');
 
     let channel = socket.channel("lobby:" + room_id, {})
@@ -51,7 +57,8 @@ function updateTime(time) {
 
 const connectToTheLobby = () => {
 
-    socket.connect();
+    socket.connect(socketParams);
+
     console.log('connecting to the socket ....');
 
     let channel = socket.channel("lobby:*", {})
@@ -95,6 +102,7 @@ const disconnect = () => {
     console.log('disconnecting from the socket!');
     socket.disconnect();
 }
+
 
 window.connectToTheRoom = connectToTheRoom;
 window.connectToTheLobby = connectToTheLobby;
