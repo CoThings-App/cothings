@@ -7,6 +7,7 @@
       <thead>
         <tr>
           <th>Room</th>
+          <th colspan="2" class="center">Actions</th>
           <th class="center">Occupied</th>
           <th class="center">Capacity</th>
           <th>Occupied (%)</th>
@@ -22,7 +23,13 @@
         <%= for room <- Enum.sort_by(rooms, &(&1.name)) do %>
         <tr>
           <td>
-            <%= link room.name, to: Routes.room_path(@conn, :live, room) %>
+            <%= room.name %>
+          </td>
+          <td>
+            <button id="btn-dec" onclick="window.changeRoomPopulation('dec', <%= room.id %>)" class="button button-outline">-</button>
+          </td>
+          <td>
+            <button id="btn-inc" onclick="window.changeRoomPopulation('inc', <%= room.id %>)" class="button button-outline">+</button>
           </td>
           <td class="center"><span id="room_<%= room.id %>_count"><%= room.count %><span></td>
           <td class="center"><span id="room_<%= room.id %>_capacity"><%= room.capacity %><span></td>
@@ -37,6 +44,6 @@
 </section>
 <script>
   function connectToSocket() {
-    window.connectToTheLobby()
+    window.connectToTheLobby();
   }
 </script>
