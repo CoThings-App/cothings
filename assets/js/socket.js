@@ -21,8 +21,7 @@ const connectToTheLobby = () => {
 
     console.log('connecting to the socket ....');
 
-    let channel = socket.channel("room:lobby", {})
-    channel.join()
+    lobbyChannel.join()
         .receive("ok", resp => {
             console.log('connected to the socket!');
             resp.rooms.forEach(room => {
@@ -36,12 +35,27 @@ const connectToTheLobby = () => {
             console.error("Unable to join", resp)
         })
 
-    channel.on("update", function(data) {
-        console.log("update", data);
+    lobbyChannel.on("update", function(data) {
         updateTheRoomStats(data.room)
     });
 
+    lobbyChannel.on("inc", function(data) {
+        updateTheRoomStats(data);
+    });
+    lobbyChannel.on("dec", function(data) {
+        updateTheRoomStats(data);
+    });
+
     function updateTheRoomStats(room) {
+        room.percentage = Math.round(room.count / room.capacity * 100);
+
+        room.css_class = "green";
+        if (room.percentage > 60 & room.percentage <= 80) {
+            room.css_class = "orange";
+        } else {
+            room.css_class = "red";
+        }
+
         document.getElementById(`room_${room.id}_count`).innerText = room.count;
         document.getElementById(`room_${room.id}_percentage`).innerText = `${room.percentage}%`;
         document.getElementById(`bar_${room.id}`).className = `progress-bar ${room.css_class}`;
@@ -63,7 +77,10 @@ const disconnect = () => {
     socket.disconnect();
 }
 
+const changeRoomPopulation = (action, roomId) => {
+    lobbyChannel.push(action, { room_id: roomId })
+}
 
-window.connectToTheRoom = connectToTheRoom;
+window.changeRoomPopulation = changeRoomPopulation;
 window.connectToTheLobby = connectToTheLobby;
 window.disconnect = disconnect
