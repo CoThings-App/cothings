@@ -9,47 +9,7 @@ const socketParams = () => {
     }
 }
 
-const connectToTheRoom = (room_id) => {
-
-    socket.connect(socketParams);
-
-    console.log('connecting to the socket ....');
-
-    let channel = socket.channel("room:" + room_id, {})
-    channel.join()
-        .receive("ok", resp => {
-            console.log('connected to the socket!');
-            updateCounters(resp.room);
-        })
-        .receive("error", resp => {
-            //TODO: put an alert on UI
-            console.error("Unable to join", resp)
-        })
-
-    channel.on("inc", function(data) {
-        updateCounters(data.room);
-    });
-    channel.on("dec", function(data) {
-        updateCounters(data.room);
-    });
-
-    document.getElementById("btn-inc").addEventListener('click', () => {
-        channel.push("inc");
-    });
-
-    document.getElementById("btn-dec").addEventListener('click', () => {
-        channel.push("dec");
-    });
-
-    function updateCounters(room) {
-        const counter = document.getElementById("counter");
-        counter.innerText = `${room.count}/${room.capacity}`;
-        counter.className = room.css_class;
-        document.getElementById("percentage").innerText = `${room.percentage}%`;
-        document.getElementById("percentage-circle").className = `c100 p${room.percentage} ${room.css_class}`;
-        updateTime(room.last_updated)
-    }
-}
+let lobbyChannel = socket.channel("room:lobby", {})
 
 function updateTime(time) {
     document.getElementById('last-updated').innerHTML = `<b>Last updated:</b> ${moment.utc(time).fromNow()}`;
