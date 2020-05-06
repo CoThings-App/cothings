@@ -25,7 +25,7 @@
             <%= link room.name, to: Routes.room_path(@conn, :live, room) %>
           </td>
           <td class="center"><span id="room_<%= room.id %>_count"><%= room.count %><span></td>
-          <td class="center"><span id="room_<%= room.id %>_limit"><%= room.limit %><span></td>
+          <td class="center"><span id="room_<%= room.id %>_capacity"><%= room.capacity %><span></td>
           <td>
            <%= render ColivingWeb.SharedView, "_lobby_item.html", room: room %>
         </tr>

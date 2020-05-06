@@ -20,7 +20,7 @@ defmodule ColivingWeb.RoomChannelTests do
       Rooms.create_room(%{
         name: "Test Room",
         count: 0,
-        limit: 10,
+        capacity: 10,
         group: "Test Group"
       })
 

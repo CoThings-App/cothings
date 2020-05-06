@@ -4,7 +4,7 @@ defmodule Coliving.Models.Room do
     :id,
     :name,
     :count,
-    :limit,
+    :capacity,
     :group,
     :ibeacon_uuid,
     :altbeacon_uuid,

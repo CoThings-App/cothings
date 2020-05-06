@@ -13,9 +13,9 @@
   <%= number_input f, :count %>
   <%= error_tag f, :count %>
 
-  <%= label f, :limit %>
-  <%= number_input f, :limit %>
-  <%= error_tag f, :limit %>
+  <%= label f, :capacity %>
+  <%= number_input f, :capacity %>
+  <%= error_tag f, :capacity %>
 
   <%= label f, :group %>
   <%= text_input f, :group %>

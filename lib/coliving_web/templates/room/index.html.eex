@@ -5,7 +5,7 @@
     <tr>
       <th>Name</th>
       <th>Count</th>
-      <th>Limit</th>
+      <th>Capacity</th>
       <th>Group</th>
       <th></th>
     </tr>
@@ -15,7 +15,7 @@
     <tr>
       <td><%= room.name %></td>
       <td><%= room.count %></td>
-      <td><%= room.limit %></td>
+      <td><%= room.capacity %></td>
       <td><%= room.group %></td>
 
       <td>

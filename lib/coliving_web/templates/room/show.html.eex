@@ -13,8 +13,8 @@
   </li>
 
   <li>
-    <strong>Limit:</strong>
-    <%= @room.limit %>
+    <strong>Capacity:</strong>
+    <%= @room.capacity %>
   </li>
 
   <li>

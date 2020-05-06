@@ -2,14 +2,14 @@ defmodule Coliving.Rooms.Room do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @all_fields ~w(name count limit group ibeacon_uuid altbeacon_uuid major minor)a
-  @required_fields ~w(name count limit group)a
+  @all_fields ~w(name count capacity group ibeacon_uuid altbeacon_uuid major minor)a
+  @required_fields ~w(name count capacity group)a
 
   schema "rooms" do
     field :name, :string
     # count of people / running machines etc.
     field :count, :integer
-    field :limit, :integer
+    field :capacity, :integer
     field :group, :string
     field :ibeacon_uuid, :string
     field :altbeacon_uuid, :string

@@ -43,7 +43,7 @@ const connectToTheRoom = (room_id) => {
 
     function updateCounters(room) {
         const counter = document.getElementById("counter");
-        counter.innerText = `${room.count}/${room.limit}`;
+        counter.innerText = `${room.count}/${room.capacity}`;
         counter.className = room.css_class;
         document.getElementById("percentage").innerText = `${room.percentage}%`;
         document.getElementById("percentage-circle").className = `c100 p${room.percentage} ${room.css_class}`;

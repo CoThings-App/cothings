@@ -6,9 +6,9 @@ defmodule Coliving.RoomsTest do
   describe "rooms" do
     alias Coliving.Rooms.Room
 
-    @valid_attrs %{count: 42, limit: 42, name: "some name", group: "some group"}
-    @update_attrs %{count: 43, limit: 43, name: "some updated name", group: "some updated group"}
-    @invalid_attrs %{count: nil, limit: nil, name: nil, group: nil}
+    @valid_attrs %{count: 42, capacity: 42, name: "some name", group: "some group"}
+    @update_attrs %{count: 43, capacity: 43, name: "some updated name", group: "some updated group"}
+    @invalid_attrs %{count: nil, capacity: nil, name: nil, group: nil}
 
     def room_fixture(attrs \\ %{}) do
       {:ok, room} =
@@ -32,7 +32,7 @@ defmodule Coliving.RoomsTest do
     test "create_room/1 with valid data creates a room" do
       assert {:ok, %Room{} = room} = Rooms.create_room(@valid_attrs)
       assert room.count == 42
-      assert room.limit == 42
+      assert room.capacity == 42
       assert room.name == "some name"
     end
 
@@ -44,7 +44,7 @@ defmodule Coliving.RoomsTest do
       room = room_fixture()
       assert {:ok, %Room{} = room} = Rooms.update_room(room, @update_attrs)
       assert room.count == 43
-      assert room.limit == 43
+      assert room.capacity == 43
       assert room.name == "some updated name"
     end
 
@@ -73,7 +73,7 @@ defmodule Coliving.RoomsTest do
       {:ok, room} =
         Rooms.create_room(%{
           count: 42,
-          limit: 42,
+          capacity: 42,
           name: "some name",
           group: "some group"
         })

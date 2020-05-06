@@ -226,7 +226,7 @@ defmodule Coliving.Rooms do
   end
 
   def create_room_model_from_stats(room) do
-    percentage = round(room.count / room.limit * 100)
+    percentage = round(room.count / room.capacity * 100)
 
     css_class =
       cond do
@@ -239,7 +239,7 @@ defmodule Coliving.Rooms do
       id: room.id,
       name: room.name,
       count: room.count,
-      limit: room.limit,
+      capacity: room.capacity,
       group: room.group,
       ibeacon_uuid: room.ibeacon_uuid,
       altbeacon_uuid: room.altbeacon_uuid,
