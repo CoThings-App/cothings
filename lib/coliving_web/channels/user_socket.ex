@@ -3,7 +3,7 @@ defmodule ColivingWeb.UserSocket do
 
   @cookie_max_age 15_778_476 # 6 months
 
-  channel "lobby:*", ColivingWeb.LobbyChannel
+  channel "room:*", ColivingWeb.RoomChannel
 
   def connect(params, socket, _connect_info) do
     device_token = params["device_token"]

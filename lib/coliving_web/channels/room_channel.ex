@@ -1,12 +1,13 @@
-defmodule ColivingWeb.LobbyChannel do
+defmodule ColivingWeb.RoomChannel do
   use ColivingWeb, :channel
 
   alias Coliving.Rooms
 
-  @room_prefix "lobby:"
+  @room_prefix "room:"
+  @lobby "lobby"
 
   def join(@room_prefix <> room_id, _payload, socket) do
-    if room_id == "*" do
+    if room_id == @lobby do
       rooms = Rooms.get_lobby_stats()
       {:ok, %{rooms: rooms}, assign(socket, :room_id, room_id)}
     else
@@ -28,12 +29,12 @@ defmodule ColivingWeb.LobbyChannel do
     data = get_latest_updates(room_id)
     broadcast!(socket, action, data)
     # lets notify homepage as well
-    ColivingWeb.Endpoint.broadcast!(@room_prefix <> "*", "update", data)
+    ColivingWeb.Endpoint.broadcast!(@room_prefix <> @lobby, "update", data)
     {:reply, :ok, socket}
   end
 
   defp get_latest_updates(room_id) do
-    if room_id == "*" do
+    if room_id == @lobby do
       rooms = Rooms.get_lobby_stats()
       %{rooms: rooms}
     else

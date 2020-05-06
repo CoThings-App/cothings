@@ -15,7 +15,7 @@ const connectToTheRoom = (room_id) => {
 
     console.log('connecting to the socket ....');
 
-    let channel = socket.channel("lobby:" + room_id, {})
+    let channel = socket.channel("room:" + room_id, {})
     channel.join()
         .receive("ok", resp => {
             console.log('connected to the socket!');
@@ -61,7 +61,7 @@ const connectToTheLobby = () => {
 
     console.log('connecting to the socket ....');
 
-    let channel = socket.channel("lobby:*", {})
+    let channel = socket.channel("room:lobby", {})
     channel.join()
         .receive("ok", resp => {
             console.log('connected to the socket!');

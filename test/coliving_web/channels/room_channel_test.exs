@@ -1,7 +1,7 @@
-defmodule ColivingWeb.LobbyChannelTests do
+defmodule ColivingWeb.RoomChannelTests do
   use ColivingWeb.ChannelCase
 
-  alias ColivingWeb.LobbyChannel
+  alias ColivingWeb.RoomChannel
   alias ColivingWeb.UserSocket
   alias Coliving.Rooms
 
@@ -10,7 +10,7 @@ defmodule ColivingWeb.LobbyChannelTests do
 
     {:ok, _, socket} =
       socket(UserSocket, "device_uuid", %{some: :assign})
-      |> subscribe_and_join(LobbyChannel, "lobby:#{room.id}")
+      |> subscribe_and_join(RoomChannel, "room:#{room.id}")
 
     {:ok, socket: socket}
   end
