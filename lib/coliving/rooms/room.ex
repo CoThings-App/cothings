@@ -3,7 +3,10 @@ defmodule Coliving.Rooms.Room do
   import Ecto.Changeset
 
   @all_fields ~w(name count capacity group ibeacon_uuid altbeacon_uuid major minor)a
+  @json_fields ~w(id name count capacity group ibeacon_uuid altbeacon_uuid major minor updated_at)a
   @required_fields ~w(name count capacity group)a
+
+  @derive {Jason.Encoder, only: @json_fields}
 
   schema "rooms" do
     field :name, :string
