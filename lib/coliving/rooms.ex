@@ -214,44 +214,15 @@ defmodule Coliving.Rooms do
     Usage.changeset(usage, %{})
   end
 
-  alias Coliving.Models
-
-  def get_latest_room_stats(id) do
-    room = get_room!(id)
-    create_room_model_from_stats(room)
+  def increment_room_population(room_id) do
+    change_room_population("inc", room_id)
   end
 
-  def get_lobby_stats() do
-    list_rooms() |> Enum.map(&create_room_model_from_stats(&1))
+  def decrement_room_population(room_id) do
+    change_room_population("dec", room_id)
   end
 
-  def create_room_model_from_stats(room) do
-    percentage = round(room.count / room.capacity * 100)
-
-    css_class =
-      cond do
-        percentage <= 60 -> "green"
-        percentage > 60 and percentage <= 80 -> "orange"
-        percentage > 80 -> "red"
-      end
-
-    %Models.Room{
-      id: room.id,
-      name: room.name,
-      count: room.count,
-      capacity: room.capacity,
-      group: room.group,
-      ibeacon_uuid: room.ibeacon_uuid,
-      altbeacon_uuid: room.altbeacon_uuid,
-      major: room.major,
-      minor: room.minor,
-      last_updated: room.updated_at,
-      percentage: percentage,
-      css_class: css_class
-    }
-  end
-
-  def enter_or_leave_the_room(room_id, action) do
+  defp change_room_population(action, room_id) do
     room = get_room!(room_id)
     current_hit = room.count
 
@@ -270,8 +241,6 @@ defmodule Coliving.Rooms do
       update_room(room, %{
         "count" => hit
       })
-
-      hit
     end
   end
 end
