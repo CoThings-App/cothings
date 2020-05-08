@@ -227,7 +227,7 @@ defmodule Coliving.Rooms do
     current_hit = room.count
 
     if action == "dec" && current_hit == 0 do
-      current_hit
+      {:ok, room }
     else
       create_usage(%{
         "action" => action,
