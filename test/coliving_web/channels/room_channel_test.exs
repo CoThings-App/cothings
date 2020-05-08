@@ -5,15 +5,23 @@ defmodule ColivingWeb.RoomChannelTests do
   alias ColivingWeb.UserSocket
   alias Coliving.Rooms
 
-  @env_log_room_usage "LOG_ROOM_USAGE"
-  @env_log_room_usage_with_device_uuid "LOG_ROOM_USAGE_WITH_DEVICE_UUID"
-  @env_enable_socket_client_auth "ENABLE_SOCKET_CLIENT_AUTH"
+  defp create_test_room() do
+    {:ok, room} =
+      Rooms.create_room(%{
+        name: "Test Room",
+        count: 0,
+        capacity: 10,
+        group: "Test Group"
+      })
+
+    room
+  end
 
   describe "socket with auth" do
     setup do
-      System.put_env(@env_log_room_usage, "true")
-      System.put_env(@env_log_room_usage_with_device_uuid, "false")
-      System.put_env(@env_enable_socket_client_auth, "true")
+      Application.put_env(:coliving, :usage_logging_enabled, true)
+      Application.put_env(:coliving, :usage_logging_enabled_with_device_uuid, false)
+      Application.put_env(:coliving, :socket_auth_enabled, true)
 
       room = create_test_room()
 
@@ -28,21 +36,20 @@ defmodule ColivingWeb.RoomChannelTests do
       {:ok, socket: socket, room: room}
     end
 
-    defp create_test_room() do
-      {:ok, room} =
-        Rooms.create_room(%{
-          name: "Test Room",
-          count: 0,
-          capacity: 10,
-          group: "Test Group"
-        })
-
-      room
-    end
-
     test "increase room population", %{socket: socket, room: room} do
       push(socket, "inc", %{room_id: room.id})
       assert_push "inc", %{}
+
+      # by setup logging is enabled
+      assert Rooms.get_usage_by_room_id(room.id) != nil
+    end
+
+    test "increase room population without logging", %{socket: socket, room: room} do
+      Application.put_env(:coliving, :usage_logging_enabled, false)
+      push(socket, "inc", %{room_id: room.id})
+      assert_push "inc", %{}
+
+      assert Rooms.get_usage_by_room_id(room.id) == nil
     end
 
     test "decrease room population", %{socket: socket, room: room} do
@@ -53,7 +60,8 @@ defmodule ColivingWeb.RoomChannelTests do
 
   describe "socket withouth auth" do
     setup do
-      System.put_env(@env_log_room_usage, "true")
+      Application.put_env(:coliving, :usage_logging_enabled, true)
+      Application.put_env(:coliving, :usage_logging_enabled, true)
 
       room = create_test_room()
 
