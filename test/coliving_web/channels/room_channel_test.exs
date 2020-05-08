@@ -11,7 +11,6 @@ defmodule ColivingWeb.RoomChannelTests do
 
   describe "socket with auth" do
     setup do
-
       System.put_env(@env_log_room_usage, "true")
       System.put_env(@env_log_room_usage_with_device_uuid, "false")
       System.put_env(@env_enable_socket_client_auth, "true")
@@ -26,7 +25,7 @@ defmodule ColivingWeb.RoomChannelTests do
         socket(UserSocket, "device_uuid", %{device_token => device_token})
         |> subscribe_and_join(RoomChannel, "room:lobby")
 
-      {:ok, socket: socket, room: room }
+      {:ok, socket: socket, room: room}
     end
 
     defp create_test_room() do
@@ -42,8 +41,8 @@ defmodule ColivingWeb.RoomChannelTests do
     end
 
     test "increase room population", %{socket: socket, room: room} do
-      push(socket, "inc", %{room_id: room.id })
-      assert_push "inc",  %{}
+      push(socket, "inc", %{room_id: room.id})
+      assert_push "inc", %{}
     end
 
     test "decrease room population", %{socket: socket, room: room} do
@@ -52,5 +51,27 @@ defmodule ColivingWeb.RoomChannelTests do
     end
   end
 
+  describe "socket withouth auth" do
+    setup do
+      System.put_env(@env_log_room_usage, "true")
 
+      room = create_test_room()
+
+      {:ok, _, socket} =
+        socket(UserSocket, "device_uuid", %{})
+        |> subscribe_and_join(RoomChannel, "room:lobby")
+
+      {:ok, socket: socket, room: room}
+    end
+
+    test "increase room population", %{socket: socket, room: room} do
+      push(socket, "inc", %{room_id: room.id})
+      assert_push "inc", %{}
+    end
+
+    test "decrease room population", %{socket: socket, room: room} do
+      push(socket, "dec", %{room_id: room.id})
+      assert_push "dec", %{}
+    end
+  end
 end

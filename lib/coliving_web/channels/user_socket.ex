@@ -7,6 +7,13 @@ defmodule ColivingWeb.UserSocket do
   channel "room:*", ColivingWeb.RoomChannel
 
   def connect(params, socket, _connect_info) do
+    case System.get_env("ENABLE_SOCKET_CLIENT_AUTH") do
+      "true" -> auth(params, socket)
+      nil -> {:ok, socket}
+    end
+  end
+
+  defp auth(params, socket) do
     device_token = params["device_token"]
 
     if device_token == nil do
