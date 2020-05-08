@@ -7,7 +7,7 @@
     <title><%= assigns[:page_title] || Application.get_env(:coliving, :app_title) %></title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <%= csrf_meta_tag() %>
-    <%= if Application.get_env(:coliving, :device_auth) == "true" do %>
+    <%= if Application.get_env(:coliving, :usage_logging_enabled_with_device_uuid) do %>
       <script>
         window.deviceToken = '<%= assigns[:device_token] %>'
       </script>
