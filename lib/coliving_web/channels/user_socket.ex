@@ -8,8 +8,8 @@ defmodule ColivingWeb.UserSocket do
 
   def connect(params, socket, _connect_info) do
     case Application.get_env(:coliving, :socket_auth_enabled) do
-      true -> auth(params, socket)
-      nil -> {:ok, socket}
+      "true" -> auth(params, socket)
+      _ -> {:ok, socket}
     end
   end
 
