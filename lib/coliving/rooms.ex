@@ -253,7 +253,9 @@ defmodule Coliving.Rooms do
           true -> log_usage(action, room, device_uuid)
           false -> log_usage(action, room, nil)
         end
-        _ -> nil
+
+      _ ->
+        nil
     end
   end
 
