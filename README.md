@@ -17,7 +17,6 @@ You can checkout applications' designs from [here](https://github.com/rainlab-in
 Here's some screenshots that we use for our share-house's facility:
 
 ![Lobby](https://github.com/rainlab-inc/coliving/blob/master/assets/static/images/app_screenshot_lobby.png "Lobby Overall")
-![Room](https://github.com/rainlab-inc/coliving/blob/master/assets/static/images/app_screenshot_room.png "Room Stats")
 
 Soon, there will be mobile clients to update the counters automatically using beacons.
 
@@ -63,6 +62,14 @@ Here's some explanation of some environment values.
     `APP_TITLE` "CoThings" is the default app title however feel free to  change the app's title, but you need to keep the credits at the bottom acccording to the license.
 
     `ADMIN_USERNAME` and `ADMIN_PASSWORD` are the credentials for managing rooms. To access the rooms management the url is `/rooms`
+    
+    `LOG_ROOM_USAGE` let the application create room usage logs. Default: `false`
+
+    `LOG_ROOM_USAGE_WITH_DEVICE_UUID` let the application logs the usages along with a unique `device_uuid` that create on the first request via web browser and set in the cookie for 6 months. Considering to change this time period to shorter or optional as well. However we don't recommend to track users unless you it's a requirement for your custom application. Default: `false`
+
+    `ENABLE_SOCKET_CLIENT_AUTH` this is needed when `LOG_ROOM_USAGE_WITH_DEVICE_UUID` is enabled.
+
+    This enabled / disabled features will be show on the bottom of the homepage.
 
 1. Update your database settings and persistent volume paths in `docker-compose.yml` file.
 
