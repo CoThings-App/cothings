@@ -1,46 +1,56 @@
 defmodule ColivingWeb.RoomChannelTests do
-  use ColivingWeb.ChannelCase
+  use ColivingWeb.ChannelCase, async: true
 
   alias ColivingWeb.RoomChannel
   alias ColivingWeb.UserSocket
   alias Coliving.Rooms
 
-  setup do
-    room = create_test_room()
+  @env_log_room_usage "LOG_ROOM_USAGE"
+  @env_log_room_usage_with_device_uuid "LOG_ROOM_USAGE_WITH_DEVICE_UUID"
+  @env_enable_socket_client_auth "ENABLE_SOCKET_CLIENT_AUTH"
 
-    {:ok, _, socket} =
-      socket(UserSocket, "device_uuid", %{some: :assign})
-      |> subscribe_and_join(RoomChannel, "room:#{room.id}")
+  describe "socket with auth" do
+    setup do
 
-    {:ok, socket: socket}
+      System.put_env(@env_log_room_usage, "true")
+      System.put_env(@env_log_room_usage_with_device_uuid, "false")
+      System.put_env(@env_enable_socket_client_auth, "true")
+
+      room = create_test_room()
+
+      device_uuid = Ecto.UUID.generate()
+
+      device_token = Phoenix.Token.sign(@endpoint, "device token", device_uuid)
+
+      {:ok, _, socket} =
+        socket(UserSocket, "device_uuid", %{device_token => device_token})
+        |> subscribe_and_join(RoomChannel, "room:lobby")
+
+      {:ok, socket: socket, room: room }
+    end
+
+    defp create_test_room() do
+      {:ok, room} =
+        Rooms.create_room(%{
+          name: "Test Room",
+          count: 0,
+          capacity: 10,
+          group: "Test Group"
+        })
+
+      room
+    end
+
+    test "increase room population", %{socket: socket, room: room} do
+      push(socket, "inc", %{room_id: room.id })
+      assert_push "inc",  %{}
+    end
+
+    test "decrease room population", %{socket: socket, room: room} do
+      push(socket, "dec", %{room_id: room.id})
+      assert_push "dec", %{}
+    end
   end
 
-  defp create_test_room() do
-    {:ok, room} =
-      Rooms.create_room(%{
-        name: "Test Room",
-        count: 0,
-        capacity: 10,
-        group: "Test Group"
-      })
 
-    room
-  end
-
-  test "ping replies with status ok", %{socket: socket} do
-    ref = push(socket, "ping", %{"hello" => "there"})
-    assert_reply ref, :ok, %{"hello" => "there"}
-  end
-
-  test "enter a room", %{socket: socket} do
-    push(socket, "inc", %{})
-    assert_push "inc", %{}
-    assert_broadcast "inc", %{}
-  end
-
-  test "leave a room", %{socket: socket} do
-    push(socket, "dec", %{})
-    assert_push "dec", %{}
-    assert_broadcast "dec", %{}
-  end
 end
