@@ -28,10 +28,10 @@ config :phoenix, :json_library, Jason
 
 config :coliving,
   app_title: System.get_env("APP_TITLE") || "CoThings",
-  usage_logging_enabled: System.get_env("LOG_ROOM_USAGE") || false,
+  usage_logging_enabled: System.get_env("LOG_ROOM_USAGE") || "false",
   usage_logging_enabled_with_device_uuid:
-    System.get_env("LOG_ROOM_USAGE_WITH_DEVICE_UUID") || false,
-  socket_auth_enabled: System.get_env("ENABLE_SOCKET_CLIENT_AUTH") || false
+    System.get_env("LOG_ROOM_USAGE_WITH_DEVICE_UUID") || "false",
+  socket_auth_enabled: System.get_env("ENABLE_SOCKET_CLIENT_AUTH") || "false"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
