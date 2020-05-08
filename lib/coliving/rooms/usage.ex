@@ -3,7 +3,7 @@ defmodule Coliving.Rooms.Usage do
   import Ecto.Changeset
 
   @all_fields ~w(room_id action hit device_uuid)a
-  @required_fields ~w(room_id action hit device_uuid)a
+  @required_fields ~w(room_id action hit)a
 
   schema "usages" do
     field :room_id, :id

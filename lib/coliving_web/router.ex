@@ -20,7 +20,6 @@ defmodule ColivingWeb.Router do
 
     get "/", PageController, :index
     resources "/rooms", RoomController
-    get "/live/:id", RoomController, :live
   end
 
   scope "/session", ColivingWeb do

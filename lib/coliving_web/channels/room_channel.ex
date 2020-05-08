@@ -6,40 +6,27 @@ defmodule ColivingWeb.RoomChannel do
   @room_prefix "room:"
   @lobby "lobby"
 
-  def join(@room_prefix <> room_id, _payload, socket) do
-    if room_id == @lobby do
-      rooms = Rooms.get_lobby_stats()
-      {:ok, %{rooms: rooms}, assign(socket, :room_id, room_id)}
-    else
-      room_id = String.to_integer(room_id)
-      room = Rooms.get_latest_room_stats(room_id)
-      {:ok, %{room: room}, assign(socket, :room_id, room_id)}
-    end
+  def join(@room_prefix <> @lobby, _payload, socket) do
+    socket = assign(socket, :device_uuid, socket.assigns[:device_uuid])
+    {:ok, %{rooms: Rooms.list_rooms()}, assign(socket, :room_id, @lobby)}
   end
 
-  def handle_in("ping", payload, socket) do
-    {:reply, {:ok, payload}, socket}
-  end
-
-  def handle_in(action, _params, socket), do: log_the_action_broadcast(action, socket)
-
-  defp log_the_action_broadcast(action, socket) do
-    room_id = socket.assigns.room_id
-    if action != "update", do: Rooms.enter_or_leave_the_room(room_id, action)
-    data = get_latest_updates(room_id)
-    broadcast!(socket, action, data)
-    # lets notify homepage as well
-    ColivingWeb.Endpoint.broadcast!(@room_prefix <> @lobby, "update", data)
+  def handle_in("inc", %{"room_id" => room_id}, socket) do
+    {:ok, room} = Rooms.increment_room_population(room_id, socket.assigns[:device_uuid])
+    broadcast!(socket, "inc", room)
     {:reply, :ok, socket}
   end
 
-  defp get_latest_updates(room_id) do
-    if room_id == @lobby do
-      rooms = Rooms.get_lobby_stats()
-      %{rooms: rooms}
-    else
-      room = Rooms.get_latest_room_stats(room_id)
-      %{room: room}
-    end
+  def handle_in("dec", %{"room_id" => room_id}, socket) do
+    {:ok, room} = Rooms.decrement_room_population(room_id, socket.assigns[:device_uuid])
+    broadcast!(socket, "dec", room)
+    {:reply, :ok, socket}
+  end
+
+  @doc """
+    Use it from controller in case room name changes
+  """
+  def broadcast_room_updates(room) do
+    ColivingWeb.Endpoint.broadcast!(@room_prefix <> @lobby, "update", %{room: room})
   end
 end

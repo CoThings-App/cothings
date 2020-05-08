@@ -7,7 +7,12 @@ defmodule Coliving.RoomsTest do
     alias Coliving.Rooms.Room
 
     @valid_attrs %{count: 42, capacity: 42, name: "some name", group: "some group"}
-    @update_attrs %{count: 43, capacity: 43, name: "some updated name", group: "some updated group"}
+    @update_attrs %{
+      count: 43,
+      capacity: 43,
+      name: "some updated name",
+      group: "some updated group"
+    }
     @invalid_attrs %{count: nil, capacity: nil, name: nil, group: nil}
 
     def room_fixture(attrs \\ %{}) do

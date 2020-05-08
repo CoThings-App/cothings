@@ -214,64 +214,63 @@ defmodule Coliving.Rooms do
     Usage.changeset(usage, %{})
   end
 
-  alias Coliving.Models
+  @doc """
+    Returns room usages
+  """
+  def get_usage_by_room_id(room_id), do: Repo.get_by(Usage, room_id: room_id)
 
-  def get_latest_room_stats(id) do
-    room = get_room!(id)
-    create_room_model_from_stats(room)
+  def increment_room_population(room_id, device_uuid) do
+    change_room_population("inc", room_id, device_uuid)
   end
 
-  def get_lobby_stats() do
-    list_rooms() |> Enum.map(&create_room_model_from_stats(&1))
+  def decrement_room_population(room_id, device_uuid) do
+    change_room_population("dec", room_id, device_uuid)
   end
 
-  def create_room_model_from_stats(room) do
-    percentage = round(room.count / room.capacity * 100)
-
-    css_class =
-      cond do
-        percentage <= 60 -> "green"
-        percentage > 60 and percentage <= 80 -> "orange"
-        percentage > 80 -> "red"
-      end
-
-    %Models.Room{
-      id: room.id,
-      name: room.name,
-      count: room.count,
-      capacity: room.capacity,
-      group: room.group,
-      ibeacon_uuid: room.ibeacon_uuid,
-      altbeacon_uuid: room.altbeacon_uuid,
-      major: room.major,
-      minor: room.minor,
-      last_updated: room.updated_at,
-      percentage: percentage,
-      css_class: css_class
-    }
-  end
-
-  def enter_or_leave_the_room(room_id, action) do
+  defp change_room_population(action, room_id, device_uuid) do
     room = get_room!(room_id)
     current_hit = room.count
 
+    # early return
     if action == "dec" && current_hit == 0 do
-      current_hit
+      {:ok, room}
     else
-      create_usage(%{
-        "action" => action,
-        "room_id" => room.id,
-        "hit" => current_hit
-      })
-
       count = if action == "dec", do: -1, else: +1
       hit = current_hit + count
+
+      maybe_log_usage(action, room, device_uuid)
 
       update_room(room, %{
         "count" => hit
       })
-
-      hit
     end
+  end
+
+  defp maybe_log_usage(action, room, device_uuid) do
+    case should_log_usage?() do
+      true ->
+        case should_log_usage_with_device_uuid?() do
+          true -> log_usage(action, room, device_uuid)
+          false -> log_usage(action, room, nil)
+        end
+        _ -> nil
+    end
+  end
+
+  defp should_log_usage?(), do: Application.get_env(:coliving, :usage_logging_enabled)
+
+  defp should_log_usage_with_device_uuid?(),
+    do: Application.get_env(:coliving, :usage_logging_enabled_with_device_uuid)
+
+  defp log_usage(action, room, device_uuid) do
+    attrs = %{
+      "action" => action,
+      "room_id" => room.id,
+      "hit" => room.count
+    }
+
+    if device_uuid != nil,
+      do: Map.put_new(attrs, "device_uuid", device_uuid) |> create_usage(),
+      else: attrs |> create_usage()
   end
 end

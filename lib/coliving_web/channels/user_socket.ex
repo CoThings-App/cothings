@@ -1,11 +1,19 @@
 defmodule ColivingWeb.UserSocket do
   use Phoenix.Socket
 
-  @cookie_max_age 15_778_476 # 6 months
+  # 6 months
+  @cookie_max_age 15_778_476
 
   channel "room:*", ColivingWeb.RoomChannel
 
   def connect(params, socket, _connect_info) do
+    case Application.get_env(:coliving, :socket_auth_enabled) do
+      true -> auth(params, socket)
+      nil -> {:ok, socket}
+    end
+  end
+
+  defp auth(params, socket) do
     device_token = params["device_token"]
 
     if device_token == nil do
