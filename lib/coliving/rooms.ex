@@ -214,33 +214,63 @@ defmodule Coliving.Rooms do
     Usage.changeset(usage, %{})
   end
 
-  def increment_room_population(room_id) do
-    change_room_population("inc", room_id)
+  @doc """
+    Returns room usages
+  """
+  def get_usage_by_room_id(room_id), do: Repo.get_by(Usage, room_id: room_id)
+
+  def increment_room_population(room_id, device_uuid) do
+    change_room_population("inc", room_id, device_uuid)
   end
 
-  def decrement_room_population(room_id) do
-    change_room_population("dec", room_id)
+  def decrement_room_population(room_id, device_uuid) do
+    change_room_population("dec", room_id, device_uuid)
   end
 
-  defp change_room_population(action, room_id) do
+  defp change_room_population(action, room_id, device_uuid) do
     room = get_room!(room_id)
     current_hit = room.count
 
+    # early return
     if action == "dec" && current_hit == 0 do
       {:ok, room}
     else
-      create_usage(%{
-        "action" => action,
-        "room_id" => room.id,
-        "hit" => current_hit
-      })
-
       count = if action == "dec", do: -1, else: +1
       hit = current_hit + count
+
+      maybe_log_usage(action, room, device_uuid)
 
       update_room(room, %{
         "count" => hit
       })
     end
+  end
+
+  defp maybe_log_usage(action, room, device_uuid) do
+    case should_log_usage?() do
+      true ->
+        case should_log_usage_with_device_uuid?() do
+          true -> log_usage(action, room, device_uuid)
+          false -> log_usage(action, room, nil)
+        end
+        _ -> nil
+    end
+  end
+
+  defp should_log_usage?(), do: Application.get_env(:coliving, :usage_logging_enabled)
+
+  defp should_log_usage_with_device_uuid?(),
+    do: Application.get_env(:coliving, :usage_logging_enabled_with_device_uuid)
+
+  defp log_usage(action, room, device_uuid) do
+    attrs = %{
+      "action" => action,
+      "room_id" => room.id,
+      "hit" => room.count
+    }
+
+    if device_uuid != nil,
+      do: Map.put_new(attrs, "device_uuid", device_uuid) |> create_usage(),
+      else: attrs |> create_usage()
   end
 end

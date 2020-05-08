@@ -7,8 +7,8 @@ defmodule ColivingWeb.UserSocket do
   channel "room:*", ColivingWeb.RoomChannel
 
   def connect(params, socket, _connect_info) do
-    case System.get_env("ENABLE_SOCKET_CLIENT_AUTH") do
-      "true" -> auth(params, socket)
+    case Application.get_env(:coliving, :socket_auth_enabled) do
+      true -> auth(params, socket)
       nil -> {:ok, socket}
     end
   end
