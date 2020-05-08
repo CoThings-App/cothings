@@ -16,6 +16,16 @@ defmodule ColivingWeb.Plugs.DevicePlug do
   end
 
   def call(conn, _) do
+    case Application.get_env(:coliving, :socket_auth_enabled) do
+      true ->
+        create_unique_device_uuid(conn)
+
+      false ->
+        conn
+    end
+  end
+
+  defp create_unique_device_uuid(conn) do
     conn = fetch_cookies(conn)
 
     device_token = conn.req_cookies["device_token"]
