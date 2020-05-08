@@ -19,9 +19,9 @@ defmodule ColivingWeb.RoomChannelTests do
 
   describe "socket with auth" do
     setup do
-      Application.put_env(:coliving, :usage_logging_enabled, true)
-      Application.put_env(:coliving, :usage_logging_enabled_with_device_uuid, false)
-      Application.put_env(:coliving, :socket_auth_enabled, true)
+      Application.put_env(:coliving, :usage_logging_enabled, "true")
+      Application.put_env(:coliving, :usage_logging_enabled_with_device_uuid, "false")
+      Application.put_env(:coliving, :socket_auth_enabled, "true")
 
       room = create_test_room()
 
@@ -45,7 +45,7 @@ defmodule ColivingWeb.RoomChannelTests do
     end
 
     test "increase room population without logging", %{socket: socket, room: room} do
-      Application.put_env(:coliving, :usage_logging_enabled, false)
+      Application.put_env(:coliving, :usage_logging_enabled, "false")
       push(socket, "inc", %{room_id: room.id})
       assert_push "inc", %{}
 
@@ -60,8 +60,8 @@ defmodule ColivingWeb.RoomChannelTests do
 
   describe "socket withouth auth" do
     setup do
-      Application.put_env(:coliving, :usage_logging_enabled, true)
-      Application.put_env(:coliving, :usage_logging_enabled, true)
+      Application.put_env(:coliving, :usage_logging_enabled, "true")
+      Application.put_env(:coliving, :usage_logging_enabled, "true")
 
       room = create_test_room()
 

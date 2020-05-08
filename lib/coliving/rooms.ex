@@ -248,10 +248,10 @@ defmodule Coliving.Rooms do
 
   defp maybe_log_usage(action, room, device_uuid) do
     case should_log_usage?() do
-      true ->
+      "true" ->
         case should_log_usage_with_device_uuid?() do
-          true -> log_usage(action, room, device_uuid)
-          false -> log_usage(action, room, nil)
+          "true" -> log_usage(action, room, device_uuid)
+          _ -> log_usage(action, room, nil)
         end
 
       _ ->

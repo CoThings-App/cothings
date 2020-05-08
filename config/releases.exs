@@ -29,4 +29,9 @@ config :coliving, ColivingWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: secret_key_base
 
-config :coliving, app_title: System.get_env("APP_TITLE") || "CoThings"
+config :coliving,
+  app_title: System.get_env("APP_TITLE") || "CoThings",
+  usage_logging_enabled: System.get_env("LOG_ROOM_USAGE") || "false",
+  usage_logging_enabled_with_device_uuid:
+    System.get_env("LOG_ROOM_USAGE_WITH_DEVICE_UUID") || "false",
+  socket_auth_enabled: System.get_env("ENABLE_SOCKET_CLIENT_AUTH") || "false"

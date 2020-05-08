@@ -17,10 +17,10 @@ defmodule ColivingWeb.Plugs.DevicePlug do
 
   def call(conn, _) do
     case Application.get_env(:coliving, :socket_auth_enabled) do
-      true ->
+      "true" ->
         create_unique_device_uuid(conn)
 
-      false ->
+      _ ->
         conn
     end
   end

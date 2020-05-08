@@ -9,7 +9,7 @@ const socketParams = () => {
     }
 }
 
-let lobbyChannel = socket.channel("room:lobby", {})
+let lobbyChannel = socket.channel("room:lobby");
 
 function updateTime(time) {
     document.getElementById('last-updated').innerHTML = `<b>Last updated:</b> ${moment.utc(time).fromNow()}`;
@@ -17,7 +17,12 @@ function updateTime(time) {
 
 const connectToTheLobby = () => {
 
-    socket.connect(socketParams);
+    if (window.deviceToken) {
+        socket.connect(socketParams);
+    } else {
+        console.log("connects without params");
+        socket.connect();
+    }
 
     console.log('connecting to the socket ....');
 
