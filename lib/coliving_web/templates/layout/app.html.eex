@@ -35,6 +35,16 @@
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
       <%= @inner_content %>
     </main>
+    <main role="footer" class="container">
+        <p>
+          <h5>Features:</h5>
+          <ul>
+            <li> Socket Auth: <b><%= Application.get_env(:coliving, :socket_auth_enabled) %></b></li>
+            <li> Log Room Usages: <b><%= Application.get_env(:coliving, :usage_logging_enabled) %></b></li>
+            <li> Log Room Usages with Device UUID: <b><%= Application.get_env(:coliving, :usage_logging_enabled_with_device_uuid) %></b></li>
+          </ul>
+        </p>
+    </main>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
     <script>
       connectToSocket();
