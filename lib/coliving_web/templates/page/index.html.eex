@@ -2,45 +2,49 @@
   <p class="welcome-info">Welcome to Lobby!<br/>Here's list of rooms that you can monitor in realtime.<br/><span id="last-updated"></span></p>
 </section>
 <section class="row">
-  <article class="column">
-    <table>
-      <thead>
-        <tr>
-          <th>Room</th>
-          <th colspan="2" class="center">Actions</th>
-          <th class="center">Occupied</th>
-          <th class="center">Capacity</th>
-          <th>Occupied (%)</th>
-        </tr>
-      </thead>
-      <%= for {group, rooms } <- @rooms do %>
-      <tbody>
-        <tr>
-          <td colspan="4">
-            <h3><%= group %></h3>
-          </td>
-        </tr>
-        <%= for room <- Enum.sort_by(rooms, &(&1.name)) do %>
-        <tr>
-          <td>
-            <%= room.name %>
-          </td>
-          <td>
-            <button id="btn-dec" onclick="window.changeRoomPopulation('dec', <%= room.id %>)" class="button button-outline">-</button>
-          </td>
-          <td>
-            <button id="btn-inc" onclick="window.changeRoomPopulation('inc', <%= room.id %>)" class="button button-outline">+</button>
-          </td>
-          <td class="center"><span id="room_<%= room.id %>_count"><%= room.count %><span></td>
-          <td class="center"><span id="room_<%= room.id %>_capacity"><%= room.capacity %><span></td>
-          <td>
-           <%= render ColivingWeb.SharedView, "_lobby_item.html", room: room %>
-        </tr>
-        <% end %>
-      </tbody>
-      <% end %>
-    </table>
-  </article>
+
+
+
+  <%= for {group, rooms } <- @rooms do %>
+    <div class="group">
+      <h3><%= group %></h3>
+
+      <%= for room <- Enum.sort_by(rooms, &(&1.name)) do %>
+
+          <div class="room">
+            <div class="info">
+              <span class="room-name"><%= room.name %></span>
+              <span class="occupied">Occupied: <%= room.count %> of <%= room.capacity %>
+              <span class="updated-at">Updated: 3 minutes ago
+            </div>
+
+            <div class="actions">
+              <button id="btn-dec" class="action-button" onclick="window.changeRoomPopulation('dec', <%= room.id %>)">-</button>
+               <div class="svg-item">
+                <svg width="80px" height="80px" viewBox="0 0 40 40" class="donut">
+                  <circle class="donut-hole" cx="20" cy="20" r="15.91549430918954" fill="#fff"></circle>
+                  <circle class="donut-ring" cx="20" cy="20" r="15.91549430918954" fill="transparent" stroke-width="3.5"></circle>
+                  <circle class="donut-segment" cx="20" cy="20" r="15.91549430918954" fill="transparent" stroke-width="3.5"
+                  stroke-dasharray="<%= get_donut_percentage_array(room)%>" stroke-dashoffset="25"></circle>
+                  <g class="donut-text">
+                    <text y="50%" transform="translate(0, 2)">
+                      <tspan x="50%" text-anchor="middle" class="donut-percent"><%= get_room_percentage(room) %>%</tspan>
+                    </text>
+                  </g>
+                </svg>
+              </div>
+              <button id="btn-inc" class="action-button" onclick="window.changeRoomPopulation('inc', <%= room.id %>)">+</button>
+            </div>
+
+
+          </div>
+
+       <% end %>
+
+      </div>
+  <% end %>
+
+
 </section>
 <script>
   function connectToSocket() {
