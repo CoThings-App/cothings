@@ -1,7 +1,8 @@
 defmodule ColivingWeb.UserSocket do
   use Phoenix.Socket
 
-  @cookie_max_age 15_778_476 # 6 months
+  # 6 months
+  @cookie_max_age 15_778_476
 
   channel "room:*", ColivingWeb.RoomChannel
 

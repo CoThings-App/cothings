@@ -8,7 +8,8 @@ defmodule ColivingWeb.Plugs.DevicePlug do
 
   alias Coliving.Devices
 
-  @cookie_max_age 15_778_476 # 6 months
+  # 6 months
+  @cookie_max_age 15_778_476
 
   def init(_) do
     # required
@@ -44,7 +45,9 @@ defmodule ColivingWeb.Plugs.DevicePlug do
 
   defp save_device_uuid_and_sign_as_token(conn, device_uuid) do
     device_token = sign_device_uuid(conn, device_uuid)
-    put_resp_cookie(conn, "device_token", device_token, max_age: @cookie_max_age) |> assign(:device_token, device_token)
+
+    put_resp_cookie(conn, "device_token", device_token, max_age: @cookie_max_age)
+    |> assign(:device_token, device_token)
   end
 
   defp sign_device_uuid(conn, device_uuid),
