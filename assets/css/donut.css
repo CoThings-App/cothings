@@ -4,18 +4,7 @@
     }
 }
 
-
-/* body {
-    font-size: 16px;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #333;
-} */
-
 .svg-item {
-    /* width: 300px;
-    height: 300px; */
     font-size: 16px;
 }
 
@@ -26,25 +15,21 @@
 .donut-segment {
     animation: donut-chart-fill 1s reverse ease-in;
     transform-origin: center;
-    stroke: #FF6200;
 }
 
 .donut-text {
-    font-family: Arial, Helvetica, sans-serif;
-    fill: #FF6200;
+    fill: #000;
 }
 
 .donut-label {
     font-size: 0.28em;
     font-weight: 700;
     line-height: 1;
-    fill: #000;
     transform: translateY(0.25em);
 }
 
 .donut-percent {
     font-size: 0.5em;
-    fill: #FF6200;
     line-height: 1;
     transform: translateY(0.5em);
 }
