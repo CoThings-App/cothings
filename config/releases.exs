@@ -29,12 +29,12 @@ config :coliving, ColivingWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: secret_key_base
 
-config :coliving,
-  app_title: System.get_env("APP_TITLE") || "CoThings",
-  usage_logging_enabled: toBool.(System.get_env("LOG_ROOM_USAGE"), false)
-
   toBool = fn
     "true", _ -> true
     "false", _ -> false
     nil, default -> default
   end
+
+config :coliving,
+  app_title: System.get_env("APP_TITLE") || "CoThings",
+  usage_logging_enabled: toBool.(System.get_env("LOG_ROOM_USAGE"), false)
