@@ -3,11 +3,6 @@ import moment from './moment';
 
 let socket = new Socket("/socket");
 
-const socketParams = () => {
-    return {
-        device_token: window.deviceToken
-    }
-}
 
 let lobbyChannel = socket.channel("room:lobby");
 
@@ -17,12 +12,7 @@ function updateTime(time) {
 
 const connectToTheLobby = () => {
 
-    if (window.deviceToken) {
-        socket.connect(socketParams);
-    } else {
-        console.log("connects without params");
-        socket.connect();
-    }
+    socket.connect();
 
     console.log('connecting to the socket ....');
 

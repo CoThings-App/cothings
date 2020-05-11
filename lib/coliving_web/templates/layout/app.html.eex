@@ -7,11 +7,6 @@
     <title><%= assigns[:page_title] || Application.get_env(:coliving, :app_title) %></title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <%= csrf_meta_tag() %>
-    <%= if Application.get_env(:coliving, :usage_logging_enabled_with_device_uuid) == "true" do %>
-      <script>
-        window.deviceToken = '<%= assigns[:device_token] %>'
-      </script>
-    <% end %>
   </head>
   <body>
     <header>
@@ -34,16 +29,6 @@
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
       <%= @inner_content %>
-    </main>
-    <main role="footer" class="container">
-        <p>
-          <h5>Features:</h5>
-          <ul>
-            <li> Socket Auth: <b><%= Application.get_env(:coliving, :socket_auth_enabled) %></b></li>
-            <li> Log Room Usages: <b><%= Application.get_env(:coliving, :usage_logging_enabled) %></b></li>
-            <li> Log Room Usages with Device UUID: <b><%= Application.get_env(:coliving, :usage_logging_enabled_with_device_uuid) %></b></li>
-          </ul>
-        </p>
     </main>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
     <script>

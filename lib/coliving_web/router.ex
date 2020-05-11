@@ -8,7 +8,6 @@ defmodule ColivingWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug ColivingWeb.Plugs.SessionPlug
-    plug ColivingWeb.Plugs.DevicePlug
   end
 
   pipeline :api do

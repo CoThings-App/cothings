@@ -7,18 +7,17 @@ defmodule ColivingWeb.RoomChannel do
   @lobby "lobby"
 
   def join(@room_prefix <> @lobby, _payload, socket) do
-    socket = assign(socket, :device_uuid, socket.assigns[:device_uuid])
     {:ok, %{rooms: Rooms.list_rooms()}, assign(socket, :room_id, @lobby)}
   end
 
   def handle_in("inc", %{"room_id" => room_id}, socket) do
-    {:ok, room} = Rooms.increment_room_population(room_id, socket.assigns[:device_uuid])
+    {:ok, room} = Rooms.increment_room_population(room_id)
     broadcast!(socket, "inc", room)
     {:reply, :ok, socket}
   end
 
   def handle_in("dec", %{"room_id" => room_id}, socket) do
-    {:ok, room} = Rooms.decrement_room_population(room_id, socket.assigns[:device_uuid])
+    {:ok, room} = Rooms.decrement_room_population(room_id)
     broadcast!(socket, "dec", room)
     {:reply, :ok, socket}
   end
