@@ -65,13 +65,7 @@ Here's some explanation of some environment values.
     
     `LOG_ROOM_USAGE` let the application create room usage logs. Default: `false`
 
-    `LOG_ROOM_USAGE_WITH_DEVICE_UUID` let the application logs the usages along with a unique `device_uuid` that create on the first request via web browser and set in the cookie for 6 months. Considering to change this time period to shorter or optional as well. However we don't recommend to track users unless you it's a requirement for your custom application. Default: `false`
-
-    `ENABLE_SOCKET_CLIENT_AUTH` this is needed when `LOG_ROOM_USAGE_WITH_DEVICE_UUID` is enabled.
-
-    This enabled / disabled features will be show on the bottom of the homepage.
-
-1. Update your database settings and persistent volume paths in `docker-compose.yml` file.
+1. Update your database settings and persistent volume paths in `docker-compose.yml` file. You can keep track of bussiest days of the week and time of the day for the room usage.
 
 1. There are two ways to have the docker image:
 
