@@ -1,8 +1,6 @@
 defmodule ColivingWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :coliving
 
-  # 6 months
-  @cookie_max_age 15_778_476
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
@@ -10,8 +8,7 @@ defmodule ColivingWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_coliving_key",
-    signing_salt: "s2W6YZH1",
-    max_age: @cookie_max_age
+    signing_salt: "s2W6YZH1"
   ]
 
   socket "/socket", ColivingWeb.UserSocket,

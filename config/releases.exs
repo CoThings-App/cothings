@@ -31,7 +31,10 @@ config :coliving, ColivingWeb.Endpoint,
 
 config :coliving,
   app_title: System.get_env("APP_TITLE") || "CoThings",
-  usage_logging_enabled: System.get_env("LOG_ROOM_USAGE") || "false",
-  usage_logging_enabled_with_device_uuid:
-    System.get_env("LOG_ROOM_USAGE_WITH_DEVICE_UUID") || "false",
-  socket_auth_enabled: System.get_env("ENABLE_SOCKET_CLIENT_AUTH") || "false"
+  usage_logging_enabled: toBool.(System.get_env("LOG_ROOM_USAGE"), false)
+
+  toBool = fn
+    "true", _ -> true
+    "false", _ -> false
+    nil, default -> default
+  end

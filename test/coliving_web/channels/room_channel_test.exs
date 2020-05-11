@@ -19,18 +19,12 @@ defmodule ColivingWeb.RoomChannelTests do
 
   describe "socket with auth" do
     setup do
-      Application.put_env(:coliving, :usage_logging_enabled, "true")
-      Application.put_env(:coliving, :usage_logging_enabled_with_device_uuid, "false")
-      Application.put_env(:coliving, :socket_auth_enabled, "true")
+      Application.put_env(:coliving, :usage_logging_enabled, true)
 
       room = create_test_room()
 
-      device_uuid = Ecto.UUID.generate()
-
-      device_token = Phoenix.Token.sign(@endpoint, "device token", device_uuid)
-
       {:ok, _, socket} =
-        socket(UserSocket, "device_uuid", %{device_token => device_token})
+        socket(UserSocket, "some", %{some: :assign })
         |> subscribe_and_join(RoomChannel, "room:lobby")
 
       {:ok, socket: socket, room: room}
@@ -45,7 +39,7 @@ defmodule ColivingWeb.RoomChannelTests do
     end
 
     test "increase room population without logging", %{socket: socket, room: room} do
-      Application.put_env(:coliving, :usage_logging_enabled, "false")
+      Application.put_env(:coliving, :usage_logging_enabled, false)
       push(socket, "inc", %{room_id: room.id})
       assert_push "inc", %{}
 
@@ -60,13 +54,12 @@ defmodule ColivingWeb.RoomChannelTests do
 
   describe "socket withouth auth" do
     setup do
-      Application.put_env(:coliving, :usage_logging_enabled, "true")
-      Application.put_env(:coliving, :usage_logging_enabled, "true")
+      Application.put_env(:coliving, :usage_logging_enabled, true)
 
       room = create_test_room()
 
       {:ok, _, socket} =
-        socket(UserSocket, "device_uuid", %{})
+        socket(UserSocket, "some", %{some: :assign })
         |> subscribe_and_join(RoomChannel, "room:lobby")
 
       {:ok, socket: socket, room: room}

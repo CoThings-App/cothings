@@ -219,15 +219,15 @@ defmodule Coliving.Rooms do
   """
   def get_usage_by_room_id(room_id), do: Repo.get_by(Usage, room_id: room_id)
 
-  def increment_room_population(room_id, device_uuid) do
-    change_room_population("inc", room_id, device_uuid)
+  def increment_room_population(room_id) do
+    change_room_population("inc", room_id)
   end
 
-  def decrement_room_population(room_id, device_uuid) do
-    change_room_population("dec", room_id, device_uuid)
+  def decrement_room_population(room_id) do
+    change_room_population("dec", room_id)
   end
 
-  defp change_room_population(action, room_id, device_uuid) do
+  defp change_room_population(action, room_id) do
     room = get_room!(room_id)
     current_hit = room.count
 
@@ -238,7 +238,7 @@ defmodule Coliving.Rooms do
       count = if action == "dec", do: -1, else: +1
       hit = current_hit + count
 
-      maybe_log_usage(action, room, device_uuid)
+      maybe_log_usage(action, room)
 
       update_room(room, %{
         "count" => hit
@@ -246,14 +246,9 @@ defmodule Coliving.Rooms do
     end
   end
 
-  defp maybe_log_usage(action, room, device_uuid) do
+  defp maybe_log_usage(action, room) do
     case should_log_usage?() do
-      "true" ->
-        case should_log_usage_with_device_uuid?() do
-          "true" -> log_usage(action, room, device_uuid)
-          _ -> log_usage(action, room, nil)
-        end
-
+      true -> log_usage(action, room)
       _ ->
         nil
     end
@@ -261,18 +256,12 @@ defmodule Coliving.Rooms do
 
   defp should_log_usage?(), do: Application.get_env(:coliving, :usage_logging_enabled)
 
-  defp should_log_usage_with_device_uuid?(),
-    do: Application.get_env(:coliving, :usage_logging_enabled_with_device_uuid)
-
-  defp log_usage(action, room, device_uuid) do
-    attrs = %{
+  defp log_usage(action, room) do
+    create_usage(%{
       "action" => action,
       "room_id" => room.id,
       "hit" => room.count
-    }
-
-    if device_uuid != nil,
-      do: Map.put_new(attrs, "device_uuid", device_uuid) |> create_usage(),
-      else: attrs |> create_usage()
+    })
   end
+
 end
