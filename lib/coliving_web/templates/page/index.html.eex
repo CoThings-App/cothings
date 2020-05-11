@@ -1,5 +1,5 @@
 <section class="phx-hero">
-  <p class="welcome-info">Welcome to Lobby!<br/>Here's list of rooms that you can monitor in realtime.<br/><span id="last-updated"></span></p>
+  <span id="last-updated"></span></p>
 </section>
 <section class="row">
   <article class="column">
@@ -7,10 +7,9 @@
       <thead>
         <tr>
           <th>Room</th>
-          <th colspan="2" class="center">Actions</th>
-          <th class="center">Occupied</th>
-          <th class="center">Capacity</th>
-          <th>Occupied (%)</th>
+          <th></th>
+          <th class="center">Occupied (%)</th>
+          <th></th>
         </tr>
       </thead>
       <%= for {group, rooms } <- @rooms do %>
@@ -24,17 +23,18 @@
         <tr>
           <td>
             <%= room.name %>
+            <div id="room_<%= room.id %>_count" class="occupied"></div>
+            <div id="room_<%= room.id %>_last_updated" class="time"></div>
           </td>
           <td>
-            <button id="btn-dec" onclick="window.changeRoomPopulation('dec', <%= room.id %>)" class="button button-outline">-</button>
+            <button onclick="window.changeRoomPopulation('dec', <%= room.id %>)" class="button button-outline small">-</button>
           </td>
           <td>
-            <button id="btn-inc" onclick="window.changeRoomPopulation('inc', <%= room.id %>)" class="button button-outline">+</button>
+            <%= render ColivingWeb.SharedView, "_lobby_item.html", room: room %>
           </td>
-          <td class="center"><span id="room_<%= room.id %>_count"><%= room.count %><span></td>
-          <td class="center"><span id="room_<%= room.id %>_capacity"><%= room.capacity %><span></td>
           <td>
-           <%= render ColivingWeb.SharedView, "_lobby_item.html", room: room %>
+            <button onclick="window.changeRoomPopulation('inc', <%= room.id %>)" class="button button-outline">+</button>
+          </td>
         </tr>
         <% end %>
       </tbody>

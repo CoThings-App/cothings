@@ -1,7 +1,6 @@
 /* This file is for your main application css. */
 
 @import "./phoenix.css";
-@import "./circle.css";
 div.room-status {
     width: 100%;
 }
@@ -23,20 +22,6 @@ div.room-status {
     display: block;
     font-size: 1em;
 }
-
-
-/* span.green {
-    color: rgb(129, 160, 90);
-} */
-
-
-/* span.orange {
-    color: #FFC300;
-}
-
-span.red {
-    color: red;
-} */
 
 p.welcome-info {
     font-size: 1em !important;
@@ -85,4 +70,18 @@ th.center {
 
 span.percentage {
     color: #000000;
+}
+
+.occupied {
+    display: block;
+    font-size: small;
+}
+
+.time {
+    display: block;
+    font-size: small;
+}
+
+.last-updated {
+    color: #f49002
 }
