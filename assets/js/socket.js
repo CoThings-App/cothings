@@ -44,8 +44,9 @@ const connectToTheLobby = () => {
     function updateTheRoomStats(room, last) {
         room.percentage = Math.round(room.count / room.capacity * 100);
 
-        room.css_class = "green";
-        if (room.percentage > 60 & room.percentage <= 80) {
+        if (room.percentage <= 60) {
+            room.css_class = "green";
+        } else if (room.percentage > 60 && room.percentage <= 80) {
             room.css_class = "orange";
         } else {
             room.css_class = "red";
