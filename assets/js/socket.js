@@ -74,7 +74,7 @@ const connectToTheLobby = () => {
     }
 
     function getLatestUpdatedRoom(rooms) {
-        return rooms.reduce((m, v, i) => (v.last_updated > m.last_updated) && i ? v : m);
+        return rooms.reduce((m, v, i) => (v.updated_at > m.updated_at) && i ? v : m);
     }
 
 }
