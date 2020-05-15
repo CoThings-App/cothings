@@ -21,6 +21,11 @@ defmodule ColivingWeb.Router do
     resources "/rooms", RoomController
   end
 
+  scope "/", ColivingWeb do
+    pipe_through :api
+    get "/config.json", ConfigController, :index
+  end
+
   scope "/session", ColivingWeb do
     pipe_through :browser
 
