@@ -65,6 +65,8 @@ Here's some explanation of some environment values.
     
     `LOG_ROOM_USAGE` let the application create room usage logs. Default: `false`
 
+    `APP_IMAGE_URL` You can setup an header image for your application. If not, we're going to use this [photo](https://unsplash.com/photos/qCjolcMFaLI) by [Daniel DiNuzzo @ddinuzzo](https://unsplash.com/@ddinuzzo) on [Unsplash](https://unsplash.com/).
+
 1. Update your database settings and persistent volume paths in `docker-compose.yml` file. You can keep track of bussiest days of the week and time of the day for the room usage.
 
 1. There are two ways to have the docker image:
