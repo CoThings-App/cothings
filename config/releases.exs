@@ -37,5 +37,5 @@ config :coliving, ColivingWeb.Endpoint,
 
 config :coliving,
   app_title: System.get_env("APP_TITLE") || "CoThings",
-  app_image_url: System.get_env("APP_IMAGE_URL") || "https://" + System.get_env("HOST") + "/images/app_image.jpg",
+  app_image_url: System.get_env("APP_IMAGE_URL") || "https://" <> System.get_env("HOST") <> "/images/app_image.jpg",
   usage_logging_enabled: toBool.(System.get_env("LOG_ROOM_USAGE"), false)
