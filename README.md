@@ -29,6 +29,10 @@ Any contributions are welcome. Here is some categories that you might help with:
  - Backend development
  - Mobile apps development
 
+## Contact with the team
+ - info@cothings.app
+ - IRC channel on freenode.net #cothings
+
 ## Technical Information
 
 Currently the project is being developed in [Elixir](https://elixir-lang.org/) + [Phoenix Framework](https://www.phoenixframework.org/). In the future we might separate the backend and frontend.
