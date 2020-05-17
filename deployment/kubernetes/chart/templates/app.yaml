@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $.Values.name }}-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ $.Values.name }}-app
+  template:
+    metadata:
+      labels:
+        app: {{ $.Values.name }}-app
+    spec:
+{{- with $.Values.region }}
+      nodeSelector:
+        topology.kubernetes.io/region: {{ . }}
+{{- end }}
+      automountServiceAccountToken: false
+      containers:
+      - &cothings_container
+        name: cothings
+        image: dkr.rlab.io/cothings/web-app:v{{ $.Chart.AppVersion }}
+        resources:
+          requests:
+            cpu: 100m # =0.10core
+            memory: 128Mi
+          limits:
+            cpu: 500m # =0.50core
+            memory: 256Mi
+        env:
+        - name: SECRET_KEY_BASE
+          value: "{{ $.Values.secretKeyBase }}"
+        - name: DATABASE_URL
+          value: "ecto://coliving:{{ $.Values.database.password }}@{{ $.Values.name }}-db/{{ $.Values.database.name }}"
+        - name: POOL_SIZE
+          value: "{{ $.Values.database.poolSize }}"
+        - name: HOST
+          value: "{{ $.Values.host }}"
+        - name: APP_TITLE
+          value: "{{ $.Values.title }}"
+        - name: PORT
+          value: "4004"
+        - name: LANG
+          value: "en_US.UTF-8"
+        - name: REPLACE_OS_VARS
+          value: "true"
+        - name: MIX_ENV
+          value: "{{ $.Values.env }}"
+        - name: ADMIN_USERNAME
+          value: "{{ $.Values.admin.username }}"
+        - name: ADMIN_PASSWORD
+          value: "{{ $.Values.admin.password }}"
+        - name: LOG_ROOM_USAGE
+          value: "true"
+        ports:
+        - containerPort: 4004
+      initContainers:
+        - <<: *cothings_container
+          name: migrations
+          command:
+          - /app/bin/coliving
+          args:
+          - eval
+          - "Coliving.Release.migrate"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $.Values.name }}-app
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 4004
+  selector:
+    app: {{ $.Values.name }}-app
+  type: ClusterIP
+
