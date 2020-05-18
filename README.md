@@ -50,7 +50,7 @@ Please always chekcout the latest release documentation for Phoenix from [here](
 
 **Phoenix:** `1.5.1`
 
-## Run as a Docker Container
+# Run as a Docker Container
 
 1. Create `.env` file in the root folder of the project or `mv .env.example .env` and set the environment variables as needed.
 Here's some explanation of some environment values.
@@ -86,6 +86,10 @@ Here's some explanation of some environment values.
 1. ⚠️ Once you've released and ran the app on production, you need to run migration. Run the following command.
 
 `docker exec -it {container_name} bash bin/coliving eval Coliving.Release.migrate`
+
+# Run with Kubernetes using Helm Charts
+
+Kubernetes deployments are supported, by using Helm. Chart can be found under [deployment/kubernetes/chart](deployment/kubernetes/chart).
 
 # Run in Local Environment (or for Development purpose)
 To run the project in your local:
