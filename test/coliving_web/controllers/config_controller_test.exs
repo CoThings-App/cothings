@@ -1,7 +1,7 @@
 defmodule ColivingWeb.ConfigControllerTest do
-  use ColivingWeb.ConnCase
+  use ColivingWeb.ConnCase, async: true
 
-  @env_app_title_value              "Test App"
+  @env_app_title_value              "CoThings"
   @env_app_image_url_default_value  "http://localhost:4000/images/app_image.jpg"
 
   setup %{conn: conn} do
