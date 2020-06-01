@@ -7,15 +7,13 @@
       <thead>
         <tr>
           <th>Room</th>
-          <th></th>
           <th class="center">Occupied (%)</th>
-          <th></th>
         </tr>
       </thead>
       <%= for {group, rooms } <- @rooms do %>
       <tbody>
         <tr>
-          <td colspan="4">
+          <td colspan="2">
             <h3><%= group %></h3>
           </td>
         </tr>
@@ -27,13 +25,15 @@
             <div id="room_<%= room.id %>_last_updated" class="time"></div>
           </td>
           <td>
-            <button onclick="window.changeRoomPopulation('dec', <%= room.id %>)" class="button button-outline small">-</button>
-          </td>
-          <td>
-            <%= render ColivingWeb.SharedView, "_lobby_item.html", room: room %>
-          </td>
-          <td>
-            <button onclick="window.changeRoomPopulation('inc', <%= room.id %>)" class="button button-outline">+</button>
+            <div class="room-stats">
+              <div class="room-percentage">
+                <%= render ColivingWeb.SharedView, "_lobby_item.html", room: room %>
+              </div>
+              <div class="room-actions">
+                <button onclick="window.changeRoomPopulation('dec', <%= room.id %>)" class="button button-outline small">-</button>
+                <button onclick="window.changeRoomPopulation('inc', <%= room.id %>)" class="button button-outline">+</button>
+              </div>
+            <div>
           </td>
         </tr>
         <% end %>

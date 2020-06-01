@@ -1,6 +1,7 @@
 /* This file is for your main application css. */
 
 @import "./phoenix.css";
+
 div.room-status {
     width: 100%;
 }
@@ -35,43 +36,6 @@ th.center {
     text-align: center;
 }
 
-
-/* Progress Bar */
-
-.light-grey {
-    width: 100%;
-    height: 26px;
-    display: block;
-    background-color: #f1f1f1;
-}
-
-.progress-bar {
-    padding-top: 3px;
-    padding-bottom: 3px;
-    width: inherit;
-    max-width: 100%;
-    text-align: center;
-    height: 26px;
-    display: block;
-    z-index: 1000;
-}
-
-.progress-bar.green {
-    background-color: rgb(129, 160, 90);
-}
-
-.progress-bar.orange {
-    background-color: #FFC300;
-}
-
-.progress-bar.red {
-    background-color: red;
-}
-
-span.percentage {
-    color: #000000;
-}
-
 .occupied {
     display: block;
     font-size: small;
@@ -84,4 +48,75 @@ span.percentage {
 
 .last-updated {
     color: #f49002
+}
+
+.room-stats {
+    display: flex;
+    justify-content: center;
+}
+
+.room-percentage {
+    float: left;
+    display: block;
+    margin-right: 5px;
+}
+
+.room-actions {
+    float: left;
+    display: block;
+    width: 50px;
+}
+
+.room-actions>button {
+    display: list-item;
+}
+
+.single-chart {
+    width: 80px;
+    justify-content: space-around;
+}
+
+.circular-chart {
+    display: block;
+    margin: 10px auto;
+    max-width: 80%;
+    max-height: 250px;
+}
+
+.circle-bg {
+    fill: none;
+    stroke: #eee;
+    stroke-width: 3.8;
+}
+
+.circle {
+    fill: none;
+    stroke-width: 2.8;
+    stroke-linecap: round;
+    animation: progress 1s ease-out forwards;
+}
+
+@keyframes progress {
+    0% {
+        stroke-dasharray: 0 100;
+    }
+}
+
+.circular-chart.orange .circle {
+    stroke: #ff9f00;
+}
+
+.circular-chart.green .circle {
+    stroke: rgb(118, 141, 90)
+}
+
+.circular-chart.red .circle {
+    stroke: red;
+}
+
+.percentage {
+    fill: #666;
+    font-family: sans-serif;
+    font-size: 0.5em;
+    text-anchor: middle;
 }

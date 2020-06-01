@@ -67,9 +67,9 @@ const connectToTheLobby = () => {
             timeElement.innerHTML += `${time}`;
         }
 
-        document.getElementById(`room_${room.id}_percentage`).innerText = `${room.percentage}%`;
-        document.getElementById(`bar_${room.id}`).className = `progress-bar ${room.css_class}`;
-        document.getElementById(`bar_${room.id}`).style.width = `${room.percentage}%`;
+        document.getElementById(`room_percentage_text_${room.id}`).innerHTML = `${room.percentage}%`;
+        document.getElementById(`room_percentage_circle_${room.id}`).setAttribute('class', `circular-chart ${room.css_class}`);
+        document.getElementById(`room_percentage_${room.id}`).setAttribute('stroke-dasharray', `${room.percentage}, 100`);
         updateTime(room);
     }
 

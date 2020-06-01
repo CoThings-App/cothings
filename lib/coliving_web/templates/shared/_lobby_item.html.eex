@@ -1,5 +1,21 @@
-<div class="light-grey">
-    <div id="bar_<%= @room.id %>" style="width: <%= get_room_percentage(@room) %>%;" class="progress-bar <%= get_room_css_class(@room) %>">
-        <span class="percentage" id="room_<%= @room.id %>_percentage"><%= get_room_percentage(@room) %>%<span>
-    </div>
-</div>
+<%
+    percentage = get_room_percentage(@room)
+    color = get_room_css_class(@room)
+ %>
+
+<div class="single-chart">
+    <svg id="room_percentage_circle_<%= @room.id %>" viewBox="0 0 36 36" class="circular-chart <%= color %>">
+      <path class="circle-bg"
+        d="M18 2.0845
+          a 15.9155 15.9155 0 0 1 0 31.831
+          a 15.9155 15.9155 0 0 1 0 -31.831"
+      />
+      <path class="circle" id="room_percentage_<%= @room.id %>"
+        stroke-dasharray="<%= percentage %>, 100"
+        d="M18 2.0845
+          a 15.9155 15.9155 0 0 1 0 31.831
+          a 15.9155 15.9155 0 0 1 0 -31.831"
+      />
+      <text id="room_percentage_text_<%= @room.id %>" x="18" y="20.35" class="percentage"><%= percentage %>%</text>
+    </svg>
+  </div>
