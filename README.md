@@ -16,7 +16,7 @@ You can checkout applications' designs from [here](https://github.com/rainlab-in
 
 Here's some screenshots that we use for our share-house's facility:
 
-![Lobby](https://github.com/rainlab-inc/coliving/blob/master/assets/static/images/app_lobby_v022.png "Lobby Overall")
+![Lobby](https://github.com/rainlab-inc/coliving/blob/master/assets/static/images/app_lobby_v04.png "Lobby Overall")
 
 Soon, there will be mobile clients to update the counters automatically using beacons.
 
