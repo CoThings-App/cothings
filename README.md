@@ -73,6 +73,12 @@ Here's some explanation of some environment values.
 
     `APP_IMAGE_URL` You can setup an header image for your application. If not, we're going to use this [photo](https://unsplash.com/photos/qCjolcMFaLI) by [Daniel DiNuzzo @ddinuzzo](https://unsplash.com/@ddinuzzo) on [Unsplash](https://unsplash.com/).
 
+    `SERVER_SOURCE_CODE_URL` Due to AGPL-3.0 license requirements you have to provide the server's source code.
+    In case you haven't modified the source code; you can use original repo's url from https://cothings.app/code
+
+    `IOS_SOURCE_CODE_URL` Due to GPL-3.0 license requirements you have to provide the iOS application's source code.
+    In case you haven't modified the source code; you can use original repo's url from https://cothings.app/code
+
 1. Update your database settings and persistent volume paths in `docker-compose.yml` file. You can keep track of bussiest days of the week and time of the day for the room usage.
 
 1. There are two ways to have the docker image:
