@@ -56,4 +56,5 @@ config :coliving,
       "https://" <> System.get_env("HOST") <> "/images/app_image.jpg",
   usage_logging_enabled: toBool.(System.get_env("LOG_ROOM_USAGE"), false),
   server_source_code_url: server_source_code_url,
-  ios_source_code_url: ios_source_code_url
+  ios_source_code_url: ios_source_code_url,
+  check_origin: [System.get_env("HOST")]

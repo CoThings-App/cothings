@@ -14,12 +14,15 @@
         <nav role="navigation">
           <ul>
         <%= if @conn.assigns[:logged_in] do %>
+            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
+              <li><%= link "Live Dashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
+            <% end %>
             <li>
                 <a href="/session/logout">Logout</a>
             </li>
             <% else %>
               <li>
-                <a href="/session">Room Management</a>
+                <a href="/session">Management</a>
             </li>
         <% end %>
           </ul>
