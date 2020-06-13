@@ -14,6 +14,8 @@ defmodule ColivingWeb.Endpoint do
     websocket: true,
     longpoll: false
 
+  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
+
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phx.digest
@@ -32,8 +34,14 @@ defmodule ColivingWeb.Endpoint do
     plug Phoenix.CodeReloader
   end
 
+
+  plug Phoenix.LiveDashboard.RequestLogger,
+  param_key: "request_logger",
+  cookie_key: "request_logger"
+
   plug Plug.RequestId
   plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
+
 
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
