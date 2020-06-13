@@ -120,3 +120,8 @@ th.center {
     font-size: 0.5em;
     text-anchor: middle;
 }
+
+.footer {
+    text-align: center;
+    margin: 20px;
+}

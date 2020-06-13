@@ -11,15 +11,19 @@
   <body>
     <header>
       <section class="container">
+        <nav role="navigation">
+          <ul>
         <%= if @conn.assigns[:logged_in] do %>
-          <nav role="navigation">
-            <ul>
-              <li>
+            <li>
                 <a href="/session/logout">Logout</a>
-              </li>
-            </ul>
-          </nav>
+            </li>
+            <% else %>
+              <li>
+                <a href="/session">Room Management</a>
+            </li>
         <% end %>
+          </ul>
+        </nav>
         <a href="/" class="phx-logo">
           <h3><%= Application.get_env(:coliving, :app_title) %></h3>
         </a>
@@ -30,6 +34,10 @@
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
       <%= @inner_content %>
     </main>
+    <hr>
+    <footer class="footer">
+      <a href="/privacy">Privacy Policy</a>
+    </footer>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
     <script>
       connectToSocket();
