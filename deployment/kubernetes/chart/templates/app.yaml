@@ -53,6 +53,10 @@ spec:
           value: "{{ $.Values.admin.password }}"
         - name: LOG_ROOM_USAGE
           value: "true"
+        - name: SERVER_SOURCE_CODE_URL
+          value: "https://github.com/rainlab-inc/cothings"
+        - name: IOS_SOURCE_CODE_URL
+          value: "https://github.com/rainlab-inc/cothings-ios"
         ports:
         - containerPort: 4004
       initContainers:
