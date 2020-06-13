@@ -39,3 +39,5 @@ config :coliving,
   app_title: System.get_env("APP_TITLE") || "CoThings",
   app_image_url: System.get_env("APP_IMAGE_URL") || "https://" <> System.get_env("HOST") <> "/images/app_image.jpg",
   usage_logging_enabled: toBool.(System.get_env("LOG_ROOM_USAGE"), false)
+  server_source_code_url: System.get_env("SERVER_SOURCE_CODE_URL")
+  ios_source_code_url: System.get_env("IOS_SOURCE_CODE_URL")
