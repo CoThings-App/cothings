@@ -18,6 +18,7 @@ defmodule ColivingWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/privacy", PageController, :privacy
     resources "/rooms", RoomController
   end
 
