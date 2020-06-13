@@ -8,7 +8,7 @@ defmodule ColivingWeb.ConfigController do
         "image_url" => Application.get_env(:coliving, :app_image_url)
       }
     }
+
     render(conn, "config.json", data: data)
   end
-
 end

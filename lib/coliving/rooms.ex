@@ -248,7 +248,9 @@ defmodule Coliving.Rooms do
 
   defp maybe_log_usage(action, room) do
     case should_log_usage?() do
-      true -> log_usage(action, room)
+      true ->
+        log_usage(action, room)
+
       _ ->
         nil
     end
@@ -263,5 +265,4 @@ defmodule Coliving.Rooms do
       "hit" => room.count
     })
   end
-
 end

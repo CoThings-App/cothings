@@ -24,7 +24,7 @@ defmodule ColivingWeb.RoomChannelTests do
       room = create_test_room()
 
       {:ok, _, socket} =
-        socket(UserSocket, "some", %{some: :assign })
+        socket(UserSocket, "some", %{some: :assign})
         |> subscribe_and_join(RoomChannel, "room:lobby")
 
       {:ok, socket: socket, room: room}
@@ -59,7 +59,7 @@ defmodule ColivingWeb.RoomChannelTests do
       room = create_test_room()
 
       {:ok, _, socket} =
-        socket(UserSocket, "some", %{some: :assign })
+        socket(UserSocket, "some", %{some: :assign})
         |> subscribe_and_join(RoomChannel, "room:lobby")
 
       {:ok, socket: socket, room: room}
