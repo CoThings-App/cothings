@@ -28,7 +28,8 @@ config :phoenix, :json_library, Jason
 
 config :coliving,
   app_title: System.get_env("APP_TITLE") || "CoThings",
-  app_image_url: System.get_env("APP_IMAGE_URL") || "http://" <> "localhost:4000/images/app_image.jpg",
+  app_image_url:
+    System.get_env("APP_IMAGE_URL") || "http://" <> "localhost:4000/images/app_image.jpg",
   usage_logging_enabled: System.get_env("LOG_ROOM_USAGE") || false
 
 # Import environment specific config. This must remain at the bottom

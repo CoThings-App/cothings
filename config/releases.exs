@@ -19,6 +19,20 @@ secret_key_base =
     You can generate one by calling: mix phx.gen.secret
     """
 
+server_source_code_url =
+  System.get_env("SERVER_SOURCE_CODE_URL") ||
+    raise """
+    Due to AGPL-3.0 license requirements you have to provide the server's source code.
+    In case you haven't modified the source code; you can use original repo's url from https://cothings.app/code
+    """
+
+ios_source_code_url =
+  System.get_env("IOS_SOURCE_CODE_URL") ||
+    raise """
+    Due to GPL-3.0 license requirements you have to provide the iOS application's source code.
+    In case you haven't modified the source code; you can use original repo's url from https://cothings.app/code
+    """
+
 config :coliving, ColivingWeb.Endpoint,
   http: [
     port: String.to_integer(System.get_env("PORT") || "4000"),
@@ -29,13 +43,17 @@ config :coliving, ColivingWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: secret_key_base
 
-  toBool = fn
-    "true", _ -> true
-    "false", _ -> false
-    nil, default -> default
-  end
+toBool = fn
+  "true", _ -> true
+  "false", _ -> false
+  nil, default -> default
+end
 
 config :coliving,
   app_title: System.get_env("APP_TITLE") || "CoThings",
-  app_image_url: System.get_env("APP_IMAGE_URL") || "https://" <> System.get_env("HOST") <> "/images/app_image.jpg",
-  usage_logging_enabled: toBool.(System.get_env("LOG_ROOM_USAGE"), false)
+  app_image_url:
+    System.get_env("APP_IMAGE_URL") ||
+      "https://" <> System.get_env("HOST") <> "/images/app_image.jpg",
+  usage_logging_enabled: toBool.(System.get_env("LOG_ROOM_USAGE"), false),
+  server_source_code_url: server_source_code_url,
+  ios_source_code_url: ios_source_code_url

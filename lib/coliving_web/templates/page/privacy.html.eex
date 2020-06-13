@@ -1,0 +1,97 @@
+<p>
+    There are 3 parts of privacy. Backend, Frontend, and Mobile Clients (currently only iOS).
+    Since this application is completely open source and it's allowed to be modified and distributed under
+    <b>AGPL-3.0</b> (Backend & Frontend) and <b>GPL-3.0</b> (iOS) licenses please ensure this page is displayed
+    on the </i>server url</i> that you entered in your mobile client.
+    </p>
+    <p>
+    This page's url is <b><%= assigns[:url] %></b> so you should have entered <b><%= @conn.host %></b> as a <i>hostname</i>
+    in your mobile client on first launch. You can also check it from <b>Settings</b> of the mobile application.
+</p>
+
+<hr>
+
+<h2>Common parts for all</h2>
+
+<b> CoThings does not</b>
+    <ul>
+        <li> Record or monitor your location </li>
+        <li> Track you or your location </li>
+        <li> Log <i>your</i> room usage </li>
+		</ul>
+
+<b> CoThings does </b>
+
+<ul>
+    <li> Monitor beacons in background (very low battery usage) </li>
+    <li> Depending on the server configuration, room usage statistics might be collected.
+    Room usage statistics <b>does not</b> include any user information.
+    Currently for this server logging room usage is <b> <%= if assigns[:log_usage_enabled], do: "ENABLED", else: "DISABLED" %></b>.</li>
+</ul>
+
+<hr>
+
+<h1> Backend (Server) & Frontend (Web) </h1>
+
+<p>
+    The official implementation of the CoThings server doesn't include any tracking or analytics code.
+    Also, <b>AGPL-3.0</b> license requires all server hosters to provide the source code of their hosted instances,
+    which allows a way for auditing.
+</p>
+
+
+<hr>
+
+<h1> Mobile (iOS) - Only CoThings official app</h1>
+
+<p> Please bear in mind, anyone can distribute the mobile application under a different name.
+Like AGPL-3.0, GPL-3.0 also forces the distributor to share the source with you.
+
+So, this policy is valid only if you have downloaded iOS application from <a href="https://apps.apple.com/app/CoThings/id1511173372">here.</a></p>
+
+<p>You can always download the latest version from App Store.</p>
+<p><img src="/images/appstore.svg" alt="Download CoThings iOS application" /></p>
+
+<h2> Required Device Permissions </h2>
+
+<h3>Location (Allow Always) </h3>
+
+<p>In order to monitoring beacons to update the status of the rooms automatically
+while the app is inactive (not running) we need location permission to be authorized
+<b>Always</b> unless you want to open the app every time.
+</p>
+<p>
+It's totally up to you.
+First, it will ask you for <b>While Using The App</b>, later it will ask you to change <b>Always</b> (in Background).</p>
+
+<p>Please note that, without location authorization we can't monitor the beacons and update status of the rooms automatically.
+In that case you have to do it manually.
+</p>
+
+<h3> Notification (Optional) </h3>
+<p>You can enable local push notication to let know when you <i>enter</i> or <i>exit</i> the rooms in <b>Settings.</b></p>
+
+<hr>
+<h1> Source Code </h1>
+
+<h2> Backend & Frontend </h2>
+
+<p>
+<%= if assigns[:server_source_code_url] do %>
+    Source code can be found <a href="<%= assigns[:server_source_code_url] %>">here.</a>
+<% else %>
+    There's no Backend & Frontend source code link shared with you. Please ask the distributor for the source code immediately and report to <a href="mailto:info@cothings.app?Subject=Source Code Not Found for Backend & Frontend"> us.</a>
+<% end %>
+
+</p>
+
+<h2> iOS </h2>
+<p>
+<%= if assigns[:ios_source_code_url] do %>
+    Source code can be found <a href="<%= assigns[:ios_source_code_url] %>">here.</a>
+<% else %>
+    There's no iOS source code link shared with you. Please ask the distributor for the source code immediately and report to <a href="mailto:info@cothings.app?Subject=Source Code Not Found for Backend & Frontend"> us.</a>
+<% end %>
+<p>
+
+Last Updated: 2020/06/13
