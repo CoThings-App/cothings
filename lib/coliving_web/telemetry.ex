@@ -29,11 +29,11 @@ defmodule ColivingWeb.Telemetry do
       ),
 
       # Database Metrics
-      summary("colivingweb.repo.query.total_time", unit: {:native, :millisecond}),
-      summary("colivingweb.repo.query.decode_time", unit: {:native, :millisecond}),
-      summary("colivingweb.repo.query.query_time", unit: {:native, :millisecond}),
-      summary("colivingweb.repo.query.queue_time", unit: {:native, :millisecond}),
-      summary("colivingweb.repo.query.idle_time", unit: {:native, :millisecond}),
+      summary("coliving.repo.query.total_time", unit: {:native, :millisecond}),
+      summary("coliving.repo.query.decode_time", unit: {:native, :millisecond}),
+      summary("coliving.repo.query.query_time", unit: {:native, :millisecond}),
+      summary("coliving.repo.query.queue_time", unit: {:native, :millisecond}),
+      summary("coliving.repo.query.idle_time", unit: {:native, :millisecond}),
 
       # VM Metrics
       summary("vm.memory.total", unit: {:byte, :kilobyte}),

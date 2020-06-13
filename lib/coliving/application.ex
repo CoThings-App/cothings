@@ -8,7 +8,7 @@ defmodule Coliving.Application do
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
-      #Starts Telemetry
+      # Start the Telemetry supervisor
       ColivingWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: ColivingWeb.PubSub},
