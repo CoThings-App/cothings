@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title><%= assigns[:page_title] || Application.get_env(:coliving, :app_title) %></title>
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+  </head>
+  <body>
+    <header>
+      <section class="container">
+        <a href="#" class="phx-logo">
+          <h2><%= assigns[:page_title] || Application.get_env(:coliving, :app_title) %></h2>
+        </a>
+      </section>
+    </header>
+    <main role="main" class="container">
+      <%= @inner_content %>
+    </main>
+  </body>
+</html>

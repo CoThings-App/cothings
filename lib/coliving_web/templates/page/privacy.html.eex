@@ -50,7 +50,7 @@ Like AGPL-3.0, GPL-3.0 also forces the distributor to share the source with you.
 So, this policy is valid only if you have downloaded iOS application from <a href="https://apps.apple.com/app/CoThings/id1511173372">here.</a></p>
 
 <p>You can always download the latest version from App Store.</p>
-<p><img src="/images/appstore.svg" alt="Download CoThings iOS application" /></p>
+<p><a href="https://apps.apple.com/app/CoThings/id1511173372"><img src="/images/appstore.svg" alt="Download CoThings iOS application" /></a></p>
 
 <h2> Required Device Permissions </h2>
 
@@ -94,4 +94,4 @@ In that case you have to do it manually.
 <% end %>
 <p>
 
-Last Updated: 2020/06/13
+Last Updated: 2020/06/15
