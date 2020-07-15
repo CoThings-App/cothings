@@ -1,39 +1,43 @@
 # CoThings
+
 # Codename: Co-Living
 
-![Elixir CI](https://github.com/rainlab-inc/coliving/workflows/Elixir%20CI/badge.svg)
-[![GitHub last commit](https://img.shields.io/github/last-commit/rainlab-inc/coliving)](https://github.com/rainlab-inc/coliving/commits/master)
-[![GitHub issues](https://img.shields.io/github/issues/rainlab-inc/coliving)](https://github.com/rainlab-inc/coliving/issues)
-[![License](https://img.shields.io/github/license/rainlab-inc/coliving)](LICENSE.md)
+![Elixir CI](https://github.com/cothings-app/cothings/workflows/Elixir%20CI/badge.svg)
+[![GitHub last commit](https://img.shields.io/github/last-commit/cothings-app/coliving)](https://github.com/cothings-app/cothings/commits/master)
+[![GitHub issues](https://img.shields.io/github/issues/cothings-app/cothings)](https://github.com/cothings-app/cothings/issues)
+[![License](https://img.shields.io/github/license/cothings-app/cothings)](LICENSE.md)
 
 CoThings is application to account for current number of people using shared areas or utilities in realtime. The project’s main purpose is avoiding you to visit crowded areas during COVID-19 pandemic if you live in a community.
 
 For now, it's only a web application and it needs to update the status of the current room manually. Without any restriction anyone can update the counter in case of people forget to update their status. It uses socket for realtime communication.
 
-You can see the project overall progress from [here](https://github.com/rainlab-inc/coliving/projects/4)
+You can see the project overall progress from [here](https://github.com/cothings-app/coliving/projects/4)
 
-You can checkout applications' designs from [here](https://github.com/rainlab-inc/cothings-design)
+You can checkout applications' designs from [here](https://github.com/cothings-app/design)
 
 Here's some screenshots that we use for our share-house's facility:
 
-![Lobby](https://github.com/rainlab-inc/coliving/blob/master/assets/static/images/app_lobby_v04.png "Lobby Overall")
+![Lobby](https://github.com/cothings-app/cothings/blob/master/assets/static/images/app_lobby_v04.png "Lobby Overall")
 
 Soon, there will be mobile clients to update the counters automatically using beacons.
 
-Here's our [iOS Application](https://github.com/rainlab-inc/coliving-ios)
+Here's our [iOS Application](https://github.com/cothings-app/ios)
 
-Here's our [Demo Web Site](https://demo-eu.cothings.app) for Europe.
+Here's our [Demo Web Site](https://demo.cothings.app) for Europe.
 
 ## Contributions
+
 Any contributions are welcome. Here is some categories that you might help with:
- - Designing
- - Frontend development
- - Backend development
- - Mobile apps development
+
+- Designing
+- Frontend development
+- Backend development
+- Mobile apps development
 
 ## Contact with the team
- - info@cothings.app
- - IRC channel on freenode.net #cothings
+
+- info@cothings.app
+- IRC channel on freenode.net #cothings
 
 ## Technical Information
 
@@ -46,6 +50,7 @@ You can run the web application on your server with Docker using docker-compose.
 Please always chekcout the latest release documentation for Phoenix from [here](https://hexdocs.pm/phoenix/deployment.html)
 
 #### Stack Versions
+
 **Elixir:** `1.10.0`
 
 **Erlang/OTP:** `22`
@@ -83,9 +88,9 @@ Here's some explanation of some environment values.
 
 1. There are two ways to have the docker image:
 
-   1. Build the image by yourself `docker build -t coliving .` Please note that, since out `Dockerfile` use multistage build, you will need Docker version 17.05 or later.
+    1. Build the image by yourself `docker build -t cothings .` Please note that, since out `Dockerfile` use multistage build, you will need Docker version 17.05 or later.
 
-   1. Or you can use our [initial release](https://github.com/rainlab-inc/cothings/releases/tag/v0.1.0) _docker image_ by pull it like this: `docker pull dkr.rlab.io/cothings/web-app:v0.1.0` or specify in the _image_ and the _tag_ in `docker-compose.yml` file.
+    1. Or you can use our [initial release](https://github.com/cothings-app/cothings/releases/tag/v1.0.0) _docker image_ by pull it like this: `docker pull docker.pkg.github.com/cothings-app/cothings/cothings:latest` or specify in the _image_ and the _tag_ in `docker-compose.yml` file.
 
 1. Now run the application `docker-compose up -d`
 
