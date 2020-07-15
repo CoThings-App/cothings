@@ -67,10 +67,6 @@ th.center {
     width: 50px;
 }
 
-.room-actions>button {
-    display: list-item;
-}
-
 .single-chart {
     width: 80px;
     justify-content: space-around;
