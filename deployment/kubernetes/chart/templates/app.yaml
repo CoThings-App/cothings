@@ -54,9 +54,9 @@ spec:
         - name: LOG_ROOM_USAGE
           value: "true"
         - name: SERVER_SOURCE_CODE_URL
-          value: "https://github.com/rainlab-inc/cothings"
+          value: "https://github.com/cothings-app/cothings"
         - name: IOS_SOURCE_CODE_URL
-          value: "https://github.com/rainlab-inc/cothings-ios"
+          value: "https://github.com/cothings-app/ios"
         ports:
         - containerPort: 4004
       initContainers:
