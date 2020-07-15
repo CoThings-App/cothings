@@ -1,12 +1,13 @@
-version: '2'
+version: "2"
 
 services:
   coliving:
-    image: coliving
+    build: .
+    # image: docker.pkg.github.com/cothings-app/cothings/cothings:latest
     env_file:
       - .env
     links:
-        - db
+      - db
     labels:
       # Traefik v2
       - "traefik.enable=true"
@@ -30,7 +31,7 @@ services:
       - POSTGRES_PASSWORD=
       - POSTGRES_DB=
     volumes:
-        - ~/data/coliving/database:/var/lib/postgresql/data
+      - ~/data/coliving/database:/var/lib/postgresql/data
     restart: unless-stopped
     networks:
       - proxy
