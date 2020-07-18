@@ -3,7 +3,7 @@
 # Codename: Co-Living
 
 ![Elixir CI](https://github.com/cothings-app/cothings/workflows/Elixir%20CI/badge.svg)
-[![GitHub last commit](https://img.shields.io/github/last-commit/cothings-app/coliving)](https://github.com/cothings-app/cothings/commits/master)
+[![GitHub last commit](https://img.shields.io/github/last-commit/cothings-app/cothings)](https://github.com/cothings-app/cothings/commits/master)
 [![GitHub issues](https://img.shields.io/github/issues/cothings-app/cothings)](https://github.com/cothings-app/cothings/issues)
 [![License](https://img.shields.io/github/license/cothings-app/cothings)](LICENSE.md)
 
