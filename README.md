@@ -15,15 +15,20 @@ You can see the project overall progress from [here](https://github.com/cothings
 
 You can checkout applications' designs from [here](https://github.com/cothings-app/design)
 
-Here's some screenshots that we use for our share-house's facility:
-
-![Lobby](https://github.com/cothings-app/cothings/blob/master/assets/static/images/app_lobby_v04.png "Lobby Overall")
 
 Soon, there will be mobile clients to update the counters automatically using beacons.
 
 Here's our [iOS Application](https://github.com/cothings-app/ios)
 
-Here's our [Demo Web Site](https://demo.cothings.app) for Europe.
+You can download the iOS application from the App Store
+
+[![](https://developer.apple.com/app-store/marketing/guidelines/images/badge-example-preferred_2x.png)](https://apps.apple.com/app/CoThings/id1523609550)
+
+Here's our [Demo Web Site](https://demo.cothings.app).
+
+And here's a screenshot that we use for our share-house facility:
+
+![Lobby](https://github.com/cothings-app/cothings/blob/master/assets/static/images/app_lobby_v04.png "Lobby Overall")
 
 ## Contributions
 
