@@ -28,8 +28,6 @@ Here's our [Demo Web Site](https://demo.cothings.app).
 
 And here's a screenshot that we use for our share-house facility:
 
-![Lobby](https://github.com/cothings-app/cothings/blob/master/assets/static/images/app_lobby_v04.png "Lobby Overall")
-
 ## Contributions
 
 Any contributions are welcome. Here is some categories that you might help with:
