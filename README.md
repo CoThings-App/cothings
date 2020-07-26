@@ -95,7 +95,7 @@ Here's some explanation of some environment values.
 
     1. Build the image by yourself `docker build -t coliving .` Please note that, since out `Dockerfile` use multistage build, you will need Docker version 17.05 or later.
 
-    1. Or you can use our [initial release](https://github.com/cothings-app/cothings/releases/) _docker image_ by pull it like this: `ddocker pull cothings/web-app:latest` or specify in the _image_ and the _tag_ in `docker-compose.yml` file.
+    1. Or you can use our [initial release](https://github.com/cothings-app/cothings/releases/) _docker image_ by pull it like this: `docker pull cothings/web-app:latest` or specify in the _image_ and the _tag_ in `docker-compose.yml` file.
 
 1. Now run the application `docker-compose up -d`
 
