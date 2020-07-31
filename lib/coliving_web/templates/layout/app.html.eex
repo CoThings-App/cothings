@@ -9,42 +9,17 @@
     <%= csrf_meta_tag() %>
   </head>
   <body>
-    <header>
-      <section class="container">
-        <nav role="navigation">
-          <ul>
-        <%= if @conn.assigns[:logged_in] do %>
-            <li>
-                <a href="/rooms">Room Management</a>
-            </li>
-            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-              <li><%= link "Live Dashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
-            <% end %>
-            <li>
-                <a href="/session/logout">Logout</a>
-            </li>
-            <% else %>
-              <li>
-                <a href="/session">Management</a>
-            </li>
-        <% end %>
-          </ul>
-        </nav>
-        <a href="/" class="phx-logo">
-          <h3><%= Application.get_env(:coliving, :app_title) %></h3>
-        </a>
-      </section>
-    </header>
+    <%= render ColivingWeb.LayoutView, "_navigation.html", conn: @conn %>
+
     <main role="main" class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
       <%= @inner_content %>
     </main>
-    <hr>
-    <footer class="footer">
-      <a href="/privacy">Privacy Policy</a>
-    </footer>
-    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    
+    <%= render ColivingWeb.LayoutView, "_footer.html", conn: @conn %>
+
+    <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/app.js") %>'></script>
     <script>
       connectToSocket();
     </script>

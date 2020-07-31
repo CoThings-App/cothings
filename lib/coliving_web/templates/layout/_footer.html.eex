@@ -1,0 +1,4 @@
+<hr>
+<footer class="footer">
+  <a href="<%= Routes.page_path(@conn, :privacy) %>">Privacy Policy</a>
+</footer>
