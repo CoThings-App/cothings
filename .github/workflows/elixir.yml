@@ -2,19 +2,18 @@ name: Elixir CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     services:
       db:
         image: postgres:12.1-alpine
-        ports: ['5432:5432']
+        ports: ["5432:5432"]
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -22,13 +21,13 @@ jobs:
           --health-retries 5
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup elixir
-      uses: actions/setup-elixir@v1
-      with:
-        elixir-version: 1.9.4 # Define the elixir version [required]
-        otp-version: 22.2 # Define the OTP version [required]
-    - name: Install Dependencies
-      run: mix deps.get
-    - name: Run Tests
-      run: mix test
+      - uses: actions/checkout@v2
+      - name: Setup elixir
+        uses: actions/setup-elixir@v2
+        with:
+          elixir-version: 1.11.4 # Define the elixir version [required]
+          otp-version: 23 # Define the OTP version [required]
+      - name: Install Dependencies
+        run: mix deps.get
+      - name: Run Tests
+        run: mix test
