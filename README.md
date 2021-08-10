@@ -9,14 +9,15 @@
 
 CoThings is application to account for current number of people using shared areas or utilities in realtime. The project’s main purpose is avoiding you to visit crowded areas during COVID-19 pandemic if you live in a community.
 
-For now, it's only a web application and it needs to update the status of the current room manually. Without any restriction anyone can update the counter in case of people forget to update their status. It uses socket for realtime communication.
+Without any restriction anyone can update the counter in case of people forget to update their status. 
+
+It uses socket for realtime communication. 
 
 You can see the project overall progress from [here](https://github.com/cothings-app/coliving/projects/4)
 
 You can checkout applications' designs from [here](https://github.com/cothings-app/design)
 
-
-Soon, there will be mobile clients to update the counters automatically using beacons.
+For automatic room updates (on enter and exit) you need a beacon installed in the area and the iOS application.
 
 Here's our [iOS Application](https://github.com/cothings-app/ios)
 
