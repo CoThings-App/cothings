@@ -2,30 +2,28 @@
   <section class="container">
     <nav role="navigation">
       <ul>
-      <%= if @conn.assigns[:logged_in] do %>
+        <%= if @conn.assigns[:logged_in] do %>
         <li>
-            <a href="<%= Routes.room_path(@conn, :index) %>">Room Management</a>
+          <a href={ Routes.room_path(@conn, :index) }>Room Management</a>
         </li>
 
         <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
         <li>
-          <a href="<%= Routes.live_dashboard_path(@conn, :home) %>" target="_blank">Live Dashboard</a>
+          <a href={ Routes.live_dashboard_path(@conn, :home) } target="_blank">Live Dashboard</a>
         </li>
         <% end %>
 
         <li>
-            <a href="<%= Routes.session_path(@conn, :logout) %>">Logout</a>
+          <a href={ Routes.session_path(@conn, :logout) }>Logout</a>
         </li>
-
-      <% else %>
+        <% else %>
         <li>
-          <a href="<%= Routes.session_path(@conn, :index) %>">Management</a>
+          <a href={ Routes.session_path(@conn, :index) }>Management</a>
         </li>
-      <% end %>
-      
+        <% end %>
       </ul>
     </nav>
-    <a href="<%= Routes.page_path(@conn, :index) %>" class="phx-logo">
+    <a href={ Routes.page_path(@conn, :index) } class="phx-logo">
       <h3><%= Application.get_env(:coliving, :app_title) %></h3>
     </a>
   </section>

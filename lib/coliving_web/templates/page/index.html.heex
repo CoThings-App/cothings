@@ -1,5 +1,5 @@
 <section class="phx-hero">
-  <span id="last-updated"></span></p>
+  <p><span id="last-updated"></span></p>
 </section>
 <section class="row">
   <article class="column">
@@ -21,19 +21,17 @@
         <tr>
           <td>
             <%= room.name %>
-            <div id="room_<%= room.id %>_count" class="occupied"></div>
-            <div id="room_<%= room.id %>_last_updated" class="time"></div>
+            <div id={"room_#{room.id}_count"} class="occupied"></div>
+            <div id={"room_#{room.id}_last_updated"} class="time"></div>
           </td>
           <td>
             <div class="room-stats">
-              <div class="room-percentage">
-                <%= render ColivingWeb.SharedView, "_lobby_item.html", room: room %>
-              </div>
+              <div class="room-percentage"><%= render ColivingWeb.SharedView, "_lobby_item.html", room: room %></div>
               <div class="room-actions">
-                <button onclick="window.changeRoomPopulation('dec', <%= room.id %>)" class="button button-outline small">-</button>
-                <button onclick="window.changeRoomPopulation('inc', <%= room.id %>)" class="button button-outline">+</button>
+                <button onclick={"window.changeRoomPopulation('dec', #{room.id})"} class="button button-outline small">-</button>
+                <button onclick={"window.changeRoomPopulation('inc', #{room.id})"} class="button button-outline">+</button>
               </div>
-            <div>
+            </div>
           </td>
         </tr>
         <% end %>

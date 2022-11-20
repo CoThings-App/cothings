@@ -2,9 +2,9 @@
     There are 3 parts of privacy. Backend, Frontend, and Mobile Clients (currently only iOS).
     Since this application is completely open source and it's allowed to be modified and distributed under
     <b>AGPL-3.0</b> (Backend & Frontend) and <b>GPL-3.0</b> (iOS) licenses please ensure this page is displayed
-    on the </i>server url</i> that you entered in your mobile client.
-    </p>
-    <p>
+    on the <i>server url</i> that you entered in your mobile client.
+</p>
+<p>
     This page's url is <b><%= assigns[:url] %></b> so you should have entered <b><%= @conn.host %></b> as a <i>hostname</i>
     in your mobile client on first launch. You can also check it from <b>Settings</b> of the mobile application.
 </p>
@@ -78,7 +78,7 @@ In that case you have to do it manually.
 
 <p>
 <%= if assigns[:server_source_code_url] do %>
-    Source code can be found <a href="<%= assigns[:server_source_code_url] %>">here.</a>
+    Source code can be found <a href={ assigns[:server_source_code_url] }>here.</a>
 <% else %>
     There's no Backend & Frontend source code link shared with you. Please ask the distributor for the source code immediately and report to <a href="mailto:info@cothings.app?Subject=Source Code Not Found for Backend & Frontend"> us.</a>
 <% end %>
@@ -88,10 +88,10 @@ In that case you have to do it manually.
 <h2> iOS </h2>
 <p>
 <%= if assigns[:ios_source_code_url] do %>
-    Source code can be found <a href="<%= assigns[:ios_source_code_url] %>">here.</a>
+    Source code can be found <a href="{ @assigns[:ios_source_code_url] }">here.</a>
 <% else %>
     There's no iOS source code link shared with you. Please ask the distributor for the source code immediately and report to <a href="mailto:info@cothings.app?Subject=Source Code Not Found for Backend & Frontend"> us.</a>
 <% end %>
-<p>
+</p>
 
 Last Updated: 2020/06/15

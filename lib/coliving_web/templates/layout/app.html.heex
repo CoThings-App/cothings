@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title><%= assigns[:page_title] || Application.get_env(:coliving, :app_title) %></title>
-    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <link rel="stylesheet" href={ Routes.static_path(@conn, "/css/app.css") }/>
     <%= csrf_meta_tag() %>
   </head>
   <body>
@@ -19,7 +19,7 @@
     
     <%= render ColivingWeb.LayoutView, "_footer.html", conn: @conn %>
 
-    <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/app.js") %>'></script>
+    <script type="text/javascript" src={ Routes.static_path(@conn, "/js/app.js") }></script>
     <script>
       connectToSocket();
     </script>
