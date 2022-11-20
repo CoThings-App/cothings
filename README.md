@@ -55,9 +55,9 @@ Please always chekcout the latest release documentation for Phoenix from [here](
 
 #### Stack Versions
 
-**Elixir:** `1.11.7`
+**Elixir:** `1.12.3`
 
-**Erlang/OTP:** `25`
+**Erlang/OTP:** `22`
 
 **Phoenix:** `1.6.0`
 
