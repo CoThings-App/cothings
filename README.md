@@ -55,11 +55,11 @@ Please always chekcout the latest release documentation for Phoenix from [here](
 
 #### Stack Versions
 
-**Elixir:** `1.10.0`
+**Elixir:** `1.11.7`
 
-**Erlang/OTP:** `22`
+**Erlang/OTP:** `25`
 
-**Phoenix:** `1.5.1`
+**Phoenix:** `1.6.0`
 
 # Run as a Docker Container
 
