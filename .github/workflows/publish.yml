@@ -1,0 +1,55 @@
+name: Publish Docker Image
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: |
+            ghcr.io/cothings-app/cothings/cothings
+            cothings/web-app
+
+      - name: Build and push Docker image to GitHub Container Registry
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/cothings-app/cothings/cothings:${{ github.ref }}
+            ghcr.io/cothings-app/cothings/cothings:latest
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Build and push Docker image to Docker Hub
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: |
+            cothings/web-app:${{ github.ref }}
+            cothings/web-app:latest
+          labels: ${{ steps.meta.outputs.labels }}
