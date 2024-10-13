@@ -4,7 +4,7 @@ defmodule Coliving.MixProject do
   def project do
     [
       app: :coliving,
-      version: "0.6.0",
+      version: "0.6.1",
       elixir: "~> 1.14.1",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix] ++ Mix.compilers(),
