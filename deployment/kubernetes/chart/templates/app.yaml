@@ -20,7 +20,7 @@ spec:
       containers:
       - &cothings_container
         name: cothings
-        image: dkr.rlab.io/cothings/web-app:v{{ $.Chart.AppVersion }}
+        image: ghcr.io/cothings-app/cothings/cothings:v{{ $.Chart.AppVersion }}
         resources:
           requests:
             cpu: 100m # =0.10core

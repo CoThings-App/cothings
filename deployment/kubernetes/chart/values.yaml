@@ -31,7 +31,7 @@ database:
   # enable persistence for production deployments
   persistence:
     enabled: false # enable for auto creating a PVC and store the data
-    storageClassName: default
+    # storageClassName: default
     size: "1Gi"
 
 ingress:
